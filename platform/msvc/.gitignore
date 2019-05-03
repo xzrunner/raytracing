@@ -1,0 +1,5 @@
+raytracing/
+projects/*
+
+!projects/raytracing.vcxproj
+!projects/raytracing.vcxproj.filters
