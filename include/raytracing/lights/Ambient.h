@@ -22,6 +22,10 @@ public:
 
 	void ScaleRadiance(const float b);
 
+    void SetColor(const RGBColor& color) {
+        m_color = color;
+    }
+
 private:
 	float m_ls;
 	RGBColor m_color;

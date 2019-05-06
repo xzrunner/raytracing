@@ -197,6 +197,16 @@ AABB Box::GetBoundingBox() const
 	return aabb;
 }
 
+void Box::SetSize(const Point3D& min, const Point3D& max)
+{
+    x0 = min.x;
+    y0 = min.y;
+    z0 = min.z;
+    x1 = max.x;
+    y1 = max.y;
+    z1 = max.z;
+}
+
 Normal Box::GetNormal(const int face_hit) const
 {
 	switch (face_hit)

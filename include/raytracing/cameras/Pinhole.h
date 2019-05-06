@@ -12,10 +12,12 @@ class Pinhole : public Camera
 {
 public:
 	Pinhole();
-	
+
 	virtual void RenderScene(const World& w) const;
 
 	void SetViewDistance(const float vpd);
+
+    void SetZoomFactor(float zoom) { m_zoom = zoom; }
 
 	Vector3D GetDirection(const Point2D& p) const;
 

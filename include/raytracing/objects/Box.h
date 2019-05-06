@@ -15,6 +15,8 @@ public:
 
 	virtual AABB GetBoundingBox() const;
 
+    void SetSize(const Point3D& min, const Point3D& max);
+
 private:
 	Normal GetNormal(const int face_hit) const;
 
