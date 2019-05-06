@@ -31,7 +31,7 @@ bool PointLight::InShadow(const Ray& ray, const ShadeRec& sr) const
 	float t;
 	float d = m_location.Distance(ray.ori);
 
-	const std::vector<GeometricObject*>& objs = sr.w.GetObjects();
+	auto& objs = sr.w.GetObjects();
 	for (int i = 0, n = objs.size(); i < n; ++i) {
 		if (objs[i]->ShadowHit(ray, t) && t < d) {
 			return true;

@@ -5,6 +5,8 @@
 #include "raytracing/maths/Normal.h"
 #include "raytracing/maths/Vector3D.h"
 
+#include <memory>
+
 namespace rt
 {
 
@@ -15,7 +17,6 @@ class AreaLight : public Light
 {
 public:
 	AreaLight();
-	virtual ~AreaLight();
 
 	virtual RGBColor L(const ShadeRec& sr) const;
 
@@ -26,13 +27,13 @@ public:
 	virtual float G(const ShadeRec& sr) const;
 	virtual float Pdf(const ShadeRec& sr) const;
 
-	void SetObject(GeometricObject* obj);
+	void SetObject(const std::shared_ptr<GeometricObject>& object);
 
 private:
-	GeometricObject* m_object;
+	std::shared_ptr<GeometricObject> m_object = nullptr;
 
 	// will be an emissive material
-	Material* m_material;
+	std::shared_ptr<Material> m_material = nullptr;
 
 	mutable Point3D	m_sample_point;
 

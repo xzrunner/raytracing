@@ -7,30 +7,17 @@ namespace rt
 {
 
 ImageTexture::ImageTexture()
-	: m_image(NULL)
-	, m_mapping(NULL)
+	: m_image(nullptr)
+	, m_mapping(nullptr)
 {
 }
 
-ImageTexture::ImageTexture(Image* image)
+ImageTexture::ImageTexture(const std::shared_ptr<Image>& image)
 	: m_hres(image->GetHres())
 	, m_vres(image->GetVres())
-	, m_mapping(NULL)
+    , m_image(image)
+	, m_mapping(nullptr)
 {
-	if (image) {
-		image->Retain();
-		m_image = image;
-	}
-}
-
-ImageTexture::~ImageTexture()
-{
-	if (m_image) {
-		m_image->Release();
-	}
-	if (m_mapping) {
-		m_mapping->Release();
-	}
 }
 
 RGBColor ImageTexture::GetColor(const ShadeRec& sr) const
@@ -44,16 +31,6 @@ RGBColor ImageTexture::GetColor(const ShadeRec& sr) const
 	}
 
 	return m_image->GetColor(row, column);
-}
-
-void ImageTexture::SetImage(Image* image)
-{
-	obj_assign((const Object*&)m_image, image);
-}
-
-void ImageTexture::SetMapping(Mapping* mapping)
-{
-	obj_assign((const Object*&)m_mapping, mapping);
 }
 
 }

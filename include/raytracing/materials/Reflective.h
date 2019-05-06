@@ -11,7 +11,6 @@ class Reflective : public Phong
 {
 public:
 	Reflective();
-	virtual ~Reflective();
 
 	virtual RGBColor Shade(const ShadeRec& sr) const;
 	virtual RGBColor AreaLightShade(const ShadeRec& sr) const;
@@ -20,7 +19,7 @@ public:
 	void SetCr(const RGBColor& c);
 
 private:
-	PerfectSpecular* m_reflective_brdf;
+	std::unique_ptr<PerfectSpecular> m_reflective_brdf = nullptr;
 
 }; // Reflective
 

@@ -22,10 +22,12 @@ public:
 
 	virtual Normal GetNormal(const Point3D& p) const;
 
-	void SetSampler(Sampler* sampler);
+    void SetSampler(const std::shared_ptr<Sampler>& sampler) {
+        m_sampler = sampler;
+    }
 
 private:
-	// corner vertex 
+	// corner vertex
 	Point3D m_p0;
 	// side
 	Vector3D m_a, m_b;
@@ -37,7 +39,7 @@ private:
 	// for rectangular lights
 	float m_area;
 	float m_inv_area;
-	Sampler* m_sampler;
+	std::shared_ptr<Sampler> m_sampler = nullptr;
 
 }; // Rectangle
 

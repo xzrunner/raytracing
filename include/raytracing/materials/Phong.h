@@ -2,6 +2,8 @@
 
 #include "raytracing/materials/Material.h"
 
+#include <memory>
+
 namespace rt
 {
 
@@ -12,7 +14,7 @@ class Phong : public Material
 {
 public:
 	Phong();
-	virtual ~Phong();
+    virtual ~Phong();
 
 	virtual RGBColor Shade(const ShadeRec& sr) const;
 
@@ -24,9 +26,9 @@ public:
 	void SetExp(const float e);
 
 private:
-	Lambertian*		m_ambient_brdf;
-	Lambertian*		m_diffuse_brdf;
-	GlossySpecular*	m_specular_brdf;
+	std::unique_ptr<Lambertian>		m_ambient_brdf = nullptr;
+    std::unique_ptr<Lambertian>		m_diffuse_brdf = nullptr;
+	std::unique_ptr<GlossySpecular>	m_specular_brdf = nullptr;
 
 }; // Phong
 

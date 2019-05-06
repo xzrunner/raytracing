@@ -10,17 +10,14 @@ namespace rt
 {
 
 Phong::Phong()
-	: m_ambient_brdf(new Lambertian)
-	, m_diffuse_brdf(new Lambertian)
-	, m_specular_brdf(new GlossySpecular)
+	: m_ambient_brdf(std::make_unique<Lambertian>())
+	, m_diffuse_brdf(std::make_unique<Lambertian>())
+	, m_specular_brdf(std::make_unique<GlossySpecular>())
 {
 }
 
 Phong::~Phong()
 {
-	m_ambient_brdf->Release();
-	m_diffuse_brdf->Release();
-	m_specular_brdf->Release();
 }
 
 // this sets Phong::kd
@@ -63,7 +60,7 @@ RGBColor Phong::Shade(const ShadeRec& sr) const
 {
 	Vector3D wo = -sr.ray.dir;
 	RGBColor L  = m_ambient_brdf->rho(sr, wo) * sr.w.GetAmbient()->L(sr);
-	const std::vector<Light*>& lights = sr.w.GetLights();
+	auto& lights = sr.w.GetLights();
 	for (int i = 0, n = lights.size(); i < n; i++)
 	{
 		Vector3D wi = lights[i]->GetDirection(sr);

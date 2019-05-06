@@ -6,18 +6,18 @@
 namespace rt
 {
 
-RayCast::RayCast(const World* world)
+RayCast::RayCast(const World& world)
 	: Tracer(world)
 {}
 
 RGBColor RayCast::TraceRay(const Ray& ray) const
 {
-	ShadeRec sr(m_world->HitObjects(ray));
+	ShadeRec sr(m_world.HitObjects(ray));
 	if (sr.hit_an_object) {
 		sr.ray = ray;
 		return sr.material->Shade(sr);
 	} else {
-		return m_world->GetBackgroundColor();
+		return m_world.GetBackgroundColor();
 	}
 }
 

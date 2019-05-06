@@ -6,20 +6,20 @@
 namespace rt
 {
 
-AreaLighting::AreaLighting(const World* world)
+AreaLighting::AreaLighting(const World& world)
 	: Tracer(world)
 {
 }
 
 RGBColor AreaLighting::TraceRay(const Ray& ray) const
 {
-	ShadeRec sr(m_world->HitObjects(ray));
+	ShadeRec sr(m_world.HitObjects(ray));
 
 	if (sr.hit_an_object) {
 		sr.ray = ray;
 		return sr.material->AreaLightShade(sr);
 	} else {
-		return m_world->GetBackgroundColor();
+		return m_world.GetBackgroundColor();
 	}
 }
 

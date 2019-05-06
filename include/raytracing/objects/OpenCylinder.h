@@ -11,8 +11,6 @@ public:
 	OpenCylinder(const OpenCylinder& cy);
 	OpenCylinder(double bottom, double top, double radius);
 
-	virtual OpenCylinder* Clone() const;
-
 	virtual bool Hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
 	virtual bool ShadowHit(const Ray& ray, float& tmin) const;
 

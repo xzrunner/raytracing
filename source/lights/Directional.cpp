@@ -28,7 +28,7 @@ Vector3D Directional::GetDirection(const ShadeRec& sr) const
 bool Directional::InShadow(const Ray& ray, const ShadeRec& sr) const
 {
 	float t;
-	const std::vector<GeometricObject*>& objs = sr.w.GetObjects();
+	auto& objs = sr.w.GetObjects();
 	for (int i = 0, n = objs.size(); i < n; ++i) {
 		if (objs[i]->ShadowHit(ray, t)) {
 			return true;

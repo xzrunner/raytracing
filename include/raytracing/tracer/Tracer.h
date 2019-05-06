@@ -11,7 +11,7 @@ class Ray;
 class Tracer
 {
 public:
-	Tracer(const World* world);
+	Tracer(const World& world);
 	virtual ~Tracer() {}
 
 	virtual RGBColor TraceRay(const Ray& ray) const;
@@ -19,7 +19,7 @@ public:
 	virtual RGBColor TraceRay(const Ray& ray, int depth) const;
 
 protected:
-	const World* m_world;
+	const World& m_world;
 
 }; // Tracer
 

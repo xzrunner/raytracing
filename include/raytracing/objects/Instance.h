@@ -10,8 +10,7 @@ class Instance : public GeometricObject
 {
 public:
 	Instance();
-	Instance(GeometricObject* obj);
-	virtual ~Instance();
+	Instance(const std::shared_ptr<GeometricObject>& obj);
 
 	virtual bool Hit(const Ray& ray, double& t, ShadeRec& s) const;
 	virtual bool ShadowHit(const Ray& ray, float& t) const;
@@ -28,7 +27,7 @@ public:
 	void Shear(const Matrix& m);
 
 private:
-	GeometricObject*	m_object;					// object to be transformed
+	std::shared_ptr<GeometricObject> m_object = nullptr;  // object to be transformed
 	Matrix				m_inv_matrix;		    	// inverse transformation matrix
 	static 	Matrix		m_forward_matrix; 			// transformation matrix
 	AABB				m_aabb;						// transformed object's bounding box

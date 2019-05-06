@@ -9,15 +9,13 @@ namespace rt
 {
 
 SV_Matte::SV_Matte()
-	: m_ambient_brdf(new Lambertian)
-	, m_diffuse_brdf(new Lambertian)
+	: m_ambient_brdf(std::make_unique<Lambertian>())
+	, m_diffuse_brdf(std::make_unique<Lambertian>())
 {
 }
 
 SV_Matte::~SV_Matte()
 {
-	delete m_ambient_brdf;
-	delete m_diffuse_brdf;
 }
 
 // same with Matte::Shade
@@ -25,7 +23,7 @@ RGBColor SV_Matte::Shade(const ShadeRec& sr) const
 {
 	Vector3D wo = -sr.ray.dir;
 	RGBColor L = m_ambient_brdf->rho(sr, wo) * sr.w.GetAmbient()->L(sr);
-	const std::vector<Light*>& lights = sr.w.GetLights();
+	auto& lights = sr.w.GetLights();
 	for (int i = 0, n = lights.size(); i < n; i++)
 	{
 		Vector3D wi = lights[i]->GetDirection(sr);
@@ -51,7 +49,7 @@ RGBColor SV_Matte::AreaLightShade(const ShadeRec& sr) const
 {
 	Vector3D wo = -sr.ray.dir;
 	RGBColor L = m_ambient_brdf->rho(sr, wo) * sr.w.GetAmbient()->L(sr);
-	const std::vector<Light*>& lights = sr.w.GetLights();
+	auto& lights = sr.w.GetLights();
 	for (int i = 0, n = lights.size(); i < n; i++)
 	{
 		Vector3D wi = lights[i]->GetDirection(sr);
@@ -82,7 +80,7 @@ void SV_Matte::SetKd(const float k)
 	m_diffuse_brdf->SetKd(k);
 }
 
-void SV_Matte::SetCd(const Texture* tex)
+void SV_Matte::SetCd(const std::shared_ptr<Texture>& tex)
 {
 	m_ambient_brdf->SetCd(tex);
 	m_diffuse_brdf->SetCd(tex);

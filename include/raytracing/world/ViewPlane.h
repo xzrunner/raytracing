@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 namespace rt
 {
 
@@ -10,7 +12,6 @@ class ViewPlane
 public:
 	ViewPlane();
 	ViewPlane(const ViewPlane& vp);
-	~ViewPlane();
 
 	int GetWidth() const { return m_hori_res; }
 	int GetHeight() const { return m_vert_res; }
@@ -21,8 +22,8 @@ public:
 	void SetPixelSize(float sz) { m_pixel_size = sz; }
 
 	int GetSamplesNum() const { return m_num_samples; }
-	const Sampler* GetSampler() const { return m_sampler; }
-	void SetSampler(Sampler* sampler);
+	auto GetSampler() const { return m_sampler; }
+	void SetSampler(const std::shared_ptr<Sampler>& sampler);
 	void SetSamples(int n);
 
 	bool ShowOutOfGamut() const { return m_show_out_of_gamut; }
@@ -37,7 +38,7 @@ private:
 	int m_hori_res, m_vert_res;
 
 	// pixel size
-	float m_pixel_size;							
+	float m_pixel_size;
 
 	// number of samples per pixel
 	int	m_num_samples;
@@ -45,7 +46,7 @@ private:
 	// max number of reflected bounce rays
 	int	m_max_depth;
 
-	Sampler* m_sampler;
+    std::shared_ptr<Sampler> m_sampler = nullptr;
 
 	// display red if RGBColor out of gamut
 	bool m_show_out_of_gamut;

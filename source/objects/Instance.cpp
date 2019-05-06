@@ -11,7 +11,7 @@ namespace rt
 Matrix Instance::m_forward_matrix;
 
 Instance::Instance()
-	: m_object(NULL)
+	: m_object(nullptr)
 	, m_inv_matrix()
 	, m_aabb()
 	, m_transform_the_texture(true)
@@ -19,22 +19,13 @@ Instance::Instance()
 	m_forward_matrix.SetIdentity();
 }
 
-Instance::Instance(GeometricObject* obj)
-	: m_inv_matrix()
+Instance::Instance(const std::shared_ptr<GeometricObject>& obj)
+	: m_object(obj)
+    , m_inv_matrix()
 	, m_aabb()
 	, m_transform_the_texture(true)
 {
-	obj->Retain();
-	m_object = obj;
-
 	m_forward_matrix.SetIdentity();
-}
-
-Instance::~Instance()
-{
-	if (m_object) {
-		m_object->Release();
-	}
 }
 
 bool Instance::Hit(const Ray& ray, double& t, ShadeRec& sr) const
@@ -47,8 +38,8 @@ bool Instance::Hit(const Ray& ray, double& t, ShadeRec& sr) const
 		sr.normal = m_inv_matrix * sr.normal;
 		sr.normal.Normalize();
 
-		if (m_object->GetMaterial()) {
-			SetMaterial(m_object->GetMaterial());
+		if (auto material = m_object->GetMaterial()) {
+			SetMaterial(material);
 		}
 		if (!m_transform_the_texture)
 			sr.local_hit_point = ray.ori + t * ray.dir;
@@ -66,8 +57,8 @@ bool Instance::ShadowHit(const Ray& ray, float& tmin) const
 	inv_ray.dir = m_inv_matrix * inv_ray.dir;
 
 	if (m_object->ShadowHit(inv_ray, tmin)) {
-		if (m_object->GetMaterial()) {
-			SetMaterial(m_object->GetMaterial());
+		if (auto material = m_object->GetMaterial()) {
+			SetMaterial(material);
 		}
 
 		return true;

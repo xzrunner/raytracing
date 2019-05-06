@@ -138,22 +138,13 @@
     <ClInclude Include="..\..\..\include\raytracing\utilities\Constants.h">
       <Filter>utilities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\utilities\interfaces.h">
-      <Filter>utilities</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\utilities\Mesh.h">
-      <Filter>utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\utilities\Object.h">
       <Filter>utilities</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\utilities\RGBColor.h">
       <Filter>utilities</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\utilities\ShadeRec.h">
-      <Filter>utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\utilities\utility.h">
       <Filter>utilities</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\tracer\AreaLighting.h">
@@ -225,11 +216,6 @@
     <ClInclude Include="..\..\..\include\raytracing\objects\WireframeBox.h">
       <Filter>objects</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\include\raytracing\utilities\Object.inl">
-      <Filter>utilities</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\brdfs\BRDF.cpp">

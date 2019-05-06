@@ -13,8 +13,12 @@ Grid::Grid()
 	: nx(0)
 	, ny(0)
 	, nz(0)
-	, mesh(NULL)
+//	, mesh(nullptr)
 	, reverse_normal(false)
+{
+}
+
+Grid::~Grid()
 {
 }
 
@@ -173,7 +177,7 @@ bool Grid::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 	// traverse the grid
 
 	while (true) {
-		GeometricObject* object_ptr = cells[ix + nx * iy + nx * ny * iz];
+		auto& object_ptr = cells[ix + nx * iy + nx * ny * iz];
 
 		if (tx_next < ty_next && tx_next < tz_next) {
 			if (object_ptr && object_ptr->Hit(ray, tmin, sr) && tmin < tx_next) {
@@ -258,7 +262,7 @@ void Grid::SetupCells(void)
 	cells.reserve(num_objects);
 
 	for (int j = 0; j < num_cells; j++)
-		cells.push_back(NULL);
+		cells.push_back(nullptr);
 
 	// set up a temporary array to hold the number of m_objects stored in each cell
 
@@ -299,7 +303,7 @@ void Grid::SetupCells(void)
 					}
 					else {
 						if (counts[index] == 1) {
-							Compound* compound_ptr = new Compound;	// construct a compound object
+							auto compound_ptr = std::make_shared<Compound>();	// construct a compound object
 							compound_ptr->AddObject(cells[index]); // add object already in cell
 							compound_ptr->AddObject(m_parts[j]);  	// add the new object
 							cells[index] = compound_ptr;			// store compound in current cell

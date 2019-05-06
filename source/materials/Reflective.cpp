@@ -10,13 +10,8 @@ namespace rt
 {
 
 Reflective::Reflective()
+    : m_reflective_brdf(std::make_unique<PerfectSpecular>())
 {
-	m_reflective_brdf = new PerfectSpecular();
-}
-
-Reflective::~Reflective()
-{
-	delete m_reflective_brdf;
 }
 
 RGBColor Reflective::Shade(const ShadeRec& sr) const

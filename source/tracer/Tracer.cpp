@@ -4,7 +4,7 @@
 namespace rt
 {
 
-Tracer::Tracer(const World* world)
+Tracer::Tracer(const World& world)
 	: m_world(world)
 {
 }

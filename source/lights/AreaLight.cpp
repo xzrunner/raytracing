@@ -9,19 +9,9 @@ namespace rt
 {
 
 AreaLight::AreaLight()
-	: m_object(NULL)
-	, m_material(NULL)
+	: m_object(nullptr)
+	, m_material(nullptr)
 {
-}
-
-AreaLight::~AreaLight()
-{
-	if (m_object) {
-		m_object->Release();
-	}
-	if (m_material) {
-		m_material->Release();
-	}
 }
 
 RGBColor AreaLight::L(const ShadeRec& sr) const
@@ -48,7 +38,7 @@ bool AreaLight::InShadow(const Ray& ray, const ShadeRec& sr) const
 {
 	float t;
 	float ts = (m_sample_point - ray.ori) * ray.dir;
-	const std::vector<GeometricObject*>& objs = sr.w.GetObjects();
+	auto& objs = sr.w.GetObjects();
 	for (int i=  0, n = objs.size(); i < n; ++i) {
 		if (objs[i]->ShadowHit(ray, t) && t < ts) {
 			return true;
@@ -71,10 +61,10 @@ float AreaLight::Pdf(const ShadeRec& sr) const
 	return (m_object->Pdf(sr));
 }
 
-void AreaLight::SetObject(GeometricObject* obj)
+void AreaLight::SetObject(const std::shared_ptr<GeometricObject>& object)
 {
-	obj_assign((const Object*&)m_object, obj);
-	obj_assign((const Object*&)m_material, obj->GetMaterial());
+    m_object = object;
+    m_material = object->GetMaterial();
 }
 
 }

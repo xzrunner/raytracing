@@ -2,7 +2,6 @@
 
 #include "raytracing/utilities/RGBColor.h"
 #include "raytracing/utilities/Constants.h"
-#include "raytracing/utilities/Object.h"
 
 namespace rt
 {
@@ -10,7 +9,7 @@ namespace rt
 class ShadeRec;
 class Vector3D;
 
-class BRDF : public Object
+class BRDF
 {
 public:
 	virtual ~BRDF() {}

@@ -22,11 +22,6 @@ OpenCylinder::OpenCylinder(double bottom, double top, double radius)
 {
 }
 
-OpenCylinder* OpenCylinder::Clone() const
-{
-	return new OpenCylinder(*this);
-}
-
 bool OpenCylinder::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 {
 	double t;

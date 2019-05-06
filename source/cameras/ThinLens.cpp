@@ -15,15 +15,8 @@ ThinLens::ThinLens()
 	, m_d(500)
 	, m_f(75)
 	, m_zoom(1)
-	, m_sampler(NULL)
+	, m_sampler(nullptr)
 {
-}
-
-ThinLens::~ThinLens()
-{
-	if (m_sampler) {
-		m_sampler->Release();
-	}
 }
 
 void ThinLens::RenderScene(const World& world) const
@@ -77,9 +70,9 @@ Vector3D ThinLens::RayDirection(const Point2D& pixel_point, const Point2D& lens_
 	return dir;
 }
 
-void ThinLens::SetSampler(Sampler* sampler)
+void ThinLens::SetSampler(const std::shared_ptr<Sampler>& sampler)
 {
-	obj_assign((const Object*&)m_sampler, sampler);
+    m_sampler = sampler;
 	m_sampler->MapSamplesToUnitDisk();
 }
 

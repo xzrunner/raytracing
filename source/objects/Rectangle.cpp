@@ -16,7 +16,7 @@ Rectangle::Rectangle(const Point3D& m_p0, const Vector3D& m_a, const Vector3D& m
 	, m_normal(n)
 	, m_area((float)(m_a.Length() * m_b.Length()))
 	, m_inv_area(1 / m_area)
-	, m_sampler(NULL)
+	, m_sampler(nullptr)
 {
 }
 
@@ -86,11 +86,6 @@ float Rectangle::Pdf(const ShadeRec& sr) const
 Normal Rectangle::GetNormal(const Point3D& p) const
 {
 	return m_normal;
-}
-
-void Rectangle::SetSampler(Sampler* sampler)
-{
-	obj_assign((const Object*&)m_sampler, sampler);
 }
 
 }

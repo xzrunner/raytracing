@@ -9,22 +9,16 @@ namespace rt
 {
 
 Matte::Matte()
-	: m_ambient_brdf(new Lambertian)
-	, m_diffuse_brdf(new Lambertian)
+	: m_ambient_brdf(std::make_unique<Lambertian>())
+	, m_diffuse_brdf(std::make_unique<Lambertian>())
 {
-}
-
-Matte::~Matte()
-{
-	delete m_ambient_brdf;
-	delete m_diffuse_brdf;
 }
 
 RGBColor Matte::Shade(const ShadeRec& sr) const
 {
 	Vector3D wo = -sr.ray.dir;
 	RGBColor L = m_ambient_brdf->rho(sr, wo) * sr.w.GetAmbient()->L(sr);
-	const std::vector<Light*>& lights = sr.w.GetLights();
+	auto& lights = sr.w.GetLights();
 	for (int i = 0, n = lights.size(); i < n; i++)
 	{
 		Vector3D wi = lights[i]->GetDirection(sr);
@@ -49,7 +43,7 @@ RGBColor Matte::AreaLightShade(const ShadeRec& sr) const
 {
 	Vector3D wo = -sr.ray.dir;
 	RGBColor L = m_ambient_brdf->rho(sr, wo) * sr.w.GetAmbient()->L(sr);
-	const std::vector<Light*>& lights = sr.w.GetLights();
+	auto& lights = sr.w.GetLights();
 	for (int i = 0, n = lights.size(); i < n; i++)
 	{
 		Vector3D wi = lights[i]->GetDirection(sr);

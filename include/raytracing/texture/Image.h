@@ -1,14 +1,13 @@
 #pragma once
 
 #include "raytracing/utilities/RGBColor.h"
-#include "raytracing/utilities/Object.h"
 
 #include <vector>
 
 namespace rt
 {
 
-class Image : public Object
+class Image
 {
 public:
 	Image();

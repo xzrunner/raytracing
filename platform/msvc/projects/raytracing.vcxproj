@@ -64,18 +64,12 @@
     <ClInclude Include="..\..\..\include\raytracing\tracer\RayCast.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\Tracer.h" />
     <ClInclude Include="..\..\..\include\raytracing\utilities\Constants.h" />
-    <ClInclude Include="..\..\..\include\raytracing\utilities\interfaces.h" />
     <ClInclude Include="..\..\..\include\raytracing\utilities\Mesh.h" />
-    <ClInclude Include="..\..\..\include\raytracing\utilities\Object.h" />
     <ClInclude Include="..\..\..\include\raytracing\utilities\RGBColor.h" />
     <ClInclude Include="..\..\..\include\raytracing\utilities\ShadeRec.h" />
-    <ClInclude Include="..\..\..\include\raytracing\utilities\utility.h" />
     <ClInclude Include="..\..\..\include\raytracing\world\RenderOutput.h" />
     <ClInclude Include="..\..\..\include\raytracing\world\ViewPlane.h" />
     <ClInclude Include="..\..\..\include\raytracing\world\World.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\include\raytracing\utilities\Object.inl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\brdfs\BRDF.cpp" />

@@ -9,7 +9,6 @@
 #include "raytracing/maths/Point2D.h"
 #include "raytracing/maths/Point3D.h"
 #include "raytracing/maths/Ray.h"
-#include "raytracing/utilities/utility.h"
 #include "raytracing/utilities/RGBColor.h"
 #include "raytracing/utilities/Constants.h"
 
@@ -20,22 +19,12 @@ namespace rt
 {
 
 World::World()
-	: m_ambient(new Ambient)
-	, m_tracer(NULL)
-	, m_camera(NULL)
-	, m_output(NULL)
-	, m_background_color(BLACK)
+	: m_background_color(BLACK)
 {
 }
 
 World::~World()
 {
-	for_each(m_objects.begin(), m_objects.end(), DeletePointerFunctor<GeometricObject>());
-	for_each(m_lights.begin(), m_lights.end(), DeletePointerFunctor<Light>());
-
-	delete m_ambient;
-	delete m_tracer;
-	delete m_camera;
 }
 
 void World::RenderScene()
@@ -92,22 +81,29 @@ ShadeRec World::HitObjects(const Ray& ray) const
 	return(sr);
 }
 
-void World::AddObject(GeometricObject* obj)
+void World::AddObject(std::unique_ptr<GeometricObject> obj)
 {
-	m_objects.push_back(obj);
+	m_objects.push_back(std::move(obj));
 }
 
-void World::AddLight(Light* light)
+void World::AddLight(std::unique_ptr<Light> light)
 {
-	m_lights.push_back(light);
+	m_lights.push_back(std::move(light));
 }
 
-void World::SetRenderOutput(RenderOutput* output)
+void World::SetAmbient(std::unique_ptr<Light> ambient)
 {
-	if (m_output != output) {
-		delete m_output;
-		m_output = output;
-	}
+    m_ambient = std::move(ambient);
+}
+
+void World::SetCamera(std::unique_ptr<Camera> camera)
+{
+    m_camera = std::move(camera);
+}
+
+void World::SetTracer(std::unique_ptr<Tracer> tracer)
+{
+    m_tracer = std::move(tracer);
 }
 
 void World::DisplayPixel(const int row, const int column, const RGBColor& raw_color) const

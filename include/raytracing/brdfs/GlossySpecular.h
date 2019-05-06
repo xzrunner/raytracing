@@ -2,6 +2,8 @@
 
 #include "raytracing/brdfs/BRDF.h"
 
+#include <memory>
+
 namespace rt
 {
 
@@ -11,7 +13,6 @@ class GlossySpecular : public BRDF
 {
 public:
 	GlossySpecular();
-	virtual ~GlossySpecular();
 
 	virtual RGBColor f(const ShadeRec& sr, const Vector3D& wo, const Vector3D& wi) const;
 
@@ -34,7 +35,7 @@ private:
 	RGBColor m_cs;
 
 	// for use in sample_f
-	Sampler* m_sampler;
+	std::shared_ptr<Sampler> m_sampler = nullptr;
 
 }; // GlossySpecular
 

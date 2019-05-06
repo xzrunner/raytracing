@@ -58,25 +58,16 @@ bool Compound::ShadowHit(const Ray& ray, float& tmin) const
 	return hit;
 }
 
-void Compound::AddObject(GeometricObject* obj)
+void Compound::SetMaterial(const std::shared_ptr<Material>& material) const
 {
-	obj->Retain();
-	m_parts.push_back(obj);
-}
-
-void Compound::SetMaterial(const Material* m) const
-{
-	GeometricObject::SetMaterial(m);
-	for (int i = 0, n = m_parts.size(); i < n; ++i) {
-		m_parts[i]->SetMaterial(m);
-	}
+    GeometricObject::SetMaterial(material);
+    for (int i = 0, n = m_parts.size(); i < n; ++i) {
+        m_parts[i]->SetMaterial(material);
+    }
 }
 
 void Compound::ClearObjects()
 {
-	for (int i = 0, n = m_parts.size(); i < n; ++i) {
-		m_parts[i]->Release();
-	}
 	m_parts.clear();
 }
 

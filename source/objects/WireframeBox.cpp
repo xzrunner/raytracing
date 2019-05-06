@@ -14,25 +14,13 @@ WireframeBox::WireframeBox(const Point3D& p0, const Point3D& p1, float br)
 	double length = p1.x - p0.x;
 	double height = p1.y - p0.y;
 
-	OpenCylinder* ocd = new OpenCylinder(p0.y, p1.y, br);
+	auto ocd = std::make_shared<OpenCylinder>(p0.y, p1.y, br);
 
-	std::vector<Instance*> parts;
-	parts.reserve(12);
-	parts.assign(12,0);
-
-	parts[0] = new Instance(ocd);
-	parts[1] =  new Instance(ocd->Clone());
-	parts[2] = new Instance(ocd->Clone());
-	parts[3] = new Instance(ocd->Clone());
-	parts[4] = new Instance(ocd->Clone());
-	parts[5] = new Instance(ocd->Clone());
-	parts[6] = new Instance(ocd->Clone());
-	parts[7] = new Instance(ocd->Clone());
-	parts[8] = new Instance(ocd->Clone());
-	parts[9] = new Instance(ocd->Clone());
-	parts[10] = new Instance(ocd->Clone());
-	parts[11] = new Instance(ocd->Clone());
-
+	std::vector<std::shared_ptr<Instance>> parts;
+	parts.resize(12, 0);
+    for (int i = 0; i < 12; ++i) {
+        parts[i] = std::make_shared<Instance>(std::make_shared<OpenCylinder>(*ocd));
+    }
 
 	parts[0]->Translate(Vector3D(-width/2+br/2,0,-length/2));
 	parts[1]->Translate(Vector3D(-width/2+br/2,0,length/2));

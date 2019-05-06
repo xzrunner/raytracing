@@ -2,6 +2,8 @@
 
 #include "raytracing/materials/Material.h"
 
+#include <memory>
+
 namespace rt
 {
 
@@ -20,11 +22,11 @@ public:
 
 	void SetKa(const float k);
 	void SetKd(const float k);
-	void SetCd(const Texture* tex);
+	void SetCd(const std::shared_ptr<Texture>& tex);
 
 private:
-	Lambertian*	m_ambient_brdf;
-	Lambertian*	m_diffuse_brdf;
+	std::unique_ptr<Lambertian>	m_ambient_brdf;
+    std::unique_ptr<Lambertian>	m_diffuse_brdf;
 
 }; // SV_Matte
 

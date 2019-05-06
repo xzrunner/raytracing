@@ -11,19 +11,21 @@ class Compound : public GeometricObject
 {
 public:
 	virtual ~Compound();
-	
-	virtual bool Hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
-	virtual bool ShadowHit(const Ray& ray, float& tmin) const;
 
-	virtual void AddObject(GeometricObject* obj);
+	virtual bool Hit(const Ray& ray, double& tmin, ShadeRec& sr) const override;
+	virtual bool ShadowHit(const Ray& ray, float& tmin) const override;
 
-	virtual void SetMaterial(const Material* m) const;
+    virtual void AddObject(const std::shared_ptr<GeometricObject>& obj) override {
+        m_parts.push_back(obj);
+    }
+
+	virtual void SetMaterial(const std::shared_ptr<Material>& material) const override;
 
 protected:
 	void ClearObjects();
 
 protected:
-	std::vector<GeometricObject*> m_parts;
+	std::vector<std::shared_ptr<GeometricObject>> m_parts;
 
 }; // Compound
 

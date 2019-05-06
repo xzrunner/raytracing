@@ -1,14 +1,13 @@
 #pragma once
 
 #include "raytracing/utilities/RGBColor.h"
-#include "raytracing/utilities/Object.h"
 
 namespace rt
 {
 
 class ShadeRec;
 
-class Texture : public Object
+class Texture
 {
 public:
 	virtual ~Texture() {}

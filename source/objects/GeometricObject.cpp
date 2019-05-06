@@ -6,7 +6,7 @@ namespace rt
 {
 
 GeometricObject::GeometricObject()
-	: m_material(NULL)
+	: m_material(nullptr)
 {
 }
 
@@ -15,16 +15,6 @@ GeometricObject::GeometricObject(const GeometricObject& obj)
 	if (obj.m_material) {
 
 	}
-}
-
-GeometricObject::~GeometricObject()
-{
-	m_material->Release();
-}
-
-GeometricObject* GeometricObject::Clone() const
-{
-	return NULL;
 }
 
 Point3D GeometricObject::Sample() const
@@ -50,11 +40,6 @@ Normal GeometricObject::GetNormal(const Point3D& p) const
 AABB GeometricObject::GetBoundingBox() const
 {
 	return AABB();
-}
-
-void GeometricObject::SetMaterial(const Material* m) const
-{
-	obj_assign((const Object*&)m_material, m);
 }
 
 }

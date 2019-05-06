@@ -4,6 +4,7 @@
 #include "raytracing/utilities/ShadeRec.h"
 
 #include <vector>
+#include <memory>
 
 namespace rt
 {
@@ -19,9 +20,9 @@ class World
 {
 public:
 	World();
-	~World();
+    ~World();
 
-	void Build();
+	//void Build();
 
 	void RenderScene();
 
@@ -29,43 +30,48 @@ public:
 
 	const RGBColor& GetBackgroundColor() const { return m_background_color; }
 
-	const std::vector<Light*>& GetLights() const { return m_lights; }
+	auto& GetLights() const { return m_lights; }
 
-	const Light* GetAmbient() const { return m_ambient; }
+    void SetAmbient(std::unique_ptr<Light> ambient);
+	auto& GetAmbient() const { return m_ambient; }
 
-	const Camera* GetCamera() const { return m_camera; }
+    void SetCamera(std::unique_ptr<Camera> camera);
+	auto& GetCamera() const { return m_camera; }
 
+    void SetViewPlane(const ViewPlane& vp) { m_vp = vp; }
 	const ViewPlane& GetViewPlane() const { return m_vp; }
 
-	Tracer* GetTracer() const { return m_tracer; }
+    void SetTracer(std::unique_ptr<Tracer> tracer);
+	auto& GetTracer() const { return m_tracer; }
 
-	void SetRenderOutput(RenderOutput* output);
+    void SetRenderOutput(const std::shared_ptr<RenderOutput>& output) {
+        m_output = output;
+    }
 
 	void DisplayPixel(const int row, const int column, const RGBColor& pixel_color) const;
 
-	const std::vector<GeometricObject*>& GetObjects() const { return m_objects; }
+	auto& GetObjects() const { return m_objects; }
 
-private:
-	void AddObject(GeometricObject* obj);
+	void AddObject(std::unique_ptr<GeometricObject> obj);
 
-	void AddLight(Light* light);
+	void AddLight(std::unique_ptr<Light> light);
 
 private:
 	ViewPlane m_vp;
 
 	RGBColor m_background_color;
 
-	std::vector<GeometricObject*> m_objects;
+	std::vector<std::unique_ptr<GeometricObject>> m_objects;
 
-	std::vector<Light*> m_lights;
+	std::vector<std::unique_ptr<Light>> m_lights;
 
-	Light* m_ambient;
+    std::unique_ptr<Light> m_ambient = nullptr;
 
-	Tracer* m_tracer;
+	std::unique_ptr<Tracer> m_tracer = nullptr;
 
-	Camera* m_camera;
+    std::unique_ptr<Camera> m_camera = nullptr;
 
-	RenderOutput* m_output;
+    std::shared_ptr<RenderOutput> m_output = nullptr;
 
 }; // World
 

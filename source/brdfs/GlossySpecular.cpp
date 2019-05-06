@@ -8,15 +8,8 @@ namespace rt
 GlossySpecular::GlossySpecular()
 	: m_ks(0)
 	, m_cs(1, 1, 1)
-	, m_sampler(NULL)
+	, m_sampler(nullptr)
 {
-}
-
-GlossySpecular::~GlossySpecular()
-{
-	if (m_sampler) {
-		m_sampler->Release();
-	}
 }
 
 // ----------------------------------------------------------------------------------- f

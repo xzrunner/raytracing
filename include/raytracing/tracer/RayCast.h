@@ -10,7 +10,7 @@ class World;
 class RayCast : public Tracer
 {
 public:
-	RayCast(const World* world);
+	RayCast(const World& world);
 
 	virtual RGBColor TraceRay(const Ray& ray) const;
 

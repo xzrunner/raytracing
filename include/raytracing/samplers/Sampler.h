@@ -2,14 +2,13 @@
 
 #include "raytracing/maths/Point2D.h"
 #include "raytracing/maths/Point3D.h"
-#include "raytracing/utilities/Object.h"
 
 #include <vector>
 
 namespace rt
 {
 
-class Sampler : public Object
+class Sampler
 {
 public:
 	Sampler();
@@ -52,7 +51,7 @@ protected:
 	std::vector<Point3D> m_hemisphere_samples;
 
 	// shuffled samples array indices
-	std::vector<int> m_shuffled_indices;		
+	std::vector<int> m_shuffled_indices;
 
 	// the current number of sample points used
 	mutable unsigned long m_count;

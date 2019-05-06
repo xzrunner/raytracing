@@ -2,6 +2,8 @@
 
 #include "raytracing/materials/Material.h"
 
+#include <memory>
+
 namespace rt
 {
 
@@ -13,7 +15,6 @@ class Matte : public Material
 {
 public:
 	Matte();
-	virtual ~Matte();
 
 	virtual RGBColor Shade(const ShadeRec& sr) const;
 	virtual RGBColor AreaLightShade(const ShadeRec& sr) const;
@@ -23,8 +24,8 @@ public:
 	void SetCd(const RGBColor c);
 
 private:
-	Lambertian*	m_ambient_brdf;
-	Lambertian*	m_diffuse_brdf;
+	std::unique_ptr<Lambertian>	m_ambient_brdf = nullptr;
+	std::unique_ptr<Lambertian>	m_diffuse_brdf = nullptr;
 
 }; // Matte
 
