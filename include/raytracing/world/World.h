@@ -44,9 +44,7 @@ public:
     void SetTracer(std::unique_ptr<Tracer> tracer);
 	auto& GetTracer() const { return m_tracer; }
 
-    void SetRenderOutput(const std::shared_ptr<RenderOutput>& output) {
-        m_output = output;
-    }
+    void SetRenderOutput(RenderOutput* output) { m_output = output; }
 
 	void DisplayPixel(const int row, const int column, const RGBColor& pixel_color) const;
 
@@ -71,7 +69,9 @@ private:
 
     std::unique_ptr<Camera> m_camera = nullptr;
 
-    std::shared_ptr<RenderOutput> m_output = nullptr;
+    // fixme: raylab's wxThread dtor
+//    std::shared_ptr<RenderOutput> m_output = nullptr;
+    RenderOutput* m_output = nullptr;
 
 }; // World
 

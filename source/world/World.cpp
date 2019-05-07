@@ -13,7 +13,9 @@
 #include "raytracing/utilities/Constants.h"
 
 #include <algorithm>
+
 #include <float.h>
+#include <assert.h>
 
 namespace rt
 {
@@ -123,6 +125,7 @@ void World::DisplayPixel(const int row, const int column, const RGBColor& raw_co
 	int x = column;
 	int y = m_vp.GetHeight() - row - 1;
 
+    assert(m_output);
 	m_output->SetPixel(x, y, (int)(mapped_color.r * 255),
 		(int)(mapped_color.g * 255),
 		(int)(mapped_color.b * 255));
