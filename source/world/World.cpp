@@ -1,6 +1,6 @@
 #include "raytracing/world/World.h"
 #include "raytracing/world/RenderOutput.h"
-#include "raytracing/objects/GeometricObject.h"
+#include "raytracing/objects/Object.h"
 #include "raytracing/lights/Light.h"
 #include "raytracing/lights/Ambient.h"
 #include "raytracing/samplers/Sampler.h"
@@ -81,7 +81,7 @@ ShadeRec World::HitObjects(const Ray& ray) const
 	return(sr);
 }
 
-void World::AddObject(std::unique_ptr<GeometricObject> obj)
+void World::AddObject(std::unique_ptr<Object> obj)
 {
 	m_objects.push_back(std::move(obj));
 }

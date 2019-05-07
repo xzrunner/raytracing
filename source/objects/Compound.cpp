@@ -60,7 +60,7 @@ bool Compound::ShadowHit(const Ray& ray, float& tmin) const
 
 void Compound::SetMaterial(const std::shared_ptr<Material>& material) const
 {
-    GeometricObject::SetMaterial(material);
+    Object::SetMaterial(material);
     for (int i = 0, n = m_parts.size(); i < n; ++i) {
         m_parts[i]->SetMaterial(material);
     }

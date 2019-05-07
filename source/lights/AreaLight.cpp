@@ -1,6 +1,6 @@
 #include "raytracing/lights/AreaLight.h"
 #include "raytracing/materials/Material.h"
-#include "raytracing/objects/GeometricObject.h"
+#include "raytracing/objects/Object.h"
 #include "raytracing/world/World.h"
 #include "raytracing/utilities/Constants.h"
 #include "raytracing/utilities/ShadeRec.h"
@@ -61,7 +61,7 @@ float AreaLight::Pdf(const ShadeRec& sr) const
 	return (m_object->Pdf(sr));
 }
 
-void AreaLight::SetObject(const std::shared_ptr<GeometricObject>& object)
+void AreaLight::SetObject(const std::shared_ptr<Object>& object)
 {
     m_object = object;
     m_material = object->GetMaterial();

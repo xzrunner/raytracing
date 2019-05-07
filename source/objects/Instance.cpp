@@ -19,7 +19,7 @@ Instance::Instance()
 	m_forward_matrix.SetIdentity();
 }
 
-Instance::Instance(const std::shared_ptr<GeometricObject>& obj)
+Instance::Instance(const std::shared_ptr<Object>& obj)
 	: m_object(obj)
     , m_inv_matrix()
 	, m_aabb()

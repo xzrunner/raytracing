@@ -1,5 +1,5 @@
 #include "raytracing/lights/Directional.h"
-#include "raytracing/objects/GeometricObject.h"
+#include "raytracing/objects/Object.h"
 #include "raytracing/utilities/ShadeRec.h"
 #include "raytracing/world/World.h"
 

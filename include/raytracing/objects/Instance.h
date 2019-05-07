@@ -1,16 +1,16 @@
 #pragma once
 
-#include "raytracing/objects/GeometricObject.h"
+#include "raytracing/objects/Object.h"
 #include "raytracing/maths/Matrix.h"
 
 namespace rt
 {
 
-class Instance : public GeometricObject
+class Instance : public Object
 {
 public:
 	Instance();
-	Instance(const std::shared_ptr<GeometricObject>& obj);
+	Instance(const std::shared_ptr<Object>& obj);
 
 	virtual bool Hit(const Ray& ray, double& t, ShadeRec& s) const;
 	virtual bool ShadowHit(const Ray& ray, float& t) const;
@@ -27,7 +27,7 @@ public:
 	void Shear(const Matrix& m);
 
 private:
-	std::shared_ptr<GeometricObject> m_object = nullptr;  // object to be transformed
+	std::shared_ptr<Object> m_object = nullptr;  // object to be transformed
 	Matrix				m_inv_matrix;		    	// inverse transformation matrix
 	static 	Matrix		m_forward_matrix; 			// transformation matrix
 	AABB				m_aabb;						// transformed object's bounding box

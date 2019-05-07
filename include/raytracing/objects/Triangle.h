@@ -1,12 +1,12 @@
 #pragma once
 
-#include "raytracing/objects/GeometricObject.h"
+#include "raytracing/objects/Object.h"
 #include "raytracing/maths/Normal.h"
 
 namespace rt
 {
 
-class Triangle : public GeometricObject
+class Triangle : public Object
 {
 public:
 	Triangle();

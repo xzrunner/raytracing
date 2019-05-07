@@ -1,11 +1,11 @@
 #pragma once
 
-#include "raytracing/objects/GeometricObject.h"
+#include "raytracing/objects/Object.h"
 
 namespace rt
 {
 
-class Box : public GeometricObject
+class Box : public Object
 {
 public:
 	Box(const Point3D& min, const Point3D& max);

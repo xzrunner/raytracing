@@ -42,7 +42,7 @@
     <ClInclude Include="..\..\..\include\raytracing\maths\Vector3D.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Box.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Compound.h" />
-    <ClInclude Include="..\..\..\include\raytracing\objects\GeometricObject.h" />
+    <ClInclude Include="..\..\..\include\raytracing\objects\Object.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Grid.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Instance.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\OpenCylinder.h" />
@@ -98,7 +98,7 @@
     <ClCompile Include="..\..\..\source\maths\Vector3D.cpp" />
     <ClCompile Include="..\..\..\source\objects\Box.cpp" />
     <ClCompile Include="..\..\..\source\objects\Compound.cpp" />
-    <ClCompile Include="..\..\..\source\objects\GeometricObject.cpp" />
+    <ClCompile Include="..\..\..\source\objects\Object.cpp" />
     <ClCompile Include="..\..\..\source\objects\Grid.cpp" />
     <ClCompile Include="..\..\..\source\objects\Instance.cpp" />
     <ClCompile Include="..\..\..\source\objects\OpenCylinder.cpp" />

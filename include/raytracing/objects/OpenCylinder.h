@@ -1,11 +1,11 @@
 #pragma once
 
-#include "raytracing/objects/GeometricObject.h"
+#include "raytracing/objects/Object.h"
 
 namespace rt
 {
 
-class OpenCylinder : public GeometricObject
+class OpenCylinder : public Object
 {
 public:	
 	OpenCylinder(const OpenCylinder& cy);

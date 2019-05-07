@@ -25,7 +25,7 @@ private:
 	Point3D FindMaxBounds() const;
 
 private:
-	std::vector<std::shared_ptr<GeometricObject>> cells;		    // grid of cells
+	std::vector<std::shared_ptr<Object>> cells;		    // grid of cells
 	int	 nx, ny, nz;    	// number of cells in the x, y, and z directions
 	AABB aabb;			    // bounding box
 //	std::unique_ptr<Mesh> mesh = nullptr;			// holds triangle data

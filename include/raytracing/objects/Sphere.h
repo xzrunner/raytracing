@@ -1,12 +1,12 @@
 #pragma once
 
-#include "raytracing/objects/GeometricObject.h"
+#include "raytracing/objects/Object.h"
 #include "raytracing/maths/Point3D.h"
 
 namespace rt
 {
 
-class Sphere : public GeometricObject
+class Sphere : public Object
 {
 public:
 	Sphere();

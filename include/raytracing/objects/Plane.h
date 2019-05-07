@@ -1,13 +1,13 @@
 #pragma once
 
-#include "raytracing/objects/GeometricObject.h"
+#include "raytracing/objects/Object.h"
 #include "raytracing/maths/Point3D.h"
 #include "raytracing/maths/Normal.h"
 
 namespace rt
 {
 
-class Plane : public GeometricObject
+class Plane : public Object
 {
 public:
 	Plane();

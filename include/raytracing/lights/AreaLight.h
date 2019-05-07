@@ -10,7 +10,7 @@
 namespace rt
 {
 
-class GeometricObject;
+class Object;
 class Material;
 
 class AreaLight : public Light
@@ -27,10 +27,10 @@ public:
 	virtual float G(const ShadeRec& sr) const;
 	virtual float Pdf(const ShadeRec& sr) const;
 
-	void SetObject(const std::shared_ptr<GeometricObject>& object);
+	void SetObject(const std::shared_ptr<Object>& object);
 
 private:
-	std::shared_ptr<GeometricObject> m_object = nullptr;
+	std::shared_ptr<Object> m_object = nullptr;
 
 	// will be an emissive material
 	std::shared_ptr<Material> m_material = nullptr;

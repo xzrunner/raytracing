@@ -189,9 +189,6 @@
     <ClInclude Include="..\..\..\include\raytracing\objects\Compound.h">
       <Filter>objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\GeometricObject.h">
-      <Filter>objects</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\objects\Grid.h">
       <Filter>objects</Filter>
     </ClInclude>
@@ -214,6 +211,9 @@
       <Filter>objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\objects\WireframeBox.h">
+      <Filter>objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\Object.h">
       <Filter>objects</Filter>
     </ClInclude>
   </ItemGroup>
@@ -341,9 +341,6 @@
     <ClCompile Include="..\..\..\source\objects\Compound.cpp">
       <Filter>objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\GeometricObject.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\objects\Grid.cpp">
       <Filter>objects</Filter>
     </ClCompile>
@@ -366,6 +363,9 @@
       <Filter>objects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\objects\WireframeBox.cpp">
+      <Filter>objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\Object.cpp">
       <Filter>objects</Filter>
     </ClCompile>
   </ItemGroup>

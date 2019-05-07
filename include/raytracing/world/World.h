@@ -9,7 +9,7 @@
 namespace rt
 {
 
-class GeometricObject;
+class Object;
 class Light;
 class Tracer;
 class Ray;
@@ -52,7 +52,7 @@ public:
 
 	auto& GetObjects() const { return m_objects; }
 
-	void AddObject(std::unique_ptr<GeometricObject> obj);
+	void AddObject(std::unique_ptr<Object> obj);
 
 	void AddLight(std::unique_ptr<Light> light);
 
@@ -61,7 +61,7 @@ private:
 
 	RGBColor m_background_color;
 
-	std::vector<std::unique_ptr<GeometricObject>> m_objects;
+	std::vector<std::unique_ptr<Object>> m_objects;
 
 	std::vector<std::unique_ptr<Light>> m_lights;
 

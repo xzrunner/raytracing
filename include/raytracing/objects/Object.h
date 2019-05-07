@@ -14,11 +14,11 @@ class Ray;
 class ShadeRec;
 class Material;
 
-class GeometricObject
+class Object
 {
 public:
-	GeometricObject();
-	GeometricObject(const GeometricObject& obj);
+	Object();
+	Object(const Object& obj);
 
 	virtual bool Hit(const Ray& ray, double& t, ShadeRec& s) const = 0;
 	virtual bool ShadowHit(const Ray& ray, float& t) const = 0;
@@ -34,7 +34,7 @@ public:
 	virtual AABB GetBoundingBox() const;
 
 	// required for compound objects
-	virtual void AddObject(const std::shared_ptr<GeometricObject>& obj) {}
+	virtual void AddObject(const std::shared_ptr<Object>& obj) {}
 
     auto& GetMaterial() const { return m_material; }
     virtual void SetMaterial(const std::shared_ptr<Material>& material) const {
@@ -44,6 +44,6 @@ public:
 private:
 	mutable std::shared_ptr<Material> m_material = nullptr;
 
-}; // GeometricObject
+}; // Object
 
 }

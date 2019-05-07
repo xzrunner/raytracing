@@ -1,6 +1,6 @@
 #pragma once
 
-#include "raytracing/objects/GeometricObject.h"
+#include "raytracing/objects/Object.h"
 #include "raytracing/maths/Point3D.h"
 #include "raytracing/maths/Normal.h"
 
@@ -9,7 +9,7 @@ namespace rt
 
 class Sampler;
 
-class Rectangle : public GeometricObject
+class Rectangle : public Object
 {
 public:
 	Rectangle(const Point3D& p0, const Vector3D& a, const Vector3D& b, const Normal& n);
