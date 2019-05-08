@@ -20,11 +20,12 @@ public:
 	virtual float Pdf(const ShadeRec& sr) const;
 
 	void ScaleRadiance(const float b);
+    void SetColor(const RGBColor& color) { m_color = color; }
 
 	void SetDirection(const Vector3D& dir);
 
 private:
-	float m_ls;
+	float    m_ls;
 	RGBColor m_color;
 
 	Vector3D m_dir;
