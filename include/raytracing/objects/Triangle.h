@@ -20,8 +20,8 @@ public:
     void SetNormal(const Normal& normal) { m_normal = normal; }
 
 private:
-	Point3D	v0, v1, v2;
-	Normal	normal;
+	Point3D	m_v0, m_v1, m_v2;
+	Normal	m_normal;
 
 }; // Triangle
 
