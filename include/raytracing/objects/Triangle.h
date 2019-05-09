@@ -17,6 +17,8 @@ public:
 
 	virtual AABB GetBoundingBox() const;
 
+    void SetNormal(const Normal& normal) { m_normal = normal; }
+
 private:
 	Point3D	v0, v1, v2;
 	Normal	normal;
