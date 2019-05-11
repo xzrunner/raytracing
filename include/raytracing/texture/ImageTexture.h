@@ -18,9 +18,7 @@ public:
 
 	virtual RGBColor GetColor(const ShadeRec& sr) const;
 
-    void SetImage(const std::shared_ptr<Image>& image) {
-        m_image = image;
-    }
+    void SetImage(const std::shared_ptr<Image>& image);
     void SetMapping(const std::shared_ptr<Mapping>& mapping) {
         m_mapping = mapping;
     }

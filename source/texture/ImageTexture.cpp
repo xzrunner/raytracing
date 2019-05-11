@@ -30,7 +30,15 @@ RGBColor ImageTexture::GetColor(const ShadeRec& sr) const
 		column 	= (int)(sr.u * (m_hres - 1));
 	}
 
-	return m_image->GetColor(row, column);
+	return m_image->GetColor(column, row);
+}
+
+void ImageTexture::SetImage(const std::shared_ptr<Image>& image)
+{
+    m_image = image;
+
+    m_hres = image->GetHres();
+    m_vres = image->GetVres();
 }
 
 }
