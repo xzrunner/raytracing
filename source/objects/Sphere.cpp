@@ -9,7 +9,7 @@ namespace rt
 {
 
 Sphere::Sphere()
-	: m_radius(0)
+	: m_radius(1.0f)
 {
 }
 
