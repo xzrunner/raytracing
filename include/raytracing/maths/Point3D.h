@@ -17,6 +17,12 @@ public:
 // 	Point3D& operator = (const Point3D& p) {
 // 		x = p.x; y = p.y; z = p.z;
 // 	}
+    Point3D(const Vector3D& v)
+        : x(static_cast<float>(v.x))
+        , y(static_cast<float>(v.y))
+        , z(static_cast<float>(v.z))
+    {
+    }
 
 	Point3D operator + (const Vector3D& v) const;
 

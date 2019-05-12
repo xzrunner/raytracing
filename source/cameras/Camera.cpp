@@ -33,7 +33,7 @@ void Camera::SetUpVector(const Vector3D& up)
 
 void Camera::SetRollAngle(float r)
 {
-	float ra = r * PI_ON_180;
+	float ra = static_cast<float>(r * PI_ON_180);
 	//T(1)*R(-1)R(a)R(1)T(-1)
 	Matrix F,T,R,Ra;
 	T.SetIdentity();

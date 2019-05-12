@@ -11,8 +11,9 @@ class Camera
 {
 public:
 	Camera();
-	
+
 	virtual void RenderScene(const World& w) const = 0;
+    virtual void RenderStereo(const World& w, float x, int pixel_offset) const = 0;
 
 	void SetEye(const Point3D& p);
 
@@ -20,7 +21,7 @@ public:
 
 	void SetUpVector(const Vector3D& up);
 
-	void SetRollAngle(float ra);		
+	void SetRollAngle(float ra);
 
 	void ComputeUVW();
 

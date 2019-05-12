@@ -114,7 +114,7 @@ bool OpenCylinder::ShadowHit(const Ray& ray, float& tmin) const
 			double yhit = oy + t * dy;
 
 			if (yhit > m_y0 && yhit < m_y1) {
-				tmin = t;
+				tmin = static_cast<float>(t);
 
 				return (true);
 			}
@@ -126,7 +126,7 @@ bool OpenCylinder::ShadowHit(const Ray& ray, float& tmin) const
 			double yhit = oy + t * dy;
 
 			if (yhit > m_y0 && yhit < m_y1) {
-				tmin = t;
+				tmin = static_cast<float>(t);
 
 				return (true);
 			}

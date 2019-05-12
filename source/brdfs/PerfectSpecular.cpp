@@ -29,9 +29,9 @@ RGBColor PerfectSpecular::rho(const ShadeRec& sr, const Vector3D& wo) const
 // explained on page 500
 RGBColor PerfectSpecular::sample_f(const ShadeRec& sr, const Vector3D& wo, Vector3D& wi) const
 {
-	float ndotwo = sr.normal * wo;
-	wi = -wo + 2.0 * sr.normal * ndotwo;
-	return (m_kr * m_cr / fabs(sr.normal * wi)); // why is this fabs? // kr would be a Fresnel term in a Fresnel reflector
+	float ndotwo = static_cast<float>(sr.normal * wo);
+	wi = -wo + 2.0f * sr.normal * ndotwo;
+	return (m_kr * m_cr / fabs(static_cast<float>(sr.normal * wi))); // why is this fabs? // kr would be a Fresnel term in a Fresnel reflector
 
 }
 
@@ -40,9 +40,9 @@ RGBColor PerfectSpecular::sample_f(const ShadeRec& sr, const Vector3D& wo, Vecto
 // it returns ndotwi in the pdf
 RGBColor PerfectSpecular::sample_f(const ShadeRec& sr, const Vector3D& wo, Vector3D& wi, float& pdf) const
 {
-	float ndotwo = sr.normal * wo;
-	wi = -wo + 2.0 * sr.normal * ndotwo;
-	pdf = fabs(sr.normal * wi);
+	float ndotwo = static_cast<float>(sr.normal * wo);
+	wi = -wo + 2.0f * sr.normal * ndotwo;
+	pdf = fabs(static_cast<float>(sr.normal * wi));
 	return (m_kr * m_cr);
 }
 

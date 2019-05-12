@@ -1,10 +1,26 @@
 #include "raytracing/objects/Grid.h"
+#include "raytracing/objects/FlatMeshTriangle.h"
+#include "raytracing/objects/SmoothMeshTriangle.h"
 #include "raytracing/maths/Ray.h"
 #include "raytracing/maths/maths.h"
 #include "raytracing/utilities/Constants.h"
+#include "raytracing/utilities/Mesh.h"
+
+#include "external/ply.h"
 
 #include <float.h>
 #include <iostream>
+
+namespace
+{
+
+enum TriangleType
+{
+	Flat,
+	Smooth
+};
+
+}
 
 namespace rt
 {
@@ -13,7 +29,7 @@ Grid::Grid()
 	: nx(0)
 	, ny(0)
 	, nz(0)
-//	, mesh(nullptr)
+	, mesh(std::make_unique<Mesh>())
 	, reverse_normal(false)
 {
 }
@@ -100,15 +116,15 @@ bool Grid::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 	int ix, iy, iz;
 
 	if (aabb.Inside(ray.ori)) {  			// does the ray start inside the grid?
-		ix = clamp((ox - x0) * nx / (x1 - x0), 0, nx - 1);
-		iy = clamp((oy - y0) * ny / (y1 - y0), 0, ny - 1);
-		iz = clamp((oz - z0) * nz / (z1 - z0), 0, nz - 1);
+		ix = static_cast<int>(clamp((ox - x0) * nx / (x1 - x0), 0, nx - 1));
+		iy = static_cast<int>(clamp((oy - y0) * ny / (y1 - y0), 0, ny - 1));
+		iz = static_cast<int>(clamp((oz - z0) * nz / (z1 - z0), 0, nz - 1));
 	}
 	else {
 		Point3D p = ray.ori + t0 * ray.dir;  // initial hit point with grid's bounding box
-		ix = clamp((p.x - x0) * nx / (x1 - x0), 0, nx - 1);
-		iy = clamp((p.y - y0) * ny / (y1 - y0), 0, ny - 1);
-		iz = clamp((p.z - z0) * nz / (z1 - z0), 0, nz - 1);
+		ix = static_cast<int>(clamp((p.x - x0) * nx / (x1 - x0), 0, nx - 1));
+		iy = static_cast<int>(clamp((p.y - y0) * ny / (y1 - y0), 0, ny - 1));
+		iz = static_cast<int>(clamp((p.z - z0) * nz / (z1 - z0), 0, nz - 1));
 	}
 
 	// ray parameter increments per cell in the x, y, and z directions
@@ -252,9 +268,9 @@ void Grid::SetupCells(void)
 	double multiplier = 2.0;  	// multiplyer scales the number of grid cells relative to the number of m_objects
 
 	double s = pow(wx * wy * wz / num_objects, 0.3333333);
-	nx = multiplier * wx / s + 1;
-	ny = multiplier * wy / s + 1;
-	nz = multiplier * wz / s + 1;
+	nx = static_cast<int>(multiplier * wx / s + 1);
+	ny = static_cast<int>(multiplier * wy / s + 1);
+	nz = static_cast<int>(multiplier * wz / s + 1);
 
 	// set up the array of grid cells with null pointers
 
@@ -283,12 +299,12 @@ void Grid::SetupCells(void)
 
 		// compute the cell indices at the corners of the bounding box of the object
 
-		int ixmin = clamp((obj_bBox.x0 - p0.x) * nx / (p1.x - p0.x), 0, nx - 1);
-		int iymin = clamp((obj_bBox.y0 - p0.y) * ny / (p1.y - p0.y), 0, ny - 1);
-		int izmin = clamp((obj_bBox.z0 - p0.z) * nz / (p1.z - p0.z), 0, nz - 1);
-		int ixmax = clamp((obj_bBox.x1 - p0.x) * nx / (p1.x - p0.x), 0, nx - 1);
-		int iymax = clamp((obj_bBox.y1 - p0.y) * ny / (p1.y - p0.y), 0, ny - 1);
-		int izmax = clamp((obj_bBox.z1 - p0.z) * nz / (p1.z - p0.z), 0, nz - 1);
+		int ixmin = static_cast<int>(clamp((obj_bBox.x0 - p0.x) * nx / (p1.x - p0.x), 0, nx - 1));
+		int iymin = static_cast<int>(clamp((obj_bBox.y0 - p0.y) * ny / (p1.y - p0.y), 0, ny - 1));
+		int izmin = static_cast<int>(clamp((obj_bBox.z0 - p0.z) * nz / (p1.z - p0.z), 0, nz - 1));
+		int ixmax = static_cast<int>(clamp((obj_bBox.x1 - p0.x) * nx / (p1.x - p0.x), 0, nx - 1));
+		int iymax = static_cast<int>(clamp((obj_bBox.y1 - p0.y) * ny / (p1.y - p0.y), 0, ny - 1));
+		int izmax = static_cast<int>(clamp((obj_bBox.z1 - p0.z) * nz / (p1.z - p0.z), 0, nz - 1));
 
 		// add the object to the cells
 
@@ -354,6 +370,17 @@ void Grid::SetupCells(void)
 	counts.erase (counts.begin(), counts.end());
 }
 
+void Grid::ReadFlatTriangles(const std::string& filename)
+{
+    ReadPlyFile(filename, TriangleType::Flat);
+}
+
+void Grid::ReadSmoothTriangles(const std::string& filename)
+{
+    ReadPlyFile(filename, TriangleType::Smooth);
+    ComputeMeshNormals();
+}
+
 Point3D Grid::FindMinBounds() const
 {
 	AABB object_box;
@@ -363,15 +390,20 @@ Point3D Grid::FindMinBounds() const
 	for (int j = 0; j < num_objects; j++) {
 		object_box = m_parts[j]->GetBoundingBox();
 
-		if (object_box.x0 < p0.x)
-			p0.x = object_box.x0;
-		if (object_box.y0 < p0.y)
-			p0.y = object_box.y0;
-		if (object_box.z0 < p0.z)
-			p0.z = object_box.z0;
+        if (object_box.x0 < p0.x) {
+            p0.x = static_cast<float>(object_box.x0);
+        }
+        if (object_box.y0 < p0.y) {
+            p0.y = static_cast<float>(object_box.y0);
+        }
+        if (object_box.z0 < p0.z) {
+            p0.z = static_cast<float>(object_box.z0);
+        }
 	}
 
-	p0.x -= EPSILON; p0.y -= EPSILON; p0.z -= EPSILON;
+	p0.x -= static_cast<float>(EPSILON);
+    p0.y -= static_cast<float>(EPSILON);
+    p0.z -= static_cast<float>(EPSILON);
 
 	return p0;
 }
@@ -385,17 +417,212 @@ Point3D Grid::FindMaxBounds() const
 	for (int j = 0; j < num_objects; j++) {
 		object_box = m_parts[j]->GetBoundingBox();
 
-		if (object_box.x1 > p1.x)
-			p1.x = object_box.x1;
-		if (object_box.y1 > p1.y)
-			p1.y = object_box.y1;
-		if (object_box.z1 > p1.z)
-			p1.z = object_box.z1;
+        if (object_box.x1 > p1.x) {
+            p1.x = static_cast<float>(object_box.x1);
+        }
+        if (object_box.y1 > p1.y) {
+            p1.y = static_cast<float>(object_box.y1);
+        }
+        if (object_box.z1 > p1.z) {
+            p1.z = static_cast<float>(object_box.z1);
+        }
 	}
 
-	p1.x += EPSILON; p1.y += EPSILON; p1.z += EPSILON;
+	p1.x += static_cast<float>(EPSILON);
+    p1.y += static_cast<float>(EPSILON);
+    p1.z += static_cast<float>(EPSILON);
 
 	return p1;
+}
+
+void Grid::ReadPlyFile(const std::string& filename, int triangle_type)
+{
+	// Vertex definition
+
+	typedef struct Vertex {
+	  float x,y,z;      // space coordinates
+	} Vertex;
+
+	// Face definition. This is the same for all files but is placed here to keep all the definitions together
+
+	typedef struct Face {
+	  	unsigned char nverts;    // number of vertex indices in list
+	  	int* verts;              // vertex index list
+	} Face;
+
+	// list of property information for a vertex
+	// this varies depending on what you are reading from the file
+
+	PlyProperty vert_props[] = {
+	  {"x", PLY_FLOAT, PLY_FLOAT, offsetof(Vertex,x), 0, 0, 0, 0},
+	  {"y", PLY_FLOAT, PLY_FLOAT, offsetof(Vertex,y), 0, 0, 0, 0},
+	  {"z", PLY_FLOAT, PLY_FLOAT, offsetof(Vertex,z), 0, 0, 0, 0}
+	};
+
+	// list of property information for a face.
+	// there is a single property, which is a list
+	// this is the same for all files
+
+	PlyProperty face_props[] = {
+	  	{"vertex_indices", PLY_INT, PLY_INT, offsetof(Face,verts),
+	   		1, PLY_UCHAR, PLY_UCHAR, offsetof(Face,nverts)}
+	};
+
+	// local variables
+
+	int 			i,j;
+  	PlyFile*		ply;
+  	int 			nelems;		// number of element types: 2 in our case - vertices and faces
+  	char**			elist;
+	int 			file_type;
+	float 			version;
+	int 			nprops;		// number of properties each element has
+	int 			num_elems;	// number of each type of element: number of vertices or number of faces
+	PlyProperty**	plist;
+	Vertex**		vlist;
+	Face**			flist;
+	char*			elem_name;
+	int				num_comments;
+	char**			comments;
+	int 			num_obj_info;
+	char**			obj_info;
+
+
+  	// open a ply file for reading
+
+	ply = ply_open_for_reading(const_cast<char*>(filename.c_str()), &nelems, &elist, &file_type, &version);
+
+  	// print what we found out about the file
+
+  	printf ("version %f\n", version);
+  	printf ("type %d\n", file_type);
+
+  	// go through each kind of element that we learned is in the file and read them
+
+  	for (i = 0; i < nelems; i++) {  // there are only two elements in our files: vertices and faces
+	    // get the description of the first element
+
+  	    elem_name = elist[i];
+	    plist = ply_get_element_description (ply, elem_name, &num_elems, &nprops);
+
+	    // print the name of the element, for debugging
+
+		std::cout << "element name  " << elem_name << "  num elements = " << num_elems << "  num properties =  " << nprops << std::endl;
+
+	    // if we're on vertex elements, read in the properties
+
+    	if (equal_strings ("vertex", elem_name)) {
+	      	// set up for getting vertex elements
+	      	// the three properties are the vertex coordinates
+
+			ply_get_property (ply, elem_name, &vert_props[0]);
+	      	ply_get_property (ply, elem_name, &vert_props[1]);
+		  	ply_get_property (ply, elem_name, &vert_props[2]);
+
+		  	// reserve mesh elements
+
+		  	mesh->num_vertices = num_elems;
+		  	mesh->vertices.reserve(num_elems);
+
+		  	// grab all the vertex elements
+
+		  	for (j = 0; j < num_elems; j++) {
+				Vertex* vertex_ptr = new Vertex;
+
+		        // grab an element from the file
+
+				ply_get_element (ply, (void *) vertex_ptr);
+		  		mesh->vertices.push_back(Point3D(vertex_ptr->x, vertex_ptr->y, vertex_ptr->z));
+		  		delete vertex_ptr;
+		  	}
+    	}
+
+	    // if we're on face elements, read them in
+
+	    if (equal_strings ("face", elem_name)) {
+		    // set up for getting face elements
+
+			ply_get_property (ply, elem_name, &face_props[0]);   // only one property - a list
+
+		  	mesh->num_triangles = num_elems;
+		  	m_parts.reserve(num_elems);  // triangles will be stored in Compound::m_parts
+
+			// the following code stores the face numbers that are shared by each vertex
+
+		  	mesh->vertex_faces.reserve(mesh->num_vertices);
+		  	std::vector<int> faceList;
+
+		  	for (j = 0; j < mesh->num_vertices; j++)
+		  		mesh->vertex_faces.push_back(faceList); // store empty lists so that we can use the [] notation below
+
+			// grab all the face elements
+
+			int count = 0; // the number of faces read
+
+			for (j = 0; j < num_elems; j++) {
+			    // grab an element from the file
+
+			    Face* face_ptr = new Face;
+
+			    ply_get_element (ply, (void *) face_ptr);
+
+			    // construct a mesh triangle of the specified type
+
+			    if (triangle_type == Flat) {
+			    	auto triangle_ptr = std::make_shared<FlatMeshTriangle>(mesh, face_ptr->verts[0], face_ptr->verts[1], face_ptr->verts[2]);
+					triangle_ptr->ComputeNormal(reverse_normal);
+					m_parts.push_back(triangle_ptr);
+				}
+
+			    if (triangle_type == Smooth) {
+			    	auto triangle_ptr = std::make_shared<SmoothMeshTriangle>(mesh, face_ptr->verts[0], face_ptr->verts[1], face_ptr->verts[2]);
+					triangle_ptr->ComputeNormal(reverse_normal); 	// the "flat triangle" normal is used to compute the average normal at each mesh vertex
+					m_parts.push_back(triangle_ptr); 				// it's quicker to do it once here, than have to do it on average 6 times in compute_mesh_normals
+
+					// the following code stores a list of all faces that share a vertex
+					// it's used for computing the average normal at each vertex in order(num_vertices) time
+
+					mesh->vertex_faces[face_ptr->verts[0]].push_back(count);
+					mesh->vertex_faces[face_ptr->verts[1]].push_back(count);
+					mesh->vertex_faces[face_ptr->verts[2]].push_back(count);
+					count++;
+				}
+			}
+
+			if (triangle_type == Flat)
+				mesh->vertex_faces.erase(mesh->vertex_faces.begin(), mesh->vertex_faces.end());
+	    }
+
+	    // print out the properties we got, for debugging
+
+	    for (j = 0; j < nprops; j++)
+	    	printf ("property %s\n", plist[j]->name);
+
+	}  // end of for (i = 0; i < nelems; i++)
+
+
+	// grab and print out the comments in the file
+
+	comments = ply_get_comments (ply, &num_comments);
+
+	for (i = 0; i < num_comments; i++)
+	    printf ("comment = '%s'\n", comments[i]);
+
+	// grab and print out the object information
+
+	obj_info = ply_get_obj_info (ply, &num_obj_info);
+
+	for (i = 0; i < num_obj_info; i++)
+	    printf ("obj_info = '%s'\n", obj_info[i]);
+
+	// close the ply file
+
+	ply_close (ply);
+}
+
+void Grid::ComputeMeshNormals()
+{
+
 }
 
 }

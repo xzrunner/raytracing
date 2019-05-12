@@ -16,7 +16,7 @@ AreaLight::AreaLight()
 
 RGBColor AreaLight::L(const ShadeRec& sr) const
 {
-	float ndotd = -m_light_normal * m_wi;
+	float ndotd = static_cast<float>(-m_light_normal * m_wi);
 	if (ndotd > 0.0f && m_material) {
 		return m_material->GetLe(sr);
 	} else {
@@ -37,7 +37,7 @@ Vector3D AreaLight::GetDirection(const ShadeRec& sr) const
 bool AreaLight::InShadow(const Ray& ray, const ShadeRec& sr) const
 {
 	float t;
-	float ts = (m_sample_point - ray.ori) * ray.dir;
+	float ts = static_cast<float>((m_sample_point - ray.ori) * ray.dir);
 	auto& objs = sr.w.GetObjects();
 	for (int i=  0, n = objs.size(); i < n; ++i) {
 		if (objs[i]->ShadowHit(ray, t) && t < ts) {
@@ -50,7 +50,7 @@ bool AreaLight::InShadow(const Ray& ray, const ShadeRec& sr) const
 
 float AreaLight::G(const ShadeRec& sr) const
 {
-	float ndotd = -m_light_normal * m_wi;
+	float ndotd = static_cast<float>(-m_light_normal * m_wi);
 	float d2 	= m_sample_point.DistanceSquared(sr.hit_point);
 
 	return (ndotd / d2);

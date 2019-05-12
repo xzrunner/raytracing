@@ -26,7 +26,7 @@ public:
 	Vector3D			      dir;				    // for area lights
 	double				      t;					// ray parameter
 	const World&		      w;					// World reference
-	RGBColor			      color;
+	RGBColor			      m_color;
 
 	float u;
 	float v;

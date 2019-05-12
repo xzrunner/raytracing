@@ -7,7 +7,7 @@ namespace rt
 
 class OpenCylinder : public Object
 {
-public:	
+public:
 	OpenCylinder(const OpenCylinder& cy);
 	OpenCylinder(double bottom, double top, double radius);
 
@@ -16,9 +16,9 @@ public:
 
 private:
 	// bottom y value
-	double		m_y0;		
+	double		m_y0;
 	// top y value
-	double		m_y1;				
+	double		m_y1;
 
 	double		m_radius;
 	double		m_inv_radius;

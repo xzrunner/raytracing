@@ -13,8 +13,8 @@ Sphere::Sphere()
 {
 }
 
-Sphere::Sphere(const Point3D& m_center, float r)
-	: m_center(m_center)
+Sphere::Sphere(const Point3D& center, float r)
+	: m_center(center)
 	, m_radius(r)
 {
 }

@@ -24,7 +24,7 @@ RGBColor Reflective::Shade(const ShadeRec& sr) const
 	Ray reflected_ray(sr.hit_point, wi);
 	reflected_ray.depth = sr.depth + 1;
 
-	L += fr * sr.w.GetTracer()->TraceRay(reflected_ray, sr.depth + 1) * (sr.normal * wi);
+	L += fr * sr.w.GetTracer()->TraceRay(reflected_ray, sr.depth + 1) * static_cast<float>(sr.normal * wi);
 
 	return L;
 }

@@ -37,6 +37,9 @@
     <Filter Include="world">
       <UniqueIdentifier>{8a6faf1e-f481-4a63-9448-34b87d6b26c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="objects\mesh">
+      <UniqueIdentifier>{c92bbc6c-e254-466f-b8eb-a10331d4c1a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\raytracing\brdfs\BRDF.h">
@@ -216,6 +219,42 @@
     <ClInclude Include="..\..\..\include\raytracing\objects\Object.h">
       <Filter>objects</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\mapping\LightProbe.h">
+      <Filter>mapping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\cameras\Spherical.h">
+      <Filter>cameras</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\cameras\Stereo.h">
+      <Filter>cameras</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\SolidCylinder.h">
+      <Filter>objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\Disk.h">
+      <Filter>objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\lights\AmbientOccluder.h">
+      <Filter>lights</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\samplers\PureRandom.h">
+      <Filter>samplers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\ConvexPartCylinder.h">
+      <Filter>objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\external\ply.h">
+      <Filter>utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\FlatMeshTriangle.h">
+      <Filter>objects\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\MeshTriangle.h">
+      <Filter>objects\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\SmoothMeshTriangle.h">
+      <Filter>objects\mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\brdfs\BRDF.cpp">
@@ -367,6 +406,42 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\objects\Object.cpp">
       <Filter>objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\mapping\LightProbe.cpp">
+      <Filter>mapping</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\cameras\Spherical.cpp">
+      <Filter>cameras</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\cameras\Stereo.cpp">
+      <Filter>cameras</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\SolidCylinder.cpp">
+      <Filter>objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\Disk.cpp">
+      <Filter>objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\lights\AmbientOccluder.cpp">
+      <Filter>lights</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\samplers\PureRandom.cpp">
+      <Filter>samplers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\ConvexPartCylinder.cpp">
+      <Filter>objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\external\ply.c">
+      <Filter>utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\FlatMeshTriangle.cpp">
+      <Filter>objects\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\MeshTriangle.cpp">
+      <Filter>objects\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\SmoothMeshTriangle.cpp">
+      <Filter>objects\mesh</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

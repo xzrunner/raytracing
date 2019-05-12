@@ -175,9 +175,9 @@ bool Box::ShadowHit(const Ray& ray, float& tmin) const
 
 	if (t0 < t1 && t1 > EPSILON) {  // condition for a hit
 		if (t0 > EPSILON)
-			tmin = t0;  			// ray hits outside surface
+			tmin = static_cast<float>(t0);  			// ray hits outside surface
 		else
-			tmin = t1;				// ray hits inside surface
+			tmin = static_cast<float>(t1);				// ray hits inside surface
 
 		return (true);
 	} else {

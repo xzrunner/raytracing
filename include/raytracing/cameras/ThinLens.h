@@ -15,7 +15,8 @@ class ThinLens : public Camera
 public:
 	ThinLens();
 
-	virtual void RenderScene(const World& w) const;
+	virtual void RenderScene(const World& w) const override;
+    virtual void RenderStereo(const World& w, float x, int pixel_offset) const override;
 
 	void SetLensRadius(float radius) { m_lens_radius = radius; }
 	void SetViewDistance(const float vpd) { m_d = vpd; }

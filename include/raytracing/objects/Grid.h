@@ -6,7 +6,7 @@
 namespace rt
 {
 
-//class Mesh;
+class Mesh;
 
 class Grid : public Compound
 {
@@ -20,15 +20,21 @@ public:
 
 	void SetupCells(void);
 
+    void ReadFlatTriangles(const std::string& filename);
+    void ReadSmoothTriangles(const std::string& filename);
+
 private:
 	Point3D FindMinBounds() const;
 	Point3D FindMaxBounds() const;
+
+    void ReadPlyFile(const std::string& filename, int triangle_type);
+    void ComputeMeshNormals();
 
 private:
 	std::vector<std::shared_ptr<Object>> cells;		    // grid of cells
 	int	 nx, ny, nz;    	// number of cells in the x, y, and z directions
 	AABB aabb;			    // bounding box
-//	std::unique_ptr<Mesh> mesh = nullptr;			// holds triangle data
+	std::shared_ptr<Mesh> mesh = nullptr;			// holds triangle data
 	bool reverse_normal;	// some PLY files have normals that point inwards
 
 }; // Grid

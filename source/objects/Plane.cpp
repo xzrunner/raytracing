@@ -20,7 +20,7 @@ Plane::Plane(const Point3D& pos, const Normal& normal)
 
 bool Plane::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 {
-	float t = (m_pos - ray.ori) * m_normal / (ray.dir * m_normal);
+	float t = static_cast<float>((m_pos - ray.ori) * m_normal / (ray.dir * m_normal));
 
 	if (t > EPSILON * 10) {
 		tmin = t;
@@ -35,7 +35,7 @@ bool Plane::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 bool Plane::ShadowHit(const Ray& ray, float& tmin) const
 {
-	float t = (m_pos - ray.ori) * m_normal / (ray.dir * m_normal);
+	float t = static_cast<float>((m_pos - ray.ori) * m_normal / (ray.dir * m_normal));
 
 	if (t > EPSILON * 10) {
 		tmin = t;

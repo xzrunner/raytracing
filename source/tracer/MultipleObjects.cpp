@@ -14,7 +14,7 @@ RGBColor MultipleObjects::TraceRay(const Ray& ray) const
 {
 	ShadeRec sr(m_world.HitObjects(ray));
 	if (sr.hit_an_object) {
-		return sr.color;
+		return sr.m_color;
 	} else {
 		return m_world.GetBackgroundColor();
 	}

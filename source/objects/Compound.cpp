@@ -24,7 +24,7 @@ bool Compound::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 		if (m_parts[j]->Hit(ray, t, sr) && (t < tmin)) {
 			hit				= true;
 			tmin 			= t;
-			SetMaterial(m_parts[j]->GetMaterial());
+            m_material      = m_parts[j]->GetMaterial();
 			normal			= sr.normal;
 			local_hit_point	= sr.local_hit_point;
 		}
@@ -49,9 +49,9 @@ bool Compound::ShadowHit(const Ray& ray, float& tmin) const
 	int num_objects	= m_parts.size();
 	for (int j = 0; j < num_objects; j++) {
 		if (m_parts[j]->ShadowHit(ray, t) && (t < tmin)) {
-			hit				= true;
-			tmin 			= t;
-			SetMaterial(m_parts[j]->GetMaterial());
+			hit        = true;
+			tmin       = t;
+            m_material = m_parts[j]->GetMaterial();
 		}
 	}
 

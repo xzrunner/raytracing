@@ -23,7 +23,7 @@ void ThinLens::RenderScene(const World& world) const
 {
 	RGBColor	L;
 	Ray			ray;
-	ViewPlane	vp(world.GetViewPlane());
+	auto&       vp(world.GetViewPlane());
 	int 		depth 		= 0;
 
 	Point2D sp;			// sample point in [0, 1] X [0, 1]
@@ -31,18 +31,17 @@ void ThinLens::RenderScene(const World& world) const
 	Point2D dp;			// sample point on unit disk
 	Point2D lp;			// sample point on lens
 
-	vp.SetPixelSize(vp.GetPixelSize() / m_zoom);
+    float sz = vp.GetPixelSize() / m_zoom;
 
 	int w = vp.GetWidth(),
 		h = vp.GetHeight();
-	float s = vp.GetPixelSize();
 	for (int r = 0; r < h; r++)	{		// up
 		for (int c = 0; c < w; c++) {		// across
 			L = BLACK;
 			for (int n = 0; n < vp.GetSamplesNum(); n++) {
 				sp = vp.GetSampler()->SampleUnitSquare();
-				pp.x = s * (c - w / 2.0f + sp.x);
-				pp.y = s * (r - h / 2.0f + sp.y);
+				pp.x = sz * (c - w / 2.0f + sp.x);
+				pp.y = sz * (r - h / 2.0f + sp.y);
 
 				dp = m_sampler->SampleUnitDisk();
 				lp = dp * m_lens_radius;
@@ -52,11 +51,54 @@ void ThinLens::RenderScene(const World& world) const
 				L += world.GetTracer()->TraceRay(ray, depth);
 			}
 
-			L /= vp.GetSamplesNum();
+			L /= static_cast<float>(vp.GetSamplesNum());
 			L *= m_exposure_time;
 			world.DisplayPixel(r, c, L);
 		}
 	}
+}
+
+void ThinLens::RenderStereo(const World& wr, float x, int pixel_offset) const
+{
+	RGBColor	L;
+	Ray			ray;
+	auto&	    vp(wr.GetViewPlane());
+	int 		depth 		= 0;
+
+	Point2D sp;			// sample point in [0, 1] X [0, 1]
+	Point2D pp;			// sample point on a pixel
+	Point2D dp; 		// sample point on unit disk
+	Point2D lp;			// sample point on lens
+
+	//w.open_window(vp.hres, vp.vres);
+    float sz = vp.GetPixelSize() / m_zoom;
+
+    int w = vp.GetWidth(),
+        h = vp.GetHeight();
+    for (int r = 0; r < h; r++)			// up
+    {
+        for (int c = 0; c < w; c++)		// across
+        {
+            L = BLACK;
+            for (int n = 0; n < vp.GetSamplesNum(); n++)
+            {
+                sp = vp.GetSampler()->SampleUnitSquare();
+                pp.x = sz * (c - vp.GetWidth() / 2.0f + sp.x);
+                pp.y = sz * (r - vp.GetHeight() / 2.0f + sp.y);
+
+                dp = m_sampler->SampleUnitDisk();
+                lp = dp * m_lens_radius;
+
+                ray.ori = m_eye + lp.x * m_u + lp.y * m_v;
+                ray.dir = RayDirection(pp, lp);
+                L += wr.GetTracer()->TraceRay(ray, depth);
+            }
+
+            L /= static_cast<float>(vp.GetSamplesNum());
+            L *= m_exposure_time;
+            wr.DisplayPixel(r, c + pixel_offset, L);
+        }
+    }
 }
 
 // ----------------------------------------------------------------------------- ray direction

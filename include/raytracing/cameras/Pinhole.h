@@ -13,7 +13,8 @@ class Pinhole : public Camera
 public:
 	Pinhole();
 
-	virtual void RenderScene(const World& w) const;
+	virtual void RenderScene(const World& w) const override;
+    virtual void RenderStereo(const World& w, float x, int pixel_offset) const override;
 
 	void SetViewDistance(const float vpd);
 

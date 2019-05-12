@@ -38,7 +38,7 @@ ViewPlane::ViewPlane(const ViewPlane& vp)
 void ViewPlane::SetSampler(const std::shared_ptr<Sampler>& sampler)
 {
     m_sampler = sampler;
-	m_num_samples = sampler->GetNumSamples();
+	m_num_samples = m_sampler->GetNumSamples();
 }
 
 void ViewPlane::SetSamples(int n)

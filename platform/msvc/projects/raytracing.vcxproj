@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\external\ply.h" />
     <ClInclude Include="..\..\..\include\raytracing\brdfs\BRDF.h" />
     <ClInclude Include="..\..\..\include\raytracing\brdfs\GlossySpecular.h" />
     <ClInclude Include="..\..\..\include\raytracing\brdfs\Lambertian.h" />
@@ -18,12 +19,16 @@
     <ClInclude Include="..\..\..\include\raytracing\cameras\Camera.h" />
     <ClInclude Include="..\..\..\include\raytracing\cameras\FishEye.h" />
     <ClInclude Include="..\..\..\include\raytracing\cameras\Pinhole.h" />
+    <ClInclude Include="..\..\..\include\raytracing\cameras\Spherical.h" />
+    <ClInclude Include="..\..\..\include\raytracing\cameras\Stereo.h" />
     <ClInclude Include="..\..\..\include\raytracing\cameras\ThinLens.h" />
     <ClInclude Include="..\..\..\include\raytracing\lights\Ambient.h" />
+    <ClInclude Include="..\..\..\include\raytracing\lights\AmbientOccluder.h" />
     <ClInclude Include="..\..\..\include\raytracing\lights\AreaLight.h" />
     <ClInclude Include="..\..\..\include\raytracing\lights\Directional.h" />
     <ClInclude Include="..\..\..\include\raytracing\lights\Light.h" />
     <ClInclude Include="..\..\..\include\raytracing\lights\PointLight.h" />
+    <ClInclude Include="..\..\..\include\raytracing\mapping\LightProbe.h" />
     <ClInclude Include="..\..\..\include\raytracing\mapping\Mapping.h" />
     <ClInclude Include="..\..\..\include\raytracing\mapping\SphericalMap.h" />
     <ClInclude Include="..\..\..\include\raytracing\materials\Emissive.h" />
@@ -42,17 +47,24 @@
     <ClInclude Include="..\..\..\include\raytracing\maths\Vector3D.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Box.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Compound.h" />
+    <ClInclude Include="..\..\..\include\raytracing\objects\ConvexPartCylinder.h" />
+    <ClInclude Include="..\..\..\include\raytracing\objects\Disk.h" />
+    <ClInclude Include="..\..\..\include\raytracing\objects\FlatMeshTriangle.h" />
+    <ClInclude Include="..\..\..\include\raytracing\objects\MeshTriangle.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Object.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Grid.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Instance.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\OpenCylinder.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Plane.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Rectangle.h" />
+    <ClInclude Include="..\..\..\include\raytracing\objects\SmoothMeshTriangle.h" />
+    <ClInclude Include="..\..\..\include\raytracing\objects\SolidCylinder.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Sphere.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Triangle.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\WireframeBox.h" />
     <ClInclude Include="..\..\..\include\raytracing\samplers\Jittered.h" />
     <ClInclude Include="..\..\..\include\raytracing\samplers\MultiJittered.h" />
+    <ClInclude Include="..\..\..\include\raytracing\samplers\PureRandom.h" />
     <ClInclude Include="..\..\..\include\raytracing\samplers\Regular.h" />
     <ClInclude Include="..\..\..\include\raytracing\samplers\Sampler.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\Checker3D.h" />
@@ -72,6 +84,7 @@
     <ClInclude Include="..\..\..\include\raytracing\world\World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\external\ply.c" />
     <ClCompile Include="..\..\..\source\brdfs\BRDF.cpp" />
     <ClCompile Include="..\..\..\source\brdfs\GlossySpecular.cpp" />
     <ClCompile Include="..\..\..\source\brdfs\Lambertian.cpp" />
@@ -79,12 +92,16 @@
     <ClCompile Include="..\..\..\source\cameras\Camera.cpp" />
     <ClCompile Include="..\..\..\source\cameras\FishEye.cpp" />
     <ClCompile Include="..\..\..\source\cameras\Pinhole.cpp" />
+    <ClCompile Include="..\..\..\source\cameras\Spherical.cpp" />
+    <ClCompile Include="..\..\..\source\cameras\Stereo.cpp" />
     <ClCompile Include="..\..\..\source\cameras\ThinLens.cpp" />
     <ClCompile Include="..\..\..\source\lights\Ambient.cpp" />
+    <ClCompile Include="..\..\..\source\lights\AmbientOccluder.cpp" />
     <ClCompile Include="..\..\..\source\lights\AreaLight.cpp" />
     <ClCompile Include="..\..\..\source\lights\Directional.cpp" />
     <ClCompile Include="..\..\..\source\lights\Light.cpp" />
     <ClCompile Include="..\..\..\source\lights\PointLight.cpp" />
+    <ClCompile Include="..\..\..\source\mapping\LightProbe.cpp" />
     <ClCompile Include="..\..\..\source\mapping\SphericalMap.cpp" />
     <ClCompile Include="..\..\..\source\materials\Emissive.cpp" />
     <ClCompile Include="..\..\..\source\materials\Material.cpp" />
@@ -98,17 +115,24 @@
     <ClCompile Include="..\..\..\source\maths\Vector3D.cpp" />
     <ClCompile Include="..\..\..\source\objects\Box.cpp" />
     <ClCompile Include="..\..\..\source\objects\Compound.cpp" />
+    <ClCompile Include="..\..\..\source\objects\ConvexPartCylinder.cpp" />
+    <ClCompile Include="..\..\..\source\objects\Disk.cpp" />
+    <ClCompile Include="..\..\..\source\objects\FlatMeshTriangle.cpp" />
+    <ClCompile Include="..\..\..\source\objects\MeshTriangle.cpp" />
     <ClCompile Include="..\..\..\source\objects\Object.cpp" />
     <ClCompile Include="..\..\..\source\objects\Grid.cpp" />
     <ClCompile Include="..\..\..\source\objects\Instance.cpp" />
     <ClCompile Include="..\..\..\source\objects\OpenCylinder.cpp" />
     <ClCompile Include="..\..\..\source\objects\Plane.cpp" />
     <ClCompile Include="..\..\..\source\objects\Rectangle.cpp" />
+    <ClCompile Include="..\..\..\source\objects\SmoothMeshTriangle.cpp" />
+    <ClCompile Include="..\..\..\source\objects\SolidCylinder.cpp" />
     <ClCompile Include="..\..\..\source\objects\Sphere.cpp" />
     <ClCompile Include="..\..\..\source\objects\Triangle.cpp" />
     <ClCompile Include="..\..\..\source\objects\WireframeBox.cpp" />
     <ClCompile Include="..\..\..\source\samplers\Jittered.cpp" />
     <ClCompile Include="..\..\..\source\samplers\MultiJittered.cpp" />
+    <ClCompile Include="..\..\..\source\samplers\PureRandom.cpp" />
     <ClCompile Include="..\..\..\source\samplers\Regular.cpp" />
     <ClCompile Include="..\..\..\source\samplers\Sampler.cpp" />
     <ClCompile Include="..\..\..\source\texture\Checker3D.cpp" />
@@ -166,7 +190,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..;..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -180,7 +204,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..;..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
