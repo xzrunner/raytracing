@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\external\ply.h" />
+    <ClInclude Include="..\..\..\external\tinyply.h" />
     <ClInclude Include="..\..\..\include\raytracing\brdfs\BRDF.h" />
     <ClInclude Include="..\..\..\include\raytracing\brdfs\GlossySpecular.h" />
     <ClInclude Include="..\..\..\include\raytracing\brdfs\Lambertian.h" />
@@ -84,7 +84,7 @@
     <ClInclude Include="..\..\..\include\raytracing\world\World.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\external\ply.c" />
+    <ClCompile Include="..\..\..\external\tinyply.cpp" />
     <ClCompile Include="..\..\..\source\brdfs\BRDF.cpp" />
     <ClCompile Include="..\..\..\source\brdfs\GlossySpecular.cpp" />
     <ClCompile Include="..\..\..\source\brdfs\Lambertian.cpp" />

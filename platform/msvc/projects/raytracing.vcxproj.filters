@@ -243,9 +243,6 @@
     <ClInclude Include="..\..\..\include\raytracing\objects\ConvexPartCylinder.h">
       <Filter>objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\external\ply.h">
-      <Filter>utilities</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\objects\FlatMeshTriangle.h">
       <Filter>objects\mesh</Filter>
     </ClInclude>
@@ -254,6 +251,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\objects\SmoothMeshTriangle.h">
       <Filter>objects\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\external\tinyply.h">
+      <Filter>utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -431,9 +431,6 @@
     <ClCompile Include="..\..\..\source\objects\ConvexPartCylinder.cpp">
       <Filter>objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\external\ply.c">
-      <Filter>utilities</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\objects\FlatMeshTriangle.cpp">
       <Filter>objects\mesh</Filter>
     </ClCompile>
@@ -442,6 +439,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\objects\SmoothMeshTriangle.cpp">
       <Filter>objects\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\external\tinyply.cpp">
+      <Filter>utilities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

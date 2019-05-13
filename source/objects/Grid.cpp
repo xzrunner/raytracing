@@ -6,10 +6,13 @@
 #include "raytracing/utilities/Constants.h"
 #include "raytracing/utilities/Mesh.h"
 
-#include "external/ply.h"
+#define TINYPLY_IMPLEMENTATION
+#include "external/tinyply.h"
+
+#include <fstream>
 
 #include <float.h>
-#include <iostream>
+#include <assert.h>
 
 namespace
 {
@@ -437,187 +440,96 @@ Point3D Grid::FindMaxBounds() const
 
 void Grid::ReadPlyFile(const std::string& filename, int triangle_type)
 {
-	// Vertex definition
+    try {
+        std::ifstream ss(filename, std::ios::binary);
+        if (ss.fail()) throw std::runtime_error("failed to open " + filename);
 
-	typedef struct Vertex {
-	  float x,y,z;      // space coordinates
-	} Vertex;
+        PlyFile file;
+        file.parse_header(ss);
 
-	// Face definition. This is the same for all files but is placed here to keep all the definitions together
+        std::cout << "........................................................................\n";
+        for (auto c : file.get_comments()) std::cout << "Comment: " << c << std::endl;
+        for (auto e : file.get_elements())
+        {
+            std::cout << "element - " << e.name << " (" << e.size << ")" << std::endl;
+            for (auto p : e.properties) std::cout << "\tproperty - " << p.name << " (" << tinyply::PropertyTable[p.propertyType].str << ")" << std::endl;
+        }
+        std::cout << "........................................................................\n";
 
-	typedef struct Face {
-	  	unsigned char nverts;    // number of vertex indices in list
-	  	int* verts;              // vertex index list
-	} Face;
+		// Tinyply treats parsed data as untyped byte buffers. See below for examples.
+		std::shared_ptr<PlyData> vertices, normals, faces, texcoords;
 
-	// list of property information for a vertex
-	// this varies depending on what you are reading from the file
+		// The header information can be used to programmatically extract properties on elements
+		// known to exist in the header prior to reading the data. For brevity of this sample, properties
+		// like vertex position are hard-coded:
+		try { vertices = file.request_properties_from_element("vertex", { "x", "y", "z" }); }
+		catch (const std::exception & e) { std::cerr << "tinyply exception: " << e.what() << std::endl; }
 
-	PlyProperty vert_props[] = {
-	  {"x", PLY_FLOAT, PLY_FLOAT, offsetof(Vertex,x), 0, 0, 0, 0},
-	  {"y", PLY_FLOAT, PLY_FLOAT, offsetof(Vertex,y), 0, 0, 0, 0},
-	  {"z", PLY_FLOAT, PLY_FLOAT, offsetof(Vertex,z), 0, 0, 0, 0}
-	};
+		try { normals = file.request_properties_from_element("vertex", { "nx", "ny", "nz" }); }
+		catch (const std::exception & e) { std::cerr << "tinyply exception: " << e.what() << std::endl; }
 
-	// list of property information for a face.
-	// there is a single property, which is a list
-	// this is the same for all files
+		try { texcoords = file.request_properties_from_element("vertex", { "u", "v" }); }
+		catch (const std::exception & e) { std::cerr << "tinyply exception: " << e.what() << std::endl; }
 
-	PlyProperty face_props[] = {
-	  	{"vertex_indices", PLY_INT, PLY_INT, offsetof(Face,verts),
-	   		1, PLY_UCHAR, PLY_UCHAR, offsetof(Face,nverts)}
-	};
+		// Providing a list size hint (the last argument) is a 2x performance improvement. If you have
+		// arbitrary ply files, it is best to leave this 0.
+		try { faces = file.request_properties_from_element("face", { "vertex_indices" }, 3); }
+		catch (const std::exception & e) { std::cerr << "tinyply exception: " << e.what() << std::endl; }
 
-	// local variables
+		file.read(ss);
 
-	int 			i,j;
-  	PlyFile*		ply;
-  	int 			nelems;		// number of element types: 2 in our case - vertices and faces
-  	char**			elist;
-	int 			file_type;
-	float 			version;
-	int 			nprops;		// number of properties each element has
-	int 			num_elems;	// number of each type of element: number of vertices or number of faces
-	PlyProperty**	plist;
-	Vertex**		vlist;
-	Face**			flist;
-	char*			elem_name;
-	int				num_comments;
-	char**			comments;
-	int 			num_obj_info;
-	char**			obj_info;
+		if (vertices) std::cout << "\tRead " << vertices->count << " total vertices "<< std::endl;
+		if (normals) std::cout << "\tRead " << normals->count << " total vertex normals " << std::endl;
+		if (texcoords) std::cout << "\tRead " << texcoords->count << " total vertex texcoords " << std::endl;
+		if (faces) std::cout << "\tRead " << faces->count << " total faces (triangles) " << std::endl;
 
+        mesh->num_vertices = vertices->count;
+        mesh->vertices.resize(vertices->count);
+        const size_t num_vertices_bytes = vertices->buffer.size_bytes();
+        std::memcpy(mesh->vertices.data(), vertices->buffer.get(), num_vertices_bytes);
 
-  	// open a ply file for reading
+        mesh->num_triangles = faces->count;
+        mesh->vertex_faces.resize(faces->count);
+        assert(faces->t == tinyply::Type::INT32);
+        std::vector<int> face_data(faces->count * 3);
+        const size_t num_faces_bytes = faces->buffer.size_bytes();
+        assert(num_faces_bytes == faces->count * 3 * sizeof(int));
+        std::memcpy(face_data.data(), faces->buffer.get(), num_faces_bytes);
+        int idx_ptr = 0;
+        int count = 0; // the number of faces read
+        for (int i = 0; i < faces->count; ++i)
+        {
+            std::vector<int> face(3);
+            face[0] = face_data[idx_ptr++];
+            face[1] = face_data[idx_ptr++];
+            face[2] = face_data[idx_ptr++];
+            mesh->vertex_faces[i] = face;
 
-	ply = ply_open_for_reading(const_cast<char*>(filename.c_str()), &nelems, &elist, &file_type, &version);
-
-  	// print what we found out about the file
-
-  	printf ("version %f\n", version);
-  	printf ("type %d\n", file_type);
-
-  	// go through each kind of element that we learned is in the file and read them
-
-  	for (i = 0; i < nelems; i++) {  // there are only two elements in our files: vertices and faces
-	    // get the description of the first element
-
-  	    elem_name = elist[i];
-	    plist = ply_get_element_description (ply, elem_name, &num_elems, &nprops);
-
-	    // print the name of the element, for debugging
-
-		std::cout << "element name  " << elem_name << "  num elements = " << num_elems << "  num properties =  " << nprops << std::endl;
-
-	    // if we're on vertex elements, read in the properties
-
-    	if (equal_strings ("vertex", elem_name)) {
-	      	// set up for getting vertex elements
-	      	// the three properties are the vertex coordinates
-
-			ply_get_property (ply, elem_name, &vert_props[0]);
-	      	ply_get_property (ply, elem_name, &vert_props[1]);
-		  	ply_get_property (ply, elem_name, &vert_props[2]);
-
-		  	// reserve mesh elements
-
-		  	mesh->num_vertices = num_elems;
-		  	mesh->vertices.reserve(num_elems);
-
-		  	// grab all the vertex elements
-
-		  	for (j = 0; j < num_elems; j++) {
-				Vertex* vertex_ptr = new Vertex;
-
-		        // grab an element from the file
-
-				ply_get_element (ply, (void *) vertex_ptr);
-		  		mesh->vertices.push_back(Point3D(vertex_ptr->x, vertex_ptr->y, vertex_ptr->z));
-		  		delete vertex_ptr;
-		  	}
-    	}
-
-	    // if we're on face elements, read them in
-
-	    if (equal_strings ("face", elem_name)) {
-		    // set up for getting face elements
-
-			ply_get_property (ply, elem_name, &face_props[0]);   // only one property - a list
-
-		  	mesh->num_triangles = num_elems;
-		  	m_parts.reserve(num_elems);  // triangles will be stored in Compound::m_parts
-
-			// the following code stores the face numbers that are shared by each vertex
-
-		  	mesh->vertex_faces.reserve(mesh->num_vertices);
-		  	std::vector<int> faceList;
-
-		  	for (j = 0; j < mesh->num_vertices; j++)
-		  		mesh->vertex_faces.push_back(faceList); // store empty lists so that we can use the [] notation below
-
-			// grab all the face elements
-
-			int count = 0; // the number of faces read
-
-			for (j = 0; j < num_elems; j++) {
-			    // grab an element from the file
-
-			    Face* face_ptr = new Face;
-
-			    ply_get_element (ply, (void *) face_ptr);
-
-			    // construct a mesh triangle of the specified type
-
-			    if (triangle_type == Flat) {
-			    	auto triangle_ptr = std::make_shared<FlatMeshTriangle>(mesh, face_ptr->verts[0], face_ptr->verts[1], face_ptr->verts[2]);
-					triangle_ptr->ComputeNormal(reverse_normal);
-					m_parts.push_back(triangle_ptr);
-				}
-
-			    if (triangle_type == Smooth) {
-			    	auto triangle_ptr = std::make_shared<SmoothMeshTriangle>(mesh, face_ptr->verts[0], face_ptr->verts[1], face_ptr->verts[2]);
-					triangle_ptr->ComputeNormal(reverse_normal); 	// the "flat triangle" normal is used to compute the average normal at each mesh vertex
-					m_parts.push_back(triangle_ptr); 				// it's quicker to do it once here, than have to do it on average 6 times in compute_mesh_normals
-
-					// the following code stores a list of all faces that share a vertex
-					// it's used for computing the average normal at each vertex in order(num_vertices) time
-
-					mesh->vertex_faces[face_ptr->verts[0]].push_back(count);
-					mesh->vertex_faces[face_ptr->verts[1]].push_back(count);
-					mesh->vertex_faces[face_ptr->verts[2]].push_back(count);
-					count++;
-				}
+			if (triangle_type == Flat) {
+			    auto triangle_ptr = std::make_shared<FlatMeshTriangle>(mesh, face[0], face[1], face[2]);
+				triangle_ptr->ComputeNormal(reverse_normal);
+				m_parts.push_back(triangle_ptr);
 			}
 
-			if (triangle_type == Flat)
-				mesh->vertex_faces.erase(mesh->vertex_faces.begin(), mesh->vertex_faces.end());
-	    }
+			if (triangle_type == Smooth) {
+			    auto triangle_ptr = std::make_shared<SmoothMeshTriangle>(mesh, face[0], face[1], face[2]);
+				triangle_ptr->ComputeNormal(reverse_normal); 	// the "flat triangle" normal is used to compute the average normal at each mesh vertex
+				m_parts.push_back(triangle_ptr); 				// it's quicker to do it once here, than have to do it on average 6 times in compute_mesh_normals
 
-	    // print out the properties we got, for debugging
+				// the following code stores a list of all faces that share a vertex
+				// it's used for computing the average normal at each vertex in order(num_vertices) time
 
-	    for (j = 0; j < nprops; j++)
-	    	printf ("property %s\n", plist[j]->name);
-
-	}  // end of for (i = 0; i < nelems; i++)
-
-
-	// grab and print out the comments in the file
-
-	comments = ply_get_comments (ply, &num_comments);
-
-	for (i = 0; i < num_comments; i++)
-	    printf ("comment = '%s'\n", comments[i]);
-
-	// grab and print out the object information
-
-	obj_info = ply_get_obj_info (ply, &num_obj_info);
-
-	for (i = 0; i < num_obj_info; i++)
-	    printf ("obj_info = '%s'\n", obj_info[i]);
-
-	// close the ply file
-
-	ply_close (ply);
+				mesh->vertex_faces[face[0]].push_back(count);
+				mesh->vertex_faces[face[1]].push_back(count);
+				mesh->vertex_faces[face[2]].push_back(count);
+				count++;
+			}
+        }
+        if (triangle_type == Flat)
+            mesh->vertex_faces.erase(mesh->vertex_faces.begin(), mesh->vertex_faces.end());
+    } catch (const std::exception & e) {
+        std::cerr << "Caught tinyply exception: " << e.what() << std::endl;
+    }
 }
 
 void Grid::ComputeMeshNormals()
