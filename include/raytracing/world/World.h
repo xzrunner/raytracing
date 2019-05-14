@@ -24,7 +24,7 @@ public:
 
 	//void Build();
 
-	void RenderScene();
+	//void RenderScene();
 
 	ShadeRec HitObjects(const Ray& ray) const;
 

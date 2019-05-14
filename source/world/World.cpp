@@ -29,31 +29,31 @@ World::~World()
 {
 }
 
-void World::RenderScene()
-{
-	RGBColor pixel_color;
-	Ray	ray;
-	Point2D pos;
-
-	int width = m_vp.GetWidth(),
-		height = m_vp.GetHeight();
-	float size = m_vp.GetPixelSize();
-
-	// hardwired in
-	float zw = 100.0;
-
-	for (int y = 0, h = m_vp.GetHeight(); y < h; ++y) {
-		for (int x = 0, w = m_vp.GetWidth(); x < w; ++x) {
-			for (int i = 0, n = m_vp.GetSamplesNum(); i < n; ++i) {
-				const Point2D& sp = m_vp.GetSampler()->SampleUnitSquare();
-				pos.x = size * (x - 0.5f * width + sp.x);
-				pos.y = size * (y - 0.5f * height + sp.y);
-				ray.ori = Point3D(size * (x - width / 2.0f + 0.5f), size * (y - height / 2.0f + 0.5f), zw);
-				pixel_color += m_tracer->TraceRay(ray);
-			}
-		}
-	}
-}
+//void World::RenderScene()
+//{
+//	RGBColor pixel_color;
+//	Ray	ray;
+//	Point2D pos;
+//
+//	int width = m_vp.GetWidth(),
+//		height = m_vp.GetHeight();
+//	float size = m_vp.GetPixelSize();
+//
+//	// hardwired in
+//	float zw = 100.0;
+//
+//	for (int y = 0, h = m_vp.GetHeight(); y < h; ++y) {
+//		for (int x = 0, w = m_vp.GetWidth(); x < w; ++x) {
+//			for (int i = 0, n = m_vp.GetSamplesNum(); i < n; ++i) {
+//				const Point2D& sp = m_vp.GetSampler()->SampleUnitSquare();
+//				pos.x = size * (x - 0.5f * width + sp.x);
+//				pos.y = size * (y - 0.5f * height + sp.y);
+//				ray.ori = Point3D(size * (x - width / 2.0f + 0.5f), size * (y - height / 2.0f + 0.5f), zw);
+//				pixel_color += m_tracer->TraceRay(ray);
+//			}
+//		}
+//	}
+//}
 
 ShadeRec World::HitObjects(const Ray& ray) const
 {
