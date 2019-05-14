@@ -31,6 +31,24 @@
 #include <unordered_map>
 #include <map>
 
+// Check windows
+#if _WIN32 || _WIN64
+#if _WIN64
+#define ENVIRONMENT64
+#else
+#define ENVIRONMENT32
+#endif
+#endif
+
+// Check GCC
+#if __GNUC__
+#if __x86_64__ || __ppc64__
+#define ENVIRONMENT64
+#else
+#define ENVIRONMENT32
+#endif
+#endif
+
 namespace tinyply
 {
 
@@ -358,13 +376,23 @@ template<typename T> void ply_cast_ascii(void * dest, std::istream & is)
     *(static_cast<T *>(dest)) = ply_read_ascii<T>(is);
 }
 
-int64_t find_element(const std::string & key, const std::vector<PlyElement> & list)
+#ifdef ENVIRONMENT32
+int32_t
+#else
+int64_t
+#endif // ENVIRONMENT32
+find_element(const std::string & key, const std::vector<PlyElement> & list)
 {
     for (size_t i = 0; i < list.size(); i++) if (list[i].name == key) return i;
     return -1;
 }
 
-int64_t find_property(const std::string & key, const std::vector<PlyProperty> & list)
+#ifdef ENVIRONMENT32
+int32_t
+#else
+int64_t
+#endif // ENVIRONMENT32
+find_property(const std::string & key, const std::vector<PlyProperty> & list)
 {
     for (size_t i = 0; i < list.size(); ++i) if (list[i].name == key) return i;
     return -1;
@@ -630,7 +658,7 @@ void PlyFile::PlyFileImpl::write_ascii_internal(std::ostream & os)
                 if (p.isList)
                 {
                     os << p.listCount << " ";
-                    for (int j = 0; j < p.listCount; ++j)
+                    for (size_t j = 0; j < p.listCount; ++j)
                     {
                         write_property_ascii(p.propertyType, os, (helper.data->buffer.get() + helper.cursor->byteOffset), helper.cursor->byteOffset);
                     }
@@ -696,7 +724,7 @@ std::shared_ptr<PlyData> PlyFile::PlyFileImpl::request_properties_from_element(c
     if (elementKey.empty()) throw std::invalid_argument("`elementKey` argument is empty");
     if (!propertyKeys.size()) throw std::invalid_argument("`propertyKeys` argument is empty");
 
-    const int64_t elementIndex = find_element(elementKey, elements);
+    const auto elementIndex = find_element(elementKey, elements);
 
     std::vector<std::string> keys_not_found;
 
@@ -711,7 +739,7 @@ std::shared_ptr<PlyData> PlyFile::PlyFileImpl::request_properties_from_element(c
         // Find each of the keys
         for (auto key : propertyKeys)
         {
-            const int64_t propertyIndex = find_property(key, element.properties);
+            const auto propertyIndex = find_property(key, element.properties);
             if (propertyIndex >= 0)
             {
                 // We found the property
@@ -759,7 +787,7 @@ void PlyFile::PlyFileImpl::add_properties_to_element(const std::string & element
         }
     };
 
-    const int64_t idx = find_element(elementKey, elements);
+    const auto idx = find_element(elementKey, elements);
     if (idx >= 0)
     {
         PlyElement & e = elements[idx];
