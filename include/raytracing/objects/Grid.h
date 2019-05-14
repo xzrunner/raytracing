@@ -14,9 +14,11 @@ public:
 	Grid();
     virtual ~Grid();
 
-	virtual bool Hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
+	virtual bool Hit(const Ray& ray, double& tmin, ShadeRec& sr) const override;
 
-	virtual AABB GetBoundingBox() const;
+	virtual AABB GetBoundingBox() const override;
+
+    virtual void SetMaterial(const std::shared_ptr<Material>& material) const override;
 
 	void SetupCells(void);
 

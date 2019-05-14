@@ -17,6 +17,12 @@ public:
 
 	Normal& operator = (const Vector3D& v);
 
+    // addition
+    Normal operator + (const Normal& n) const;
+
+    // compound addition
+    Normal& operator += (const Normal& n);
+
 	// dot product with a vector on the right
 	double operator * (const Vector3D& v) const;
 
@@ -50,6 +56,19 @@ inline Normal& Normal::
 operator = (const Vector3D& v) {
 	x = v.x; y = v.y; z = v.z;
 	return *this;
+}
+
+inline
+Normal Normal::operator + (const Normal& n) const
+{
+    return Normal(x + n.x, y + n.y, z + n.z);
+}
+
+inline
+Normal& Normal::operator += (const Normal& n)
+{
+    x += n.x; y += n.y; z += n.z;
+    return *this;
 }
 
 inline double Normal::

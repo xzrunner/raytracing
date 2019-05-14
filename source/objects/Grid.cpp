@@ -244,6 +244,16 @@ AABB Grid::GetBoundingBox() const
 	return aabb;
 }
 
+void Grid::SetMaterial(const std::shared_ptr<Material>& material) const
+{
+    Compound::SetMaterial(material);
+    for (auto& obj : cells) {
+        if (obj) {
+            obj->SetMaterial(material);
+        }
+    }
+}
+
 void Grid::SetupCells(void)
 {
 	// find the minimum and maximum coordinates of the grid
@@ -497,7 +507,7 @@ void Grid::ReadPlyFile(const std::string& filename, int triangle_type)
         std::memcpy(face_data.data(), faces->buffer.get(), num_faces_bytes);
         int idx_ptr = 0;
         int count = 0; // the number of faces read
-        for (int i = 0; i < faces->count; ++i)
+        for (size_t i = 0; i < faces->count; ++i)
         {
             std::vector<int> face(3);
             face[0] = face_data[idx_ptr++];
@@ -534,7 +544,40 @@ void Grid::ReadPlyFile(const std::string& filename, int triangle_type)
 
 void Grid::ComputeMeshNormals()
 {
+	mesh->normals.reserve(mesh->num_vertices);
 
+    // for each vertex
+	for (int index = 0; index < mesh->num_vertices; index++)
+    {
+		Normal normal;    // is zero at this point
+
+        for (size_t j = 0; j < mesh->vertex_faces[index].size(); j++) {
+            normal += m_parts[mesh->vertex_faces[index][j]]->GetNormal();
+        }
+
+		// The following code attempts to avoid (nan, nan, nan) normalised normals when all components = 0
+
+        if (normal.x == 0.0 && normal.y == 0.0 && normal.z == 0.0) {
+            normal.y = 1.0;
+        }
+        else {
+            normal.Normalize();
+        }
+
+		mesh->normals.push_back(normal);
+	}
+
+	// erase the vertex_faces arrays because we have now finished with them
+
+    for (int index = 0; index < mesh->num_vertices; index++) {
+        for (size_t j = 0; j < mesh->vertex_faces[index].size(); j++) {
+            mesh->vertex_faces[index].erase(mesh->vertex_faces[index].begin(), mesh->vertex_faces[index].end());
+        }
+    }
+
+	mesh->vertex_faces.erase (mesh->vertex_faces.begin(), mesh->vertex_faces.end());
+
+	cout << "finished constructing normals" << endl;
 }
 
 }
