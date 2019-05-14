@@ -7,6 +7,10 @@
 #include "raytracing/utilities/RGBColor.h"
 #include "raytracing/utilities/Constants.h"
 
+#include <tbb/parallel_for.h>
+#include <tbb/blocked_range2d.h>
+#include <tbb/queuing_mutex.h>
+
 namespace rt
 {
 
@@ -21,84 +25,99 @@ ThinLens::ThinLens()
 
 void ThinLens::RenderScene(const World& world) const
 {
-	RGBColor	L;
-	Ray			ray;
-	auto&       vp(world.GetViewPlane());
-	int 		depth 		= 0;
+	const auto& vp    = world.GetViewPlane();
+	const int   depth = 0;
+    const float sz    = vp.GetPixelSize() / m_zoom;
 
-	Point2D sp;			// sample point in [0, 1] X [0, 1]
-	Point2D pp;			// sample point on a pixel
-	Point2D dp;			// sample point on unit disk
-	Point2D lp;			// sample point on lens
+	const int w = vp.GetWidth(),
+		      h = vp.GetHeight();
+    tbb::queuing_mutex mutex;
+    tbb::parallel_for(tbb::blocked_range2d<int>(0, w, 0, h),
+        [&](const tbb::blocked_range2d<int> &r)
+    {
+        for (int i = r.rows().begin(), i_end = r.rows().end(); i < i_end; i++) {
+            for (int j = r.cols().begin(), j_end = r.cols().end(); j < j_end; j++) {
+                RGBColor L = BLACK;
+                for (int k = 0; k < vp.GetSamplesNum(); k++) {
+                    // sample point in [0, 1] X [0, 1]
+                    auto sp = vp.GetSampler()->SampleUnitSquare();
 
-    float sz = vp.GetPixelSize() / m_zoom;
+                    // sample point on a pixel
+                    Point2D pp;
+                    pp.x = sz * (i - w / 2.0f + sp.x);
+                    pp.y = sz * (j - h / 2.0f + sp.y);
 
-	int w = vp.GetWidth(),
-		h = vp.GetHeight();
-	for (int r = 0; r < h; r++)	{		// up
-		for (int c = 0; c < w; c++) {		// across
-			L = BLACK;
-			for (int n = 0; n < vp.GetSamplesNum(); n++) {
-				sp = vp.GetSampler()->SampleUnitSquare();
-				pp.x = sz * (c - w / 2.0f + sp.x);
-				pp.y = sz * (r - h / 2.0f + sp.y);
+                    // sample point on unit disk
+                    auto dp = m_sampler->SampleUnitDisk();
+                    // sample point on lens
+                    auto lp = dp * m_lens_radius;
 
-				dp = m_sampler->SampleUnitDisk();
-				lp = dp * m_lens_radius;
+                    Ray ray;
+                    ray.ori = m_eye + lp.x * m_u + lp.y * m_v;
+                    ray.dir = RayDirection(pp, lp);
+                    L += world.GetTracer()->TraceRay(ray, depth);
+                }
 
-				ray.ori = m_eye + lp.x * m_u + lp.y * m_v;
-				ray.dir = RayDirection(pp, lp);
-				L += world.GetTracer()->TraceRay(ray, depth);
-			}
+                L /= static_cast<float>(vp.GetSamplesNum());
+                L *= m_exposure_time;
 
-			L /= static_cast<float>(vp.GetSamplesNum());
-			L *= m_exposure_time;
-			world.DisplayPixel(r, c, L);
-		}
-	}
+                {
+                    tbb::queuing_mutex::scoped_lock lock(mutex);
+                    world.DisplayPixel(j, i, L/*MaxToOneColor(L)*/);
+                }
+            }
+        }
+    });
 }
 
 void ThinLens::RenderStereo(const World& wr, float x, int pixel_offset) const
 {
-	RGBColor	L;
-	Ray			ray;
-	auto&	    vp(wr.GetViewPlane());
-	int 		depth 		= 0;
-
-	Point2D sp;			// sample point in [0, 1] X [0, 1]
-	Point2D pp;			// sample point on a pixel
-	Point2D dp; 		// sample point on unit disk
-	Point2D lp;			// sample point on lens
+	const auto& vp    = wr.GetViewPlane();
+	const int   depth = 0;
+    const float sz    = vp.GetPixelSize() / m_zoom;
 
 	//w.open_window(vp.hres, vp.vres);
-    float sz = vp.GetPixelSize() / m_zoom;
 
-    int w = vp.GetWidth(),
-        h = vp.GetHeight();
-    for (int r = 0; r < h; r++)			// up
+    const int w = vp.GetWidth(),
+              h = vp.GetHeight();
+    tbb::queuing_mutex mutex;
+    tbb::parallel_for(tbb::blocked_range2d<int>(0, w, 0, h),
+        [&](const tbb::blocked_range2d<int> &r)
     {
-        for (int c = 0; c < w; c++)		// across
-        {
-            L = BLACK;
-            for (int n = 0; n < vp.GetSamplesNum(); n++)
-            {
-                sp = vp.GetSampler()->SampleUnitSquare();
-                pp.x = sz * (c - vp.GetWidth() / 2.0f + sp.x);
-                pp.y = sz * (r - vp.GetHeight() / 2.0f + sp.y);
+        for (int i = r.rows().begin(), i_end = r.rows().end(); i < i_end; i++) {
+            for (int j = r.cols().begin(), j_end = r.cols().end(); j < j_end; j++) {
+                RGBColor L = BLACK;
+                for (int k = 0; k < vp.GetSamplesNum(); k++)
+                {
+                    // sample point in [0, 1] X [0, 1]
+                    auto sp = vp.GetSampler()->SampleUnitSquare();
 
-                dp = m_sampler->SampleUnitDisk();
-                lp = dp * m_lens_radius;
+                    // sample point on a pixel
+                    Point2D pp;
+                    pp.x = sz * (i - w / 2.0f + sp.x);
+                    pp.y = sz * (j - h / 2.0f + sp.y);
 
-                ray.ori = m_eye + lp.x * m_u + lp.y * m_v;
-                ray.dir = RayDirection(pp, lp);
-                L += wr.GetTracer()->TraceRay(ray, depth);
+                    // sample point on unit disk
+                    auto dp = m_sampler->SampleUnitDisk();
+                    // sample point on lens
+                    auto lp = dp * m_lens_radius;
+
+                    Ray ray;
+                    ray.ori = m_eye + lp.x * m_u + lp.y * m_v;
+                    ray.dir = RayDirection(pp, lp);
+                    L += wr.GetTracer()->TraceRay(ray, depth);
+                }
+
+                L /= static_cast<float>(vp.GetSamplesNum());
+                L *= m_exposure_time;
+
+                {
+                    tbb::queuing_mutex::scoped_lock lock(mutex);
+                    wr.DisplayPixel(j, i + pixel_offset, L/*MaxToOneColor(L)*/);
+                }
             }
-
-            L /= static_cast<float>(vp.GetSamplesNum());
-            L *= m_exposure_time;
-            wr.DisplayPixel(r, c + pixel_offset, L);
         }
-    }
+    });
 }
 
 // ----------------------------------------------------------------------------- ray direction

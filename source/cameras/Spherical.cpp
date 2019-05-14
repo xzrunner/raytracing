@@ -7,89 +7,113 @@
 #include "raytracing/samplers/Sampler.h"
 #include "raytracing/tracer/Tracer.h"
 
+#include <tbb/parallel_for.h>
+#include <tbb/blocked_range2d.h>
+#include <tbb/queuing_mutex.h>
+
 namespace rt
 {
 
 void Spherical::RenderScene(const World& wr) const
 {
-	RGBColor	L;
-	auto&       vp(wr.GetViewPlane());
-	int 		hres		= vp.GetWidth();
-	int 		vres 		= vp.GetHeight();
-	float		s 			= vp.GetPixelSize();
-	Ray			ray;
-	int 		depth 		= 0;
-	Point2D 	sp; 					// sample point in [0, 1] X [0, 1]
-	Point2D 	pp;						// sample point on the pixel
-	float		r_squared;				// sum of squares of normalised device coordinates
+	const auto& vp    = wr.GetViewPlane();
+	const float	s     = vp.GetPixelSize();
+	const int   depth = 0;
 
 	//wr.open_window(vp.hres, vp.vres);
-	ray.ori = m_eye;
 
-    for (int r = 0; r < vres; r++)		// up
+    const int w = vp.GetWidth(),
+              h = vp.GetHeight();
+    tbb::queuing_mutex mutex;
+    tbb::parallel_for(tbb::blocked_range2d<int>(0, w, 0, h),
+        [&](const tbb::blocked_range2d<int> &r)
     {
-		for (int c = 0; c < hres; c++) // // across
-        {
-			L = BLACK;
+        for (int i = r.rows().begin(), i_end = r.rows().end(); i < i_end; i++) {
+            for (int j = r.cols().begin(), j_end = r.cols().end(); j < j_end; j++) {
+                RGBColor L = BLACK;
 
-			for (int j = 0; j < vp.GetSamplesNum(); j++)
-            {
-                sp = vp.GetSampler()->SampleUnitSquare();
-				pp.x = s * (c - 0.5f * hres + sp.x);
-				pp.y = s * (r - 0.5f * vres + sp.y);
-				ray.dir = RayDirection(pp, hres, vres, s, r_squared);
+                Ray ray;
+                ray.ori = m_eye;
+                for (int k = 0; k < vp.GetSamplesNum(); k++)
+                {
+                    // sample point in [0, 1] x [0, 1]
+                    auto sp = vp.GetSampler()->SampleUnitSquare();
 
-                if (r_squared <= 1.0f) {
-                    L += wr.GetTracer()->TraceRay(ray, depth);
+                    // sample point on a pixel
+                    Point2D pp;
+                    pp.x = s * (i - 0.5f * w + sp.x);
+                    pp.y = s * (j - 0.5f * h + sp.y);
+
+                    // sum of squares of normalised device coordinates
+                    float r_squared;
+                    ray.dir = RayDirection(pp, w, h, s, r_squared);
+
+                    if (r_squared <= 1.0f) {
+                        L += wr.GetTracer()->TraceRay(ray, depth);
+                    }
                 }
-			}
 
-			L /= static_cast<float>(vp.GetSamplesNum());
-			L *= m_exposure_time;
-			wr.DisplayPixel(r, c, L);
-		}
-    }
+                L /= static_cast<float>(vp.GetSamplesNum());
+                L *= m_exposure_time;
+
+                {
+                    tbb::queuing_mutex::scoped_lock lock(mutex);
+                    wr.DisplayPixel(j, i, L/*MaxToOneColor(L)*/);
+                }
+            }
+        }
+    });
 }
 
 void Spherical::RenderStereo(const World& wr, float x, int pixel_offset) const
 {
-	RGBColor	L;
-	auto&       vp(wr.GetViewPlane());
-	int 		hres		= vp.GetWidth();
-	int 		vres 		= vp.GetHeight();
-	float		s 			= vp.GetPixelSize();
-	Ray			ray;
-	int 		depth 		= 0;
-	Point2D 	sp; 					// sample point in [0, 1] X [0, 1]
-	Point2D 	pp;						// sample point on the pixel
-	float		r_squared;				// sum of squares of normalised device coordinates
+	const auto& vp    = wr.GetViewPlane();
+	const float s     = vp.GetPixelSize();
+	const int   depth = 0;
 
 	//wr.open_window(vp.hres, vp.vres);
-	ray.ori = m_eye;
 
-    for (int r = 0; r < vres; r++)		// up
+    const int w = vp.GetWidth(),
+              h = vp.GetHeight();
+    tbb::queuing_mutex mutex;
+    tbb::parallel_for(tbb::blocked_range2d<int>(0, w, 0, h),
+        [&](const tbb::blocked_range2d<int> &r)
     {
-        for (int c = 0; c < hres; c++) 	// across
-        {
-            L = BLACK;
+        for (int i = r.rows().begin(), i_end = r.rows().end(); i < i_end; i++) {
+            for (int j = r.cols().begin(), j_end = r.cols().end(); j < j_end; j++) {
+                RGBColor L = BLACK;
 
-            for (int j = 0; j < vp.GetSamplesNum(); j++)
-            {
-                sp = vp.GetSampler()->SampleUnitSquare();
-                pp.x = s * (c - 0.5f * hres + sp.x);
-                pp.y = s * (r - 0.5f * vres + sp.y);
-                ray.dir = RayDirection(pp, hres, vres, s, r_squared);
+                Ray ray;
+                ray.ori = m_eye;
+                for (int k = 0; k < vp.GetSamplesNum(); k++)
+                {
+                    // sample point in [0, 1] x [0, 1]
+                    auto sp = vp.GetSampler()->SampleUnitSquare();
 
-                if (r_squared <= 1.0f) {
-                    L += wr.GetTracer()->TraceRay(ray, depth);
+                    // sample point on a pixel
+                    Point2D pp;
+                    pp.x = s * (i - 0.5f * w + sp.x);
+                    pp.y = s * (j - 0.5f * h + sp.y);
+
+                    // sum of squares of normalised device coordinates
+                    float r_squared;
+                    ray.dir = RayDirection(pp, w, h, s, r_squared);
+
+                    if (r_squared <= 1.0f) {
+                        L += wr.GetTracer()->TraceRay(ray, depth);
+                    }
+                }
+
+                L /= static_cast<float>(vp.GetSamplesNum());
+                L *= m_exposure_time;
+
+                {
+                    tbb::queuing_mutex::scoped_lock lock(mutex);
+                    wr.DisplayPixel(j, i + pixel_offset, L/*MaxToOneColor(L)*/);
                 }
             }
-
-            L /= static_cast<float>(vp.GetSamplesNum());
-            L *= m_exposure_time;
-            wr.DisplayPixel(r, c + pixel_offset, L);
         }
-    }
+    });
 }
 
 Vector3D Spherical::RayDirection(const Point2D& pp, int hres, int vres, float s, float& r_squared) const

@@ -6,6 +6,10 @@
 #include "raytracing/samplers/Sampler.h"
 #include "raytracing/tracer/Tracer.h"
 
+#include <tbb/parallel_for.h>
+#include <tbb/blocked_range2d.h>
+#include <tbb/queuing_mutex.h>
+
 namespace rt
 {
 
@@ -17,72 +21,93 @@ Pinhole::Pinhole()
 
 void Pinhole::RenderScene(const World& world) const
 {
-	RGBColor	L;
-	auto&       vp = world.GetViewPlane();
-	Ray			ray;
-	int 		depth = 0;	// recursion depth
-	Point2D 	sp;			// sample point in [0, 1] x [0, 1]
-	Point2D 	pp;			// sample point on a pixel
-	int n = (int)sqrt((float)vp.GetSamplesNum());
+	const auto& vp    = world.GetViewPlane();
+	const int   depth = 0;	// recursion depth
+	const int   n     = (int)sqrt((float)vp.GetSamplesNum());
 
-	float sz = vp.GetPixelSize() / m_zoom;
-	ray.ori = m_eye;
+	const float sz = vp.GetPixelSize() / m_zoom;
 
-	int w = vp.GetWidth(),
-		h = vp.GetHeight();
-	for (int y = 0; y < h; y++) {
-		for (int x = 0; x < w; x++) {
-			L = BLACK;
-			for (int j = 0; j < vp.GetSamplesNum(); j++) {
-				sp = vp.GetSampler()->SampleUnitSquare();
-				pp.x = sz * (x - 0.5f * h + sp.x);
-				pp.y = sz * (y - 0.5f * w + sp.y);
-				ray.dir = GetDirection(pp);
-				L += world.GetTracer()->TraceRay(ray, depth);
-			}
+	const int w = vp.GetWidth(),
+		      h = vp.GetHeight();
+    tbb::queuing_mutex mutex;
+    tbb::parallel_for(tbb::blocked_range2d<int>(0, w, 0, h),
+        [&]( const tbb::blocked_range2d<int> &r )
+    {
+        for(int i = r.rows().begin(), i_end = r.rows().end(); i < i_end; i++) {
+            for(int j = r.cols().begin(), j_end = r.cols().end(); j < j_end; j++) {
+                auto L = BLACK;
 
-			L /= static_cast<float>(vp.GetSamplesNum());
-			L *= m_exposure_time;
+                Ray ray;
+                ray.ori = m_eye;
+                for(int k = 0; k < vp.GetSamplesNum(); k++)
+                {
+                    // sample point in [0, 1] x [0, 1]
+                    auto sp = vp.GetSampler()->SampleUnitSquare();
 
-			world.DisplayPixel(y, x, MaxToOneColor(L));
-		}
-	}
+                    // sample point on a pixel
+                    Point2D pp;
+                    pp.x = sz * (i - 0.5f * w + sp.x);
+                    pp.y = sz * (j - 0.5f * h + sp.y);
+
+                    ray.dir = GetDirection(pp);
+                    L += world.GetTracer()->TraceRay(ray, depth);
+                }
+
+                L /= static_cast<float>(vp.GetSamplesNum());
+                L *= m_exposure_time;
+
+                {
+                    tbb::queuing_mutex::scoped_lock lock(mutex);
+                    world.DisplayPixel(j, i, MaxToOneColor(L));
+                }
+            }
+        }
+    });
 }
 
 void Pinhole::RenderStereo(const World& wr, float x, int pixel_offset) const
 {
-	RGBColor	L;
-	Ray			ray;
-	auto&       vp 			= wr.GetViewPlane();
-	int 		depth 		= 0;
-	Point2D 	sp; 				// sample point in [0, 1] X [0, 1]
-	Point2D 	pp;					// sample point on the pixel
+	const auto& vp    = wr.GetViewPlane();
+	const int   depth = 0;
+    const float sz    = vp.GetPixelSize() / m_zoom;
 
-    float sz = vp.GetPixelSize() / m_zoom;
-	ray.ori = m_eye;
-
-    int w = vp.GetWidth(),
-        h = vp.GetHeight();
-    for (int r = 0; r < h; r++)			// up
+    const int w = vp.GetWidth(),
+              h = vp.GetHeight();
+    tbb::queuing_mutex mutex;
+    tbb::parallel_for(tbb::blocked_range2d<int>(0, w, 0, h),
+        [&](const tbb::blocked_range2d<int> &r)
     {
-        for (int c = 0; c < w; c++)		// across
-        {
-            L = BLACK;
+        for (int i = r.rows().begin(), i_end = r.rows().end(); i < i_end; i++) {
+            for (int j = r.cols().begin(), j_end = r.cols().end(); j < j_end; j++) {
 
-            for (int j = 0; j < vp.GetSamplesNum(); j++)
-            {
-                sp = vp.GetSampler()->SampleUnitSquare();
-                pp.x = sz * (c - 0.5f * h + sp.x) + x; 	// asymmetric view frustum
-                pp.y = sz * (r - 0.5f * w + sp.y);
-                ray.dir = GetDirection(pp);
-                L += wr.GetTracer()->TraceRay(ray, depth);
+                RGBColor L = BLACK;
+
+                Ray ray;
+                ray.ori = m_eye;
+                for (int k = 0; k < vp.GetSamplesNum(); k++)
+                {
+                    // sample point in [0, 1] x [0, 1]
+                    auto sp = vp.GetSampler()->SampleUnitSquare();
+
+                    // sample point on a pixel
+                    Point2D pp;
+                    pp.x = sz * (i - 0.5f * w + sp.x) + x; 	// asymmetric view frustum
+                    pp.y = sz * (j - 0.5f * h + sp.y);
+
+                    ray.dir = GetDirection(pp);
+                    L += wr.GetTracer()->TraceRay(ray, depth);
+                }
+
+                L /= static_cast<float>(vp.GetSamplesNum());
+                L *= m_exposure_time;
+
+                {
+                    tbb::queuing_mutex::scoped_lock lock(mutex);
+                    wr.DisplayPixel(j, i + pixel_offset, L/*MaxToOneColor(L)*/);
+                }
             }
-
-            L /= static_cast<float>(vp.GetSamplesNum());
-            L *= m_exposure_time;
-            wr.DisplayPixel(r, c + pixel_offset, L);
         }
-    }
+    });
 }
 
 void Pinhole::SetViewDistance(const float vpd)
