@@ -55,6 +55,7 @@
     <ClInclude Include="..\..\..\include\raytracing\objects\Grid.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Instance.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\OpenCylinder.h" />
+    <ClInclude Include="..\..\..\include\raytracing\objects\OpenPartCylinder.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Plane.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Rectangle.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\SmoothMeshTriangle.h" />
@@ -123,6 +124,7 @@
     <ClCompile Include="..\..\..\source\objects\Grid.cpp" />
     <ClCompile Include="..\..\..\source\objects\Instance.cpp" />
     <ClCompile Include="..\..\..\source\objects\OpenCylinder.cpp" />
+    <ClCompile Include="..\..\..\source\objects\OpenPartCylinder.cpp" />
     <ClCompile Include="..\..\..\source\objects\Plane.cpp" />
     <ClCompile Include="..\..\..\source\objects\Rectangle.cpp" />
     <ClCompile Include="..\..\..\source\objects\SmoothMeshTriangle.cpp" />

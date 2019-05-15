@@ -255,6 +255,9 @@
     <ClInclude Include="..\..\..\external\tinyply.h">
       <Filter>utilities</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\OpenPartCylinder.h">
+      <Filter>objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\brdfs\BRDF.cpp">
@@ -442,6 +445,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\external\tinyply.cpp">
       <Filter>utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\OpenPartCylinder.cpp">
+      <Filter>objects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
