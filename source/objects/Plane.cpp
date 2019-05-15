@@ -39,9 +39,9 @@ bool Plane::ShadowHit(const Ray& ray, float& tmin) const
 
 	if (t > EPSILON * 10) {
 		tmin = t;
-		return (true);
+		return true;
 	} else {
-		return (false);
+		return false;
 	}
 }
 

@@ -52,7 +52,7 @@ bool Rectangle::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 	double t = (m_p0 - ray.ori) * m_normal / (ray.dir * m_normal);
 
 	if (t <= EPSILON)
-		return (false);
+		return false;
 
 	Point3D p = ray.ori + t * ray.dir;
 	Vector3D d = p - m_p0;
@@ -60,18 +60,18 @@ bool Rectangle::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 	double ddota = d * m_a;
 
 	if (ddota < 0.0 || ddota > m_a_len_squared)
-		return (false);
+		return false;
 
 	double ddotb = d * m_b;
 
 	if (ddotb < 0.0 || ddotb > m_b_len_squared)
-		return (false);
+		return false;
 
 	tmin 				= t;
 	sr.normal 			= m_normal;
 	sr.local_hit_point 	= p;
 
-	return (true);
+	return true;
 }
 
 bool Rectangle::ShadowHit(const Ray& ray, float& tmin) const
@@ -79,7 +79,7 @@ bool Rectangle::ShadowHit(const Ray& ray, float& tmin) const
 	double t = (m_p0 - ray.ori) * m_normal / (ray.dir * m_normal);
 
 	if (t <= EPSILON)
-		return (false);
+		return false;
 
 	Point3D p = ray.ori + t * ray.dir;
 	Vector3D d = p - m_p0;
@@ -87,16 +87,16 @@ bool Rectangle::ShadowHit(const Ray& ray, float& tmin) const
 	double ddota = d * m_a;
 
 	if (ddota < 0.0 || ddota > m_a_len_squared)
-		return (false);
+		return false;
 
 	double ddotb = d * m_b;
 
 	if (ddotb < 0.0 || ddotb > m_b_len_squared)
-		return (false);
+		return false;
 
 	tmin = (float)t;
 
-	return (true);
+	return true;
 }
 
 Point3D Rectangle::Sample() const

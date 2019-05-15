@@ -201,39 +201,39 @@ bool Grid::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 		if (tx_next < ty_next && tx_next < tz_next) {
 			if (object_ptr && object_ptr->Hit(ray, tmin, sr) && tmin < tx_next) {
 				SetMaterial(object_ptr->GetMaterial());
-				return (true);
+				return true;
 			}
 
 			tx_next += dtx;
 			ix += ix_step;
 
 			if (ix == ix_stop)
-				return (false);
+				return false;
 		}
 		else {
 			if (ty_next < tz_next) {
 				if (object_ptr && object_ptr->Hit(ray, tmin, sr) && tmin < ty_next) {
 					SetMaterial(object_ptr->GetMaterial());
-					return (true);
+					return true;
 				}
 
 				ty_next += dty;
 				iy += iy_step;
 
 				if (iy == iy_stop)
-					return (false);
+					return false;
 			}
 			else {
 				if (object_ptr && object_ptr->Hit(ray, tmin, sr) && tmin < tz_next) {
 					SetMaterial(object_ptr->GetMaterial());
-					return (true);
+					return true;
 				}
 
 				tz_next += dtz;
 				iz += iz_step;
 
 				if (iz == iz_stop)
-					return (false);
+					return false;
 			}
 		}
 	}

@@ -40,29 +40,29 @@ bool Triangle::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 	double beta = e1 * inv_denom;
 
 	if (beta < 0.0)
-		return (false);
+		return false;
 
 	double r = r = e * l - h * i;
 	double e2 = a * n + d * q + c * r;
 	double gamma = e2 * inv_denom;
 
 	if (gamma < 0.0 )
-		return (false);
+		return false;
 
 	if (beta + gamma > 1.0)
-		return (false);
+		return false;
 
 	double e3 = a * p - b * r + d * s;
 	double t = e3 * inv_denom;
 
 	if (t < EPSILON)
-		return (false);
+		return false;
 
 	tmin 				= t;
 	sr.normal 			= m_normal;
 	sr.local_hit_point 	= ray.ori + t * ray.dir;
 
-	return (true);
+	return true;
 }
 
 bool Triangle::ShadowHit(const Ray& ray, float& tmin) const
@@ -80,27 +80,27 @@ bool Triangle::ShadowHit(const Ray& ray, float& tmin) const
 	double beta = e1 * inv_denom;
 
 	if (beta < 0.0)
-		return (false);
+		return false;
 
 	double r = r = e * l - h * i;
 	double e2 = a * n + d * q + c * r;
 	double gamma = e2 * inv_denom;
 
 	if (gamma < 0.0 )
-		return (false);
+		return false;
 
 	if (beta + gamma > 1.0)
-		return (false);
+		return false;
 
 	double e3 = a * p - b * r + d * s;
 	double t = e3 * inv_denom;
 
 	if (t < EPSILON)
-		return (false);
+		return false;
 
 	tmin = static_cast<float>(t);
 
-	return (true);
+	return true;
 }
 
 AABB Triangle::GetBoundingBox() const

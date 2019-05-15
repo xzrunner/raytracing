@@ -59,7 +59,7 @@ bool OpenCylinder::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 				sr.local_hit_point = ray.ori + tmin * ray.dir;
 
-				return (true);
+				return true;
 			}
 		}
 
@@ -79,12 +79,12 @@ bool OpenCylinder::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 				sr.local_hit_point = ray.ori + tmin * ray.dir;
 
-				return (true);
+				return true;
 			}
 		}
 	}
 
-	return (false);
+	return false;
 }
 
 bool OpenCylinder::ShadowHit(const Ray& ray, float& tmin) const
@@ -116,7 +116,7 @@ bool OpenCylinder::ShadowHit(const Ray& ray, float& tmin) const
 			if (yhit > m_y0 && yhit < m_y1) {
 				tmin = static_cast<float>(t);
 
-				return (true);
+				return true;
 			}
 		}
 
@@ -128,12 +128,12 @@ bool OpenCylinder::ShadowHit(const Ray& ray, float& tmin) const
 			if (yhit > m_y0 && yhit < m_y1) {
 				tmin = static_cast<float>(t);
 
-				return (true);
+				return true;
 			}
 		}
 	}
 
-	return (false);
+	return false;
 }
 
 }

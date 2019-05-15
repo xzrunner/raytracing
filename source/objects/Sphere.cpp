@@ -73,15 +73,15 @@ bool Sphere::ShadowHit(const Ray& ray, float& tmin) const
 		t = (-b - e) / denom;    // smaller root
 
 		if (t > EPSILON)
-			return (true);
+			return true;
 
 		t = (-b + e) / denom;    // larger root
 
 		if (t > EPSILON)
-			return (true);
+			return true;
 	}
 
-	return (false);
+	return false;
 }
 
 void Sphere::SetCenter(const Point3D& center)

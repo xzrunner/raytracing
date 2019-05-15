@@ -98,9 +98,9 @@ bool Box::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 		}
 
 		sr.local_hit_point = ray.ori + tmin * ray.dir;
-		return (true);
+		return true;
 	} else {
-		return (false);
+		return false;
 	}
 }
 
@@ -179,9 +179,9 @@ bool Box::ShadowHit(const Ray& ray, float& tmin) const
 		else
 			tmin = static_cast<float>(t1);				// ray hits inside surface
 
-		return (true);
+		return true;
 	} else {
-		return (false);
+		return false;
 	}
 }
 

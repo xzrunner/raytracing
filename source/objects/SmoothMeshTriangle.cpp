@@ -35,17 +35,17 @@ bool SmoothMeshTriangle::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 	double beta = e1 * inv_denom;
 
 	if (beta < 0.0)
-	 	return (false);
+	 	return false;
 
 	double r = e * l - h * i;
 	double e2 = a * n + d * q + c * r;
 	double gamma = e2 * inv_denom;
 
 	if (gamma < 0.0)
-	 	return (false);
+	 	return false;
 
 	if (beta + gamma > 1.0)
-		return (false);
+		return false;
 
 	double e3 = a * p - b * r + d * s;
 	double t = e3 * inv_denom;
@@ -57,7 +57,7 @@ bool SmoothMeshTriangle::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 	sr.normal 			= InterpolateNormal(beta, gamma); // for smooth shading
 	sr.local_hit_point 	= ray.ori + t * ray.dir;
 
-	return (true);
+	return true;
 }
 
 Normal SmoothMeshTriangle::InterpolateNormal(double beta, double gamma) const

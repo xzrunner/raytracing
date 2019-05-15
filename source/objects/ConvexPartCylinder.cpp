@@ -77,7 +77,7 @@ bool ConvexPartCylinder::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 					if (-ray.dir * sr.normal < 0.0)
 						sr.normal = -sr.normal;
 					sr.local_hit_point = ray.ori + tmin * ray.dir;
-					return (true);
+					return true;
 				}
 			}
 		}
@@ -104,12 +104,12 @@ bool ConvexPartCylinder::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 					if (-ray.dir * sr.normal < 0.0)
 						sr.normal = -sr.normal;
 					sr.local_hit_point = ray.ori + tmin * ray.dir;
-					return (true);
+					return true;
 				}
 			}
 		}
 	}
-	return (false);
+	return false;
 }
 
 bool ConvexPartCylinder::ShadowHit(const Ray& ray, float& tmin) const
@@ -183,7 +183,7 @@ bool ConvexPartCylinder::ShadowHit(const Ray& ray, float& tmin) const
 					if( t < tmin )
 					{
 						tmin = static_cast<float>(t);
-						return (true);
+						return true;
 					}
 					Vector3D normal = - Normal((ox + t * dx) * m_inv_radius, 0.0, (oz + t * dz) * m_inv_radius);
 					if( ray.dir * normal < 0.0 )
@@ -195,7 +195,7 @@ bool ConvexPartCylinder::ShadowHit(const Ray& ray, float& tmin) const
 			}
 		}
 	}
-	return (false);
+	return false;
 }
 
 }

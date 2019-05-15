@@ -39,17 +39,17 @@ bool MeshTriangle::ShadowHit(const Ray& ray, float& tmin) const
 	double beta = e1 * inv_denom;
 
 	if (beta < 0.0)
-	 	return (false);
+	 	return false;
 
 	double r = r = e * l - h * i;
 	double e2 = a * n + d * q + c * r;
 	double gamma = e2 * inv_denom;
 
 	if (gamma < 0.0 )
-	 	return (false);
+	 	return false;
 
 	if (beta + gamma > 1.0)
-		return (false);
+		return false;
 
 	double e3 = a * p - b * r + d * s;
 	double t = e3 * inv_denom;
@@ -59,7 +59,7 @@ bool MeshTriangle::ShadowHit(const Ray& ray, float& tmin) const
 
 	tmin = static_cast<float>(t);
 
-	return (true);
+	return true;
 }
 
 AABB MeshTriangle::GetBoundingBox() const
