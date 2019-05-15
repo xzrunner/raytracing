@@ -1,12 +1,8 @@
 #include "raytracing/objects/SmoothMeshTriangle.h"
 #include "raytracing/utilities/Mesh.h"
 #include "raytracing/utilities/ShadeRec.h"
+#include "raytracing/utilities/Constants.h"
 #include "raytracing/maths/Ray.h"
-
-namespace
-{
-double kEpsilon = 0.001;
-}
 
 namespace rt
 {
@@ -50,8 +46,8 @@ bool SmoothMeshTriangle::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 	double e3 = a * p - b * r + d * s;
 	double t = e3 * inv_denom;
 
-	if (t < kEpsilon)
-		return (false);
+	if (t < EPSILON)
+		return false;
 
 	tmin 				= t;
 	sr.normal 			= InterpolateNormal(beta, gamma); // for smooth shading

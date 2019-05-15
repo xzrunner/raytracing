@@ -1,13 +1,9 @@
 #include "raytracing/objects/MeshTriangle.h"
 #include "raytracing/utilities/Mesh.h"
+#include "raytracing/utilities/Constants.h"
 #include "raytracing/maths/Ray.h"
 
 #include <algorithm>
-
-namespace
-{
-double kEpsilon = 0.001;
-}
 
 namespace rt
 {
@@ -54,8 +50,8 @@ bool MeshTriangle::ShadowHit(const Ray& ray, float& tmin) const
 	double e3 = a * p - b * r + d * s;
 	double t = e3 * inv_denom;
 
-	if (t < kEpsilon)
-		return (false);
+	if (t < EPSILON)
+		return false;
 
 	tmin = static_cast<float>(t);
 

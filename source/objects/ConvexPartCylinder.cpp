@@ -3,13 +3,6 @@
 #include "raytracing/maths/Normal.h"
 #include "raytracing/utilities/ShadeRec.h"
 
-namespace
-{
-
-double kEpsilon = 0.001;
-
-}
-
 namespace rt
 {
 
@@ -57,7 +50,7 @@ bool ConvexPartCylinder::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 		double denom = 2.0 * a;
 		t = (-b - e) / denom;    // smaller root
 
-		if (t > kEpsilon) {
+		if (t > EPSILON) {
 			double yhit = oy + t * dy;
 
 			if (yhit > m_y0 && yhit < m_y1) {
@@ -84,7 +77,7 @@ bool ConvexPartCylinder::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 		t = (-b + e) / denom;    // larger root
 
-		if (t > kEpsilon) {
+		if (t > EPSILON) {
 			double yhit = oy + t * dy;
 
 			if (yhit > m_y0 && yhit < m_y1) {
@@ -135,7 +128,7 @@ bool ConvexPartCylinder::ShadowHit(const Ray& ray, float& tmin) const
 		double denom = 2.0 * a;
 		t = (-b - e) / denom;    // smaller root
 
-		if (t > kEpsilon) {
+		if (t > EPSILON) {
 			double yhit = oy + t * dy;
 
 			if (yhit > m_y0 && yhit < m_y1) {
@@ -152,7 +145,7 @@ bool ConvexPartCylinder::ShadowHit(const Ray& ray, float& tmin) const
 					if( t < tmin )
 					{
 						tmin = static_cast<float>(t);
-						return (true);
+						return true;
 					}
 					Vector3D normal = - Normal((ox + t * dx) * m_inv_radius, 0.0, (oz + t * dz) * m_inv_radius);
 					if( ray.dir * normal < 0.0 )
@@ -166,7 +159,7 @@ bool ConvexPartCylinder::ShadowHit(const Ray& ray, float& tmin) const
 
 		t = (-b + e) / denom;    // larger root
 
-		if (t > kEpsilon) {
+		if (t > EPSILON) {
 			double yhit = oy + t * dy;
 
 			if (yhit > m_y0 && yhit < m_y1) {

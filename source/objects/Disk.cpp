@@ -5,13 +5,6 @@
 #include "raytracing/samplers/Sampler.h"
 #include "raytracing/utilities/Constants.h"
 
-namespace
-{
-
-const double kEpsilon = 0.001;   // for shadows and secondary rays
-
-}
-
 namespace rt
 {
 
@@ -32,7 +25,7 @@ bool Disk::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 {
 	double t = (m_center - ray.ori) * m_normal / (ray.dir * m_normal);
 
-    if (t <= kEpsilon) {
+    if (t <= EPSILON) {
         return false;
     }
 
@@ -54,7 +47,7 @@ bool Disk::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 bool Disk::ShadowHit(const Ray& ray, float& tmin) const
 {
 	float t = static_cast<float>((m_center - ray.ori) * m_normal / (ray.dir * m_normal));
-    if (t <= kEpsilon) {
+    if (t <= EPSILON) {
         return false;
     }
 
