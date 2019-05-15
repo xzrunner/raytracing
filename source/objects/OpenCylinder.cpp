@@ -6,14 +6,6 @@
 namespace rt
 {
 
-OpenCylinder::OpenCylinder(const OpenCylinder& cy)
-	: m_y0(cy.m_y0)
-	, m_y1(cy.m_y1)
-	, m_radius(cy.m_radius)
-	, m_inv_radius(1 / m_inv_radius)
-{
-}
-
 OpenCylinder::OpenCylinder(double bottom, double top, double radius)
 	: m_y0(bottom)
 	, m_y1(top)

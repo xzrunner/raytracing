@@ -8,7 +8,7 @@ namespace rt
 class OpenCylinder : public Object
 {
 public:
-	OpenCylinder(const OpenCylinder& cy);
+	OpenCylinder() {}
 	OpenCylinder(double bottom, double top, double radius);
 
 	virtual bool Hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
@@ -16,12 +16,12 @@ public:
 
 private:
 	// bottom y value
-	double		m_y0;
+	double m_y0 = -1.0;
 	// top y value
-	double		m_y1;
+    double m_y1 = 1.0;;
 
-	double		m_radius;
-	double		m_inv_radius;
+	double m_radius     = 1.0;
+	double m_inv_radius = 1.0;
 
 }; // OpenCylinder
 
