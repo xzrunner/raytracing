@@ -7,6 +7,33 @@
 namespace rt
 {
 
+Rectangle::Rectangle()
+    : m_p0(-1, 0, -1)
+    , m_a(0, 0, 2)
+    , m_b(2, 0, 0)
+    , m_a_len_squared(4.0)
+    , m_b_len_squared(4.0)
+    , m_normal(0, 1, 0)
+    , m_area(4.0)
+    , m_inv_area(0.25)
+    , m_sampler(nullptr)
+{
+}
+
+Rectangle::Rectangle(const Point3D& p0, const Vector3D& a, const Vector3D& b)
+    : m_p0(m_p0)
+    , m_a(m_a)
+    , m_b(m_b)
+    , m_a_len_squared(m_a.LenSquared())
+    , m_b_len_squared(m_b.LenSquared())
+    , m_area((float)(m_a.Length() * m_b.Length()))
+    , m_inv_area(1 / m_area)
+    , m_sampler(nullptr)
+{
+    m_normal = a ^ b;
+    m_normal.Normalize();
+}
+
 Rectangle::Rectangle(const Point3D& m_p0, const Vector3D& m_a, const Vector3D& m_b, const Normal& n)
 	: m_p0(m_p0)
 	, m_a(m_a)

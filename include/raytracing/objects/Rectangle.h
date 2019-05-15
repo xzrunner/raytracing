@@ -12,6 +12,8 @@ class Sampler;
 class Rectangle : public Object
 {
 public:
+    Rectangle();
+    Rectangle(const Point3D& p0, const Vector3D& a, const Vector3D& b);
 	Rectangle(const Point3D& p0, const Vector3D& a, const Vector3D& b, const Normal& n);
 
 	virtual bool Hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
