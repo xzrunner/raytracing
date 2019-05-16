@@ -67,4 +67,10 @@ Point3D Disk::Sample() const
     return m_center + sample_point.x * m_u + sample_point.y * m_v;
 }
 
+void Disk::SetSampler(const std::shared_ptr<Sampler>& sampler)
+{
+    m_sampler = sampler;
+    m_sampler->MapSamplesToUnitDisk();
+}
+
 }
