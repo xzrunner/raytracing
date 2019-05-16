@@ -15,7 +15,7 @@ public:
 		: r(0), g(0), b(0) {}
 	RGBColor(float r, float g, float b)
 		: r(r), g(g), b(b) {}
-	RGBColor& operator = (const RGBColor& rhs); 
+	RGBColor& operator = (const RGBColor& rhs);
 
 	RGBColor& operator += (const RGBColor& col);
 
@@ -38,7 +38,7 @@ operator = (const RGBColor& col)
 }
 
 inline RGBColor& RGBColor::
-operator += (const RGBColor& col) 
+operator += (const RGBColor& col)
 {
 	r += col.r; g += col.g; b += col.b;
 	return *this;
@@ -78,18 +78,19 @@ operator / (const float a) const
 
 //////////////////////////////////////////////////////////////////////////
 
-inline RGBColor 
-operator * (const float a, const RGBColor& c) 
+inline RGBColor
+operator * (const float a, const RGBColor& c)
 {
 	return RGBColor(a * c.r, a * c.g, a * c.b);
 }
 
-inline RGBColor 
-operator + (const RGBColor& a, const RGBColor& b) 
+inline RGBColor
+operator + (const RGBColor& a, const RGBColor& b)
 {
 	return RGBColor(a.r + b.r, a.g + b.g, a.b + b.b);
 }
 
+// Set color to red if any component is greater than one
 inline RGBColor ClampToColor(const RGBColor& raw_color)
 {
 	RGBColor c(raw_color);

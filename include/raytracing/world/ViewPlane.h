@@ -27,6 +27,7 @@ public:
 	void SetSamples(int n);
 
 	bool ShowOutOfGamut() const { return m_show_out_of_gamut; }
+    void SetShowOutOfGamut(bool show_out_of_gamut) { m_show_out_of_gamut = show_out_of_gamut; }
 
 	float GetGamma() const { return m_gamma; }
 	float GetInvGamma() const { return m_inv_gamma; }

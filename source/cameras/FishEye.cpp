@@ -59,7 +59,7 @@ void FishEye::RenderScene(const World& wr) const
 
                 {
                     tbb::queuing_mutex::scoped_lock lock(mutex);
-                    wr.DisplayPixel(j, i, L/*MaxToOneColor(L)*/);
+                    wr.DisplayPixel(j, i, L);
                 }
             }
         }
@@ -110,7 +110,7 @@ void FishEye::RenderStereo(const World& wr, float x, int pixel_offset) const
 
                 {
                     tbb::queuing_mutex::scoped_lock lock(mutex);
-                    wr.DisplayPixel(j, i + pixel_offset, L/*MaxToOneColor(L)*/);
+                    wr.DisplayPixel(j, i + pixel_offset, L);
                 }
             }
         }

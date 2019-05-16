@@ -113,9 +113,9 @@ void World::DisplayPixel(const int row, const int column, const RGBColor& raw_co
 	RGBColor mapped_color;
 
 	if (m_vp.ShowOutOfGamut()) {
-		mapped_color = MaxToOneColor(raw_color);
-	} else {
 		mapped_color = ClampToColor(raw_color);
+	} else {
+		mapped_color = MaxToOneColor(raw_color);
 	}
 
 	if (m_vp.GetGamma() != 1.0)

@@ -63,7 +63,7 @@ void ThinLens::RenderScene(const World& world) const
 
                 {
                     tbb::queuing_mutex::scoped_lock lock(mutex);
-                    world.DisplayPixel(j, i, L/*MaxToOneColor(L)*/);
+                    world.DisplayPixel(j, i, L);
                 }
             }
         }
@@ -113,7 +113,7 @@ void ThinLens::RenderStereo(const World& wr, float x, int pixel_offset) const
 
                 {
                     tbb::queuing_mutex::scoped_lock lock(mutex);
-                    wr.DisplayPixel(j, i + pixel_offset, L/*MaxToOneColor(L)*/);
+                    wr.DisplayPixel(j, i + pixel_offset, L);
                 }
             }
         }
