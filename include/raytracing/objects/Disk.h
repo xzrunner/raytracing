@@ -24,6 +24,9 @@ public:
     virtual Normal GetNormal(void) const override { return m_normal; }
     virtual Normal GetNormal(const Point3D& p) const override { return m_normal; }
 
+    void SetSampler(const std::shared_ptr<Sampler>& sampler) {
+        m_sampler = sampler;
+    }
 private:
     Point3D m_center;   				    // point through which Disk passes
     Normal 	m_normal = Normal(0, 1, 0);     // m_normal to the Disk
