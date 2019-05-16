@@ -13,7 +13,7 @@ Disk::Disk(const Point3D& point, const Normal& normal, double ra)
     , m_normal(normal)
     , m_r(ra)
     , m_r_squared(ra*ra)
-    , m_sampler_ptr(nullptr)
+    , m_sampler(nullptr)
     , m_shadows(false)
     , m_area(static_cast<float>(0.5 * PI * m_r_squared))
     , m_inv_area(1.0f / m_area)
@@ -63,7 +63,7 @@ bool Disk::ShadowHit(const Ray& ray, float& tmin) const
 
 Point3D Disk::Sample() const
 {
-    Point2D sample_point = m_sampler_ptr->SampleUnitDisk();
+    Point2D sample_point = m_sampler->SampleUnitDisk();
     return m_center + sample_point.x * m_u + sample_point.y * m_v;
 }
 

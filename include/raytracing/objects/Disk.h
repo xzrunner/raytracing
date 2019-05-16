@@ -25,12 +25,12 @@ public:
     virtual Normal GetNormal(const Point3D& p) const override { return m_normal; }
 
 private:
-    Point3D m_center;   				      // point through which Disk passes
+    Point3D m_center;   				    // point through which Disk passes
     Normal 	m_normal = Normal(0, 1, 0);     // m_normal to the Disk
     double  m_r_squared = 1;
     double  m_r = 1;
 
-    std::shared_ptr<Sampler> m_sampler_ptr = nullptr;
+    std::shared_ptr<Sampler> m_sampler = nullptr;
     bool m_shadows = false;
 
     float m_area = 1.0f;			// for disk lights
