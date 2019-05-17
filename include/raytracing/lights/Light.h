@@ -22,8 +22,8 @@ public:
 
 	virtual bool InShadow(const Ray& ray, const ShadeRec& sr) const = 0;
 
-	virtual float G(const ShadeRec& sr) const = 0;
-	virtual float Pdf(const ShadeRec& sr) const = 0;
+    virtual float G(const ShadeRec& sr) const { return 1.0f; }
+    virtual float Pdf(const ShadeRec& sr) const { return 1.0f; }
 
 	void SetShadows(bool shadows) { m_shadows = shadows; }
 

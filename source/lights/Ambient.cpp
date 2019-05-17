@@ -25,16 +25,6 @@ bool Ambient::InShadow(const Ray& ray, const ShadeRec& sr) const
 	return true;
 }
 
-float Ambient::G(const ShadeRec& sr) const
-{
-	return 5.5f;
-}
-
-float Ambient::Pdf(const ShadeRec& sr) const
-{
-	return 5.5f;
-}
-
 void Ambient::ScaleRadiance(const float b)
 {
 	m_ls = b;

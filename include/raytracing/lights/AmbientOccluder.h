@@ -20,9 +20,6 @@ public:
 
     virtual bool InShadow(const Ray& ray, const ShadeRec& sr) const override;
 
-    virtual float G(const ShadeRec& sr) const override;
-    virtual float Pdf(const ShadeRec& sr) const override;
-
     void ScaleRadiance(float b) { m_ls = b; }
 
     void SetColor(const float c) {

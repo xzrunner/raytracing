@@ -44,14 +44,9 @@ bool EnvironmentLight::InShadow(const Ray& ray, const ShadeRec& sr) const
     return (false);
 }
 
-float EnvironmentLight::G(const ShadeRec& sr) const
-{
-    return 5.5f;
-}
-
 float EnvironmentLight::Pdf(const ShadeRec& sr) const
 {
-    return sr.normal * m_wi * INV_PI;
+    return static_cast<float>(sr.normal * m_wi * INV_PI);
 }
 
 void EnvironmentLight::SetSampler(const std::shared_ptr<Sampler>& sampler)

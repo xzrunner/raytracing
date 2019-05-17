@@ -46,16 +46,6 @@ bool AmbientOccluder::InShadow(const Ray& ray, const ShadeRec& sr) const
 	return false;
 }
 
-float AmbientOccluder::G(const ShadeRec& sr) const
-{
-    return 5.5f;
-}
-
-float AmbientOccluder::Pdf(const ShadeRec& sr) const
-{
-    return 5.5f;
-}
-
 void AmbientOccluder::SetSampler(const std::shared_ptr<Sampler>& sampler)
 {
     m_sampler = sampler;

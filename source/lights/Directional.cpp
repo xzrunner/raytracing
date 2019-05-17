@@ -38,16 +38,6 @@ bool Directional::InShadow(const Ray& ray, const ShadeRec& sr) const
 	return false;
 }
 
-float Directional::G(const ShadeRec& sr) const
-{
-	return 5.5f;
-}
-
-float Directional::Pdf(const ShadeRec& sr) const
-{
-	return 5.5f;
-}
-
 void Directional::ScaleRadiance(const float b)
 {
 	m_ls = b;
