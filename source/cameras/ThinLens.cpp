@@ -37,6 +37,8 @@ void ThinLens::RenderScene(const World& world) const
     {
         for (int i = r.rows().begin(), i_end = r.rows().end(); i < i_end; i++) {
             for (int j = r.cols().begin(), j_end = r.cols().end(); j < j_end; j++) {
+                tbb::queuing_mutex::scoped_lock lock(mutex);
+
                 RGBColor L = BLACK;
                 for (int k = 0; k < vp.GetSamplesNum(); k++) {
                     // sample point in [0, 1] X [0, 1]
@@ -61,10 +63,7 @@ void ThinLens::RenderScene(const World& world) const
                 L /= static_cast<float>(vp.GetSamplesNum());
                 L *= m_exposure_time;
 
-                {
-                    tbb::queuing_mutex::scoped_lock lock(mutex);
-                    world.DisplayPixel(j, i, L);
-                }
+                world.DisplayPixel(j, i, L);
             }
         }
     });

@@ -30,6 +30,8 @@ void Spherical::RenderScene(const World& wr) const
     {
         for (int i = r.rows().begin(), i_end = r.rows().end(); i < i_end; i++) {
             for (int j = r.cols().begin(), j_end = r.cols().end(); j < j_end; j++) {
+                tbb::queuing_mutex::scoped_lock lock(mutex);
+
                 RGBColor L = BLACK;
 
                 Ray ray;
@@ -56,10 +58,7 @@ void Spherical::RenderScene(const World& wr) const
                 L /= static_cast<float>(vp.GetSamplesNum());
                 L *= m_exposure_time;
 
-                {
-                    tbb::queuing_mutex::scoped_lock lock(mutex);
-                    wr.DisplayPixel(j, i, L);
-                }
+                wr.DisplayPixel(j, i, L);
             }
         }
     });
