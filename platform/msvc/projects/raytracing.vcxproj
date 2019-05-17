@@ -26,6 +26,7 @@
     <ClInclude Include="..\..\..\include\raytracing\lights\AmbientOccluder.h" />
     <ClInclude Include="..\..\..\include\raytracing\lights\AreaLight.h" />
     <ClInclude Include="..\..\..\include\raytracing\lights\Directional.h" />
+    <ClInclude Include="..\..\..\include\raytracing\lights\EnvironmentLight.h" />
     <ClInclude Include="..\..\..\include\raytracing\lights\Light.h" />
     <ClInclude Include="..\..\..\include\raytracing\lights\PointLight.h" />
     <ClInclude Include="..\..\..\include\raytracing\mapping\LightProbe.h" />
@@ -47,6 +48,7 @@
     <ClInclude Include="..\..\..\include\raytracing\maths\Vector3D.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Box.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Compound.h" />
+    <ClInclude Include="..\..\..\include\raytracing\objects\ConcaveSphere.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\ConvexPartCylinder.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Disk.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\FlatMeshTriangle.h" />
@@ -100,6 +102,7 @@
     <ClCompile Include="..\..\..\source\lights\AmbientOccluder.cpp" />
     <ClCompile Include="..\..\..\source\lights\AreaLight.cpp" />
     <ClCompile Include="..\..\..\source\lights\Directional.cpp" />
+    <ClCompile Include="..\..\..\source\lights\EnvironmentLight.cpp" />
     <ClCompile Include="..\..\..\source\lights\Light.cpp" />
     <ClCompile Include="..\..\..\source\lights\PointLight.cpp" />
     <ClCompile Include="..\..\..\source\mapping\LightProbe.cpp" />
@@ -116,6 +119,7 @@
     <ClCompile Include="..\..\..\source\maths\Vector3D.cpp" />
     <ClCompile Include="..\..\..\source\objects\Box.cpp" />
     <ClCompile Include="..\..\..\source\objects\Compound.cpp" />
+    <ClCompile Include="..\..\..\source\objects\ConcaveSphere.cpp" />
     <ClCompile Include="..\..\..\source\objects\ConvexPartCylinder.cpp" />
     <ClCompile Include="..\..\..\source\objects\Disk.cpp" />
     <ClCompile Include="..\..\..\source\objects\FlatMeshTriangle.cpp" />

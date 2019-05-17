@@ -258,6 +258,12 @@
     <ClInclude Include="..\..\..\include\raytracing\objects\OpenPartCylinder.h">
       <Filter>objects</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\ConcaveSphere.h">
+      <Filter>objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\lights\EnvironmentLight.h">
+      <Filter>lights</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\brdfs\BRDF.cpp">
@@ -448,6 +454,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\objects\OpenPartCylinder.cpp">
       <Filter>objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\ConcaveSphere.cpp">
+      <Filter>objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\lights\EnvironmentLight.cpp">
+      <Filter>lights</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
