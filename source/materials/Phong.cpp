@@ -65,29 +65,68 @@ RGBColor Phong::Shade(const ShadeRec& sr) const
 	{
 		Vector3D wi = lights[i]->GetDirection(sr);
 		float ndotwi = static_cast<float>(sr.normal * wi);
-		if (ndotwi > 0.0) {
-
-			bool in_shadow = false;
-			if (lights[i]->CastsShadows()) {
-				Ray shadowRay(sr.hit_point, wi);
-				in_shadow = lights[i]->InShadow(shadowRay, sr);
-			}
-
-			if (!in_shadow) {
-
-				RGBColor z2 = m_diffuse_brdf->f(sr, wo, wi);
-				RGBColor z3 = m_specular_brdf->f(sr, wo, wi);
-
-				RGBColor z0 = m_diffuse_brdf->f(sr, wo, wi) + m_specular_brdf->f(sr, wo, wi);
-				RGBColor z1 = lights[i]->L(sr);
-
-				L += (m_diffuse_brdf->f(sr, wo, wi)
-					+ m_specular_brdf->f(sr, wo, wi)) * lights[i]->L(sr) * ndotwi;
-			}
+		if (ndotwi > 0.0)
+        {
+            if (m_shadows)
+            {
+			    bool in_shadow = false;
+			    if (lights[i]->CastsShadows()) {
+				    Ray shadowRay(sr.hit_point, wi);
+				    in_shadow = lights[i]->InShadow(shadowRay, sr);
+			    }
+			    if (!in_shadow)
+                {
+				    L += (m_diffuse_brdf->f(sr, wo, wi)
+					    + m_specular_brdf->f(sr, wo, wi)) * lights[i]->L(sr) * ndotwi;
+			    }
+            }
+            else
+            {
+                L += (m_diffuse_brdf->f(sr, wo, wi)
+                    + m_specular_brdf->f(sr, wo, wi)) * lights[i]->L(sr) * ndotwi;
+            }
 		}
 	}
 
 	return L;
+}
+
+RGBColor Phong::AreaLightShade(const ShadeRec& sr) const
+{
+	Vector3D wo = -sr.ray.dir;
+	RGBColor L  = m_ambient_brdf->rho(sr, wo) * sr.w.GetAmbient()->L(sr);
+	auto& lights = sr.w.GetLights();
+	for (int i = 0, n = lights.size(); i < n; i++)
+    {
+        Vector3D wi = lights[i]->GetDirection(sr);
+        float ndotwi = static_cast<float>(sr.normal * wi);
+		if (ndotwi > 0.0)
+        {
+			if (m_shadows)
+			{
+				bool in_shadow = false;
+                if (lights[i]->CastsShadows()) {
+                    Ray shadowRay(sr.hit_point, wi);
+                    in_shadow = lights[i]->InShadow(shadowRay, sr);
+                }
+                if (!in_shadow) {
+                    L += (m_diffuse_brdf->f(sr, wo, wi)
+                        + m_specular_brdf->f(sr, wo, wi)) * lights[i]->L(sr) * ndotwi * lights[i]->G(sr) / lights[i]->Pdf(sr);
+                }
+			}
+			else
+			{
+                L += (m_diffuse_brdf->f(sr, wo, wi)
+                    + m_specular_brdf->f(sr, wo, wi)) * lights[i]->L(sr) * ndotwi * lights[i]->G(sr) / lights[i]->Pdf(sr);
+			}
+		}
+	}
+	return (L);
+}
+
+RGBColor Phong::GetLe(const ShadeRec& sr) const
+{
+    return RGBColor(1.0f, 1.0f, 1.0f);
 }
 
 }

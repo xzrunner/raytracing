@@ -17,8 +17,9 @@ public:
 	SV_Matte();
 	virtual ~SV_Matte();
 
-	virtual RGBColor Shade(const ShadeRec& sr) const;
-	virtual RGBColor AreaLightShade(const ShadeRec& sr) const;
+    virtual RGBColor Shade(const ShadeRec& sr) const override;
+    virtual RGBColor AreaLightShade(const ShadeRec& sr) const override;
+    virtual RGBColor GetLe(const ShadeRec& sr) const override;
 
 	void SetKa(const float k);
 	void SetKd(const float k);

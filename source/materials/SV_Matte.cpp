@@ -70,6 +70,11 @@ RGBColor SV_Matte::AreaLightShade(const ShadeRec& sr) const
 	return L;
 }
 
+RGBColor SV_Matte::GetLe(const ShadeRec& sr) const
+{
+    return RGBColor(1.0f, 1.0f, 1.0f);
+}
+
 void SV_Matte::SetKa(const float k)
 {
 	m_ambient_brdf->SetKa(k);

@@ -4,6 +4,7 @@
 #include "raytracing/brdfs/PerfectSpecular.h"
 #include "raytracing/world/World.h"
 #include "raytracing/tracer/Tracer.h"
+#include "raytracing/brdfs/Lambertian.h"
 #include "raytracing/utilities/ShadeRec.h"
 
 namespace rt
@@ -31,7 +32,20 @@ RGBColor Reflective::Shade(const ShadeRec& sr) const
 
 RGBColor Reflective::AreaLightShade(const ShadeRec& sr) const
 {
-	return Shade(sr);
+    RGBColor L(Phong::Shade(sr));  // direct illumination
+
+    Vector3D wo = -sr.ray.dir;
+    Vector3D wi;
+    RGBColor fr = m_reflective_brdf->sample_f(sr, wo, wi);
+    Ray reflected_ray(sr.hit_point, wi);
+    reflected_ray.depth = sr.depth + 1;
+
+    L += fr * sr.w.GetTracer()->TraceRay(reflected_ray, sr.depth + 1) * static_cast<float>(sr.normal * wi);
+
+    //auto& lights = sr.w.GetLights();
+    //L += GetDiffuseBRDF()->f(sr, wo, wi) * lights[j]->L(sr) * lights[j]->G(sr) * ndotwi / lights[j]->pdf(sr);
+
+    return L;
 }
 
 void Reflective::SetKr(const float k)
