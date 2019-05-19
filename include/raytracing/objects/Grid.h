@@ -26,6 +26,9 @@ public:
     void ReadFlatTriangles(const std::string& filename);
     void ReadSmoothTriangles(const std::string& filename);
 
+    void TessellateFlatSphere(int horizontal_steps, int vertical_steps);
+    void TessellateSmoothSphere(int horizontal_steps, int vertical_steps);
+
 private:
 	Point3D FindMinBounds() const;
 	Point3D FindMaxBounds() const;

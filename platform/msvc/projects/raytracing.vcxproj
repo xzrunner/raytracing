@@ -76,6 +76,7 @@
     <ClInclude Include="..\..\..\include\raytracing\objects\Rectangle.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\RoundRimmedBowl.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\SmoothMeshTriangle.h" />
+    <ClInclude Include="..\..\..\include\raytracing\objects\SmoothTriangle.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\SolidCylinder.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Sphere.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\ThickRing.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="..\..\..\source\objects\Rectangle.cpp" />
     <ClCompile Include="..\..\..\source\objects\RoundRimmedBowl.cpp" />
     <ClCompile Include="..\..\..\source\objects\SmoothMeshTriangle.cpp" />
+    <ClCompile Include="..\..\..\source\objects\SmoothTriangle.cpp" />
     <ClCompile Include="..\..\..\source\objects\SolidCylinder.cpp" />
     <ClCompile Include="..\..\..\source\objects\Sphere.cpp" />
     <ClCompile Include="..\..\..\source\objects\ThickRing.cpp" />

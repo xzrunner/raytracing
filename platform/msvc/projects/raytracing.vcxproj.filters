@@ -40,6 +40,9 @@
     <Filter Include="objects\mesh">
       <UniqueIdentifier>{c92bbc6c-e254-466f-b8eb-a10331d4c1a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="objects\triangle">
+      <UniqueIdentifier>{94b5b71a-6be8-4139-88cf-e8b27687a573}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\raytracing\brdfs\BRDF.h">
@@ -210,9 +213,6 @@
     <ClInclude Include="..\..\..\include\raytracing\objects\Sphere.h">
       <Filter>objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\Triangle.h">
-      <Filter>objects</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\objects\WireframeBox.h">
       <Filter>objects</Filter>
     </ClInclude>
@@ -320,6 +320,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\cameras\Orthographic.h">
       <Filter>cameras</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\Triangle.h">
+      <Filter>objects\triangle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\SmoothTriangle.h">
+      <Filter>objects\triangle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -464,9 +470,6 @@
     <ClCompile Include="..\..\..\source\objects\Sphere.cpp">
       <Filter>objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\Triangle.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\objects\WireframeBox.cpp">
       <Filter>objects</Filter>
     </ClCompile>
@@ -580,6 +583,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\cameras\Orthographic.cpp">
       <Filter>cameras</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\Triangle.cpp">
+      <Filter>objects\triangle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\SmoothTriangle.cpp">
+      <Filter>objects\triangle</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,4 +1,6 @@
 #include "raytracing/objects/Grid.h"
+#include "raytracing/objects/Triangle.h"
+#include "raytracing/objects/SmoothTriangle.h"
 #include "raytracing/objects/FlatMeshTriangle.h"
 #include "raytracing/objects/SmoothMeshTriangle.h"
 #include "raytracing/maths/Ray.h"
@@ -590,6 +592,199 @@ void Grid::ReadSmoothTriangles(const std::string& filename)
 {
     ReadPlyFile(filename, TriangleType::Smooth);
     ComputeMeshNormals();
+}
+
+void Grid::TessellateFlatSphere(int horizontal_steps, int vertical_steps)
+{
+	double pi = 3.1415926535897932384;
+
+	// define the top triangles which all touch the north pole
+
+	int k = 1;
+
+	for (int j = 0; j <= horizontal_steps - 1; j++) {
+		// define vertices
+
+		Point3D v0(	0, 1, 0);																		// top (north pole)
+
+		Point3D v1(	sin(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps), 			// bottom left
+					cos(pi * k / vertical_steps),
+					cos(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps)	);
+
+		Point3D v2(	sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps), 		// bottom  right
+					cos(pi * k / vertical_steps),
+					cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps)	);
+
+		auto triangle_ptr = std::make_shared<Triangle>(v0, v1, v2);
+		m_parts.push_back(triangle_ptr);
+	}
+
+
+	// define the bottom triangles which all touch the south pole
+
+	k = vertical_steps - 1;
+
+	for (int j = 0; j <= horizontal_steps - 1; j++) {
+		// define vertices
+
+		Point3D v0(	sin(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps), 			// top left
+					cos(pi * k / vertical_steps),
+					cos(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps)	);
+
+		Point3D v1(	0, -1, 0);																		// bottom (south pole)
+
+		Point3D v2(	sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps), 		// top right
+					cos(pi * k / vertical_steps),
+					cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps)	);
+
+		auto triangle_ptr = std::make_shared<Triangle>(v0, v1, v2);
+		m_parts.push_back(triangle_ptr);
+	}
+
+
+
+	//  define the other triangles
+
+	for (int k = 1; k <= vertical_steps - 2; k++) {
+		for (int j = 0; j <= horizontal_steps - 1; j++) {
+			// define the first triangle
+
+			// vertices
+
+			Point3D v0(	sin(2.0 * pi * j / horizontal_steps) * sin(pi * (k + 1) / vertical_steps), 				// bottom left, use k + 1, j
+						cos(pi * (k + 1) / vertical_steps),
+						cos(2.0 * pi * j / horizontal_steps) * sin(pi * (k + 1) / vertical_steps)	);
+
+			Point3D v1(	sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * (k + 1) / vertical_steps), 		// bottom  right, use k + 1, j + 1
+						cos(pi * (k + 1) / vertical_steps),
+						cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * (k + 1) / vertical_steps)	);
+
+			Point3D v2(	sin(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps), 					// top left, 	use k, j
+						cos(pi * k / vertical_steps),
+						cos(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps)	);
+
+			auto triangle_ptr1 = std::make_shared<Triangle>(v0, v1, v2);
+			m_parts.push_back(triangle_ptr1);
+
+
+			// define the second triangle
+
+			// vertices
+
+			v0 = Point3D(	sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps), 			// top right, use k, j + 1
+							cos(pi * k / vertical_steps),
+							cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps) );
+
+			v1 = Point3D (	sin(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps), 				// top left, 	use k, j
+							cos(pi * k / vertical_steps),
+							cos(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps)	);
+
+			v2 = Point3D (	sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * (k + 1) / vertical_steps), 	// bottom  right, use k + 1, j + 1
+							cos(pi * (k + 1) / vertical_steps),
+							cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * (k + 1) / vertical_steps)	);
+
+			auto triangle_ptr2 = std::make_shared<Triangle>(v0, v1, v2);
+			m_parts.push_back(triangle_ptr2);
+		}
+	}
+}
+
+void Grid::TessellateSmoothSphere(int horizontal_steps, int vertical_steps)
+{
+	double pi = 3.1415926535897932384;
+
+	// define the top triangles
+
+	int k = 1;
+
+	for (int j = 0; j <= horizontal_steps - 1; j++) {
+		// define vertices
+
+		Point3D v0(	0, 1, 0);																		// top
+
+		Point3D v1(	sin(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps), 			// bottom left
+					cos(pi * k / vertical_steps),
+					cos(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps)	);
+
+		Point3D v2(	sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps), 		// bottom  right
+					cos(pi * k / vertical_steps),
+					cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps)	);
+
+		auto triangle_ptr = std::make_shared<SmoothTriangle>(v0, v1, v2);
+        triangle_ptr->SetNormals(v0, v1, v2);
+		m_parts.push_back(triangle_ptr);
+	}
+
+
+	// define the bottom triangles
+
+	k = vertical_steps - 1;
+
+	for (int j = 0; j <= horizontal_steps - 1; j++) {
+		// define vertices
+
+		Point3D v0(	sin(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps), 			// top left
+					cos(pi * k / vertical_steps),
+					cos(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps)	);
+
+		Point3D v1(	0, -1, 0);																		// bottom
+
+		Point3D v2(	sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps), 		// top right
+					cos(pi * k / vertical_steps),
+					cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps)	);
+
+		auto triangle_ptr = std::make_shared<SmoothTriangle>(v0, v1, v2);
+        triangle_ptr->SetNormals(v0, v1, v2);
+		m_parts.push_back(triangle_ptr);
+	}
+
+
+	//  define the other triangles
+
+	for (int k = 1; k <= vertical_steps - 2; k++) {
+		for (int j = 0; j <= horizontal_steps - 1; j++) {
+			// define the first triangle
+
+			// vertices
+
+			Point3D v0(	sin(2.0 * pi * j / horizontal_steps) * sin(pi * (k + 1) / vertical_steps), 				// bottom left, use k + 1, j
+						cos(pi * (k + 1) / vertical_steps),
+						cos(2.0 * pi * j / horizontal_steps) * sin(pi * (k + 1) / vertical_steps)	);
+
+			Point3D v1(	sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * (k + 1) / vertical_steps), 		// bottom  right, use k + 1, j + 1
+						cos(pi * (k + 1) / vertical_steps),
+						cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * (k + 1) / vertical_steps)	);
+
+			Point3D v2(	sin(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps), 					// top left, 	use k, j
+						cos(pi * k / vertical_steps),
+						cos(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps)	);
+
+			auto triangle_ptr1 = std::make_shared<SmoothTriangle>(v0, v1, v2);
+            triangle_ptr1->SetNormals(v0, v1, v2);
+			m_parts.push_back(triangle_ptr1);
+
+
+			// define the second triangle
+
+			// vertices
+
+			v0 = Point3D(	sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps), 			// top right, use k, j + 1
+							cos(pi * k / vertical_steps),
+							cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps) );
+
+			v1 = Point3D (	sin(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps), 				// top left, 	use k, j
+							cos(pi * k / vertical_steps),
+							cos(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps)	);
+
+			v2 = Point3D (	sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * (k + 1) / vertical_steps), 	// bottom  right, use k + 1, j + 1
+							cos(pi * (k + 1) / vertical_steps),
+							cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * (k + 1) / vertical_steps)	);
+
+			auto triangle_ptr2 = std::make_shared<SmoothTriangle>(v0, v1, v2);
+            triangle_ptr2->SetNormals(v0, v1, v2);
+			m_parts.push_back(triangle_ptr2);
+		}
+	}
 }
 
 Point3D Grid::FindMinBounds() const
