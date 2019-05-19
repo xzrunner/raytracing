@@ -18,6 +18,8 @@ public:
 
 	virtual RGBColor TraceRay(const Ray& ray, int depth) const;
 
+    virtual RGBColor TraceRay(const Ray& ray, double& t, int depth) const;
+
 protected:
 	const World& m_world;
 

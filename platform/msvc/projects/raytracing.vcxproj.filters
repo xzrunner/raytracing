@@ -327,6 +327,12 @@
     <ClInclude Include="..\..\..\include\raytracing\objects\SmoothTriangle.h">
       <Filter>objects\triangle</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\tracer\Whitted.h">
+      <Filter>tracer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\texture\PlaneChecker.h">
+      <Filter>texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\brdfs\BRDF.cpp">
@@ -589,6 +595,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\objects\SmoothTriangle.cpp">
       <Filter>objects\triangle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\tracer\Whitted.cpp">
+      <Filter>tracer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\texture\PlaneChecker.cpp">
+      <Filter>texture</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

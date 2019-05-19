@@ -32,6 +32,7 @@ public:
 	float GetGamma() const { return m_gamma; }
 	float GetInvGamma() const { return m_inv_gamma; }
 
+    int  GetMaxDepth() const { return m_max_depth; }
 	void SetMaxDepth(int depth) { m_max_depth = depth; }
 
 private:
