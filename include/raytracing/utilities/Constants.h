@@ -13,6 +13,7 @@ const double 	INV_TWO_PI 	= 0.1591549430918953358;
 
 //const double	EPSILON		= 0.0001;
 const double	EPSILON		= 0.001;
+const double	HUGE_VALUE  = 1.0E10;
 
 const RGBColor BLACK(0, 0, 0);
 const RGBColor WHITE(1, 1, 1);

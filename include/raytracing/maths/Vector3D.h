@@ -43,6 +43,7 @@ public:
 	Vector3D operator ^ (const Vector3D& v) const;
 
 	void Normalize();
+    Vector3D Normalized();
 
 	double Length() const;
 	double LenSquared() const;
@@ -54,32 +55,32 @@ Vector3D Vector3D::operator - () const {
 	return Vector3D(-x, -y, -z);
 }
 
-inline Vector3D 
+inline Vector3D
 Vector3D::operator * (const double a) const {
 	return Vector3D(x * a, y * a, z * a);
 }
 
-inline Vector3D 
+inline Vector3D
 Vector3D::operator / (const double a) const {
 	return Vector3D(x / a, y / a, z / a);
 }
 
-inline Vector3D 
+inline Vector3D
 Vector3D::operator + (const Vector3D& v) const {
 	return Vector3D(x + v.x, y + v.y, z + v.z);
 }
 
-inline Vector3D 
+inline Vector3D
 Vector3D::operator - (const Vector3D& v) const {
 	return Vector3D(x - v.x, y - v.y, z - v.z);
 }
 
-inline double 
+inline double
 Vector3D::operator * (const Vector3D& v) const {
 	return (x * v.x + y * v.y + z * v.z);
 }
 
-inline Vector3D 
+inline Vector3D
 Vector3D::operator ^ (const Vector3D& v) const {
 	return (Vector3D(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x));
 }
@@ -89,6 +90,14 @@ Normalize()
 {
 	double length = sqrt(x * x + y * y + z * z);
 	x /= length; y /= length; z /= length;
+}
+
+inline Vector3D Vector3D::
+Normalized()
+{
+    double length = sqrt(x * x + y * y + z * z);
+    x /= length; y /= length; z /= length;
+    return *this;
 }
 
 inline double Vector3D::
@@ -108,7 +117,7 @@ operator * (const double a, const Vector3D& v) {
 	return Vector3D(a * v.x, a * v.y, a * v.z);
 }
 
-Vector3D 
+Vector3D
 operator * (const Matrix& mat, const Vector3D& v);
 
 }

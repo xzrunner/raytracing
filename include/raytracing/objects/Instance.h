@@ -26,6 +26,8 @@ public:
 	void RotateZ(double r);
 	void Shear(const Matrix& m);
 
+    void SetTransformTexture(bool transform) { m_transform_the_texture = transform; }
+
 private:
 	std::shared_ptr<Object> m_object = nullptr;  // object to be transformed
 	Matrix				m_inv_matrix;		    	// inverse transformation matrix

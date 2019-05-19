@@ -16,7 +16,7 @@ rand_float(void) {
 	return (float)(rand_int() * INV_RAND_MAX);
 }
 
-inline float 
+inline float
 rand_float(float l, float h) {
 	return rand_float() * (h - l) + l;
 }
@@ -35,5 +35,9 @@ inline double
 clamp(const double x, const double min, const double max) {
 	return x < min ? min : (x > max ? max : x);
 }
+
+int SolveQuadric(double c[3], double s[2]);
+int SolveCubic(double c[4], double s[3]);
+int SolveQuartic(double c[5], double s[4]);
 
 }

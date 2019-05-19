@@ -15,6 +15,7 @@ public:
     virtual ~Grid();
 
 	virtual bool Hit(const Ray& ray, double& tmin, ShadeRec& sr) const override;
+    virtual bool ShadowHit(const Ray& ray, float& t) const override;
 
 	virtual AABB GetBoundingBox() const override;
 
