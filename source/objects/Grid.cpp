@@ -200,7 +200,7 @@ bool Grid::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 		if (tx_next < ty_next && tx_next < tz_next) {
 			if (object_ptr && object_ptr->Hit(ray, tmin, sr) && tmin < tx_next) {
-				SetMaterial(object_ptr->GetMaterial());
+				m_material = object_ptr->GetMaterial();
 				return true;
 			}
 
@@ -213,7 +213,7 @@ bool Grid::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 		else {
 			if (ty_next < tz_next) {
 				if (object_ptr && object_ptr->Hit(ray, tmin, sr) && tmin < ty_next) {
-					SetMaterial(object_ptr->GetMaterial());
+					m_material = object_ptr->GetMaterial();
 					return true;
 				}
 
@@ -225,7 +225,7 @@ bool Grid::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 			}
 			else {
 				if (object_ptr && object_ptr->Hit(ray, tmin, sr) && tmin < tz_next) {
-					SetMaterial(object_ptr->GetMaterial());
+                    m_material = object_ptr->GetMaterial();
 					return true;
 				}
 
@@ -235,6 +235,204 @@ bool Grid::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 				if (iz == iz_stop)
 					return false;
 			}
+		}
+	}
+}
+
+bool Grid::ShadowHit(const Ray& ray, float& tmin) const
+{
+	float t = 10000;
+
+	double ox = ray.ori.x;
+	double oy = ray.ori.y;
+	double oz = ray.ori.z;
+	double dx = ray.dir.x;
+	double dy = ray.dir.y;
+	double dz = ray.dir.z;
+
+	double x0 = aabb.x0;
+	double y0 = aabb.y0;
+	double z0 = aabb.z0;
+	double x1 = aabb.x1;
+	double y1 = aabb.y1;
+	double z1 = aabb.z1;
+
+	double tx_min, ty_min, tz_min;
+	double tx_max, ty_max, tz_max;
+
+	// the following code includes modifications from Shirley and Morley (2003)
+
+	double a = 1.0 / dx;
+	if (a >= 0) {
+		tx_min = (x0 - ox) * a;
+		tx_max = (x1 - ox) * a;
+	}
+	else {
+		tx_min = (x1 - ox) * a;
+		tx_max = (x0 - ox) * a;
+	}
+
+	double b = 1.0 / dy;
+	if (b >= 0) {
+		ty_min = (y0 - oy) * b;
+		ty_max = (y1 - oy) * b;
+	}
+	else {
+		ty_min = (y1 - oy) * b;
+		ty_max = (y0 - oy) * b;
+	}
+
+	double c = 1.0 / dz;
+	if (c >= 0) {
+		tz_min = (z0 - oz) * c;
+		tz_max = (z1 - oz) * c;
+	}
+	else {
+		tz_min = (z1 - oz) * c;
+		tz_max = (z0 - oz) * c;
+	}
+
+	double t0, t1;
+
+	if (tx_min > ty_min)
+		t0 = tx_min;
+	else
+		t0 = ty_min;
+
+	if (tz_min > t0)
+		t0 = tz_min;
+
+	if (tx_max < ty_max)
+		t1 = tx_max;
+	else
+		t1 = ty_max;
+
+	if (tz_max < t1)
+		t1 = tz_max;
+
+	if (t0 > t1)
+		return(false);
+
+
+	// initial cell coordinates
+
+	int ix, iy, iz;
+
+	if (aabb.Inside(ray.ori)) {  			// does the ray start inside the grid?
+		ix = clamp((ox - x0) * nx / (x1 - x0), 0, nx - 1);
+		iy = clamp((oy - y0) * ny / (y1 - y0), 0, ny - 1);
+		iz = clamp((oz - z0) * nz / (z1 - z0), 0, nz - 1);
+	}
+	else {
+		Point3D p = ray.ori + t0 * ray.dir;  // initial hit point with grid's bounding box
+		ix = clamp((p.x - x0) * nx / (x1 - x0), 0, nx - 1);
+		iy = clamp((p.y - y0) * ny / (y1 - y0), 0, ny - 1);
+		iz = clamp((p.z - z0) * nz / (z1 - z0), 0, nz - 1);
+	}
+
+	// ray parameter increments per cell in the x, y, and z directions
+
+	double dtx = (tx_max - tx_min) / nx;
+	double dty = (ty_max - ty_min) / ny;
+	double dtz = (tz_max - tz_min) / nz;
+
+	double 	tx_next, ty_next, tz_next;
+	int 	ix_step, iy_step, iz_step;
+	int 	ix_stop, iy_stop, iz_stop;
+
+	if (dx > 0) {
+		tx_next = tx_min + (ix + 1) * dtx;
+		ix_step = +1;
+		ix_stop = nx;
+	}
+	else {
+		tx_next = tx_min + (nx - ix) * dtx;
+		ix_step = -1;
+		ix_stop = -1;
+	}
+
+	if (dx == 0.0) {
+		tx_next = HUGE_VALUE;
+		ix_step = -1;
+		ix_stop = -1;
+	}
+
+
+	if (dy > 0) {
+		ty_next = ty_min + (iy + 1) * dty;
+		iy_step = +1;
+		iy_stop = ny;
+	}
+	else {
+		ty_next = ty_min + (ny - iy) * dty;
+		iy_step = -1;
+		iy_stop = -1;
+	}
+
+	if (dy == 0.0) {
+		ty_next = HUGE_VALUE;
+		iy_step = -1;
+		iy_stop = -1;
+	}
+
+	if (dz > 0) {
+		tz_next = tz_min + (iz + 1) * dtz;
+		iz_step = +1;
+		iz_stop = nz;
+	}
+	else {
+		tz_next = tz_min + (nz - iz) * dtz;
+		iz_step = -1;
+		iz_stop = -1;
+	}
+
+	if (dz == 0.0) {
+		tz_next = HUGE_VALUE;
+		iz_step = -1;
+		iz_stop = -1;
+	}
+
+	// traverse the grid
+
+	while (true) {
+		auto object_ptr = cells[ix + nx * iy + nx * ny * iz];
+
+		if (tx_next < ty_next && tx_next < tz_next) {
+			if (object_ptr && object_ptr->ShadowHit(ray, t) && t < tmin) {		//This part is different from hit function, Notice it!
+				tmin = t;
+				return (true);
+			}
+
+			tx_next += dtx;
+			ix += ix_step;
+			if (ix == ix_stop)
+				return (false);
+		}
+		else {
+			if (ty_next < tz_next) {
+				if (object_ptr && object_ptr->ShadowHit(ray, t) && t < tmin) {
+					tmin = t;
+					return (true);
+				}
+
+				ty_next += dty;
+				iy += iy_step;
+
+				if (iy == iy_stop)
+					return (false);
+		 	}
+		 	else {
+				if (object_ptr && object_ptr->ShadowHit(ray, t) && t < tmin) {
+					tmin = t;
+					return (true);
+				}
+
+				tz_next += dtz;
+				iz += iz_step;
+
+				if (iz == iz_stop)
+					return (false);
+		 	}
 		}
 	}
 }

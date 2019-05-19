@@ -39,7 +39,7 @@ bool Instance::Hit(const Ray& ray, double& t, ShadeRec& sr) const
 		sr.normal.Normalize();
 
 		if (auto material = m_object->GetMaterial()) {
-			SetMaterial(material);
+			m_material = material;
 		}
 		if (!m_transform_the_texture)
 			sr.local_hit_point = ray.ori + t * ray.dir;
@@ -58,7 +58,7 @@ bool Instance::ShadowHit(const Ray& ray, float& tmin) const
 
 	if (m_object->ShadowHit(inv_ray, tmin)) {
 		if (auto material = m_object->GetMaterial()) {
-			SetMaterial(material);
+            m_material = material;
 		}
 
 		return true;
