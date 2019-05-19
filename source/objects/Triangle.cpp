@@ -21,8 +21,8 @@ Triangle::Triangle(const Point3D& v0, const Point3D& v1, const Point3D& v2)
 	: m_v0(v0)
 	, m_v1(v1)
 	, m_v2(v2)
-	, m_normal(0, 1, 0)
 {
+    ComputeNormal();
 }
 
 bool Triangle::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
@@ -109,6 +109,12 @@ AABB Triangle::GetBoundingBox() const
 	return (AABB(std::min(std::min(m_v0.x, m_v1.x), m_v2.x) - delta, std::max(std::max(m_v0.x, m_v1.x), m_v2.x) + delta,
 				 std::min(std::min(m_v0.y, m_v1.y), m_v2.y) - delta, std::max(std::max(m_v0.y, m_v1.y), m_v2.y) + delta,
 				 std::min(std::min(m_v0.z, m_v1.z), m_v2.z) - delta, std::max(std::max(m_v0.z, m_v1.z), m_v2.z) + delta));
+}
+
+void Triangle::ComputeNormal()
+{
+    m_normal = (m_v1 - m_v0) ^ (m_v2 - m_v0);
+    m_normal.Normalize();
 }
 
 }

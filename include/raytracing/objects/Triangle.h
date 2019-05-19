@@ -20,6 +20,9 @@ public:
     void SetNormal(const Normal& normal) { m_normal = normal; }
 
 private:
+    void ComputeNormal();
+
+private:
 	Point3D	m_v0, m_v1, m_v2;
 	Normal	m_normal;
 
