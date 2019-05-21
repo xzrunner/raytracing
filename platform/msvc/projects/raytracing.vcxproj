@@ -39,6 +39,7 @@
     <ClInclude Include="..\..\..\include\raytracing\materials\Matte.h" />
     <ClInclude Include="..\..\..\include\raytracing\materials\Phong.h" />
     <ClInclude Include="..\..\..\include\raytracing\materials\Reflective.h" />
+    <ClInclude Include="..\..\..\include\raytracing\materials\SV_Emissive.h" />
     <ClInclude Include="..\..\..\include\raytracing\materials\SV_Matte.h" />
     <ClInclude Include="..\..\..\include\raytracing\maths\AABB.h" />
     <ClInclude Include="..\..\..\include\raytracing\maths\maths.h" />
@@ -93,6 +94,7 @@
     <ClInclude Include="..\..\..\include\raytracing\texture\Image.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\ImageTexture.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\PlaneChecker.h" />
+    <ClInclude Include="..\..\..\include\raytracing\texture\SphereChecker.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\Texture.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\AreaLighting.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\FirstHit.h" />
@@ -136,6 +138,7 @@
     <ClCompile Include="..\..\..\source\materials\Matte.cpp" />
     <ClCompile Include="..\..\..\source\materials\Phong.cpp" />
     <ClCompile Include="..\..\..\source\materials\Reflective.cpp" />
+    <ClCompile Include="..\..\..\source\materials\SV_Emissive.cpp" />
     <ClCompile Include="..\..\..\source\materials\SV_Matte.cpp" />
     <ClCompile Include="..\..\..\source\maths\AABB.cpp" />
     <ClCompile Include="..\..\..\source\maths\maths.cpp" />
@@ -187,6 +190,7 @@
     <ClCompile Include="..\..\..\source\texture\Image.cpp" />
     <ClCompile Include="..\..\..\source\texture\ImageTexture.cpp" />
     <ClCompile Include="..\..\..\source\texture\PlaneChecker.cpp" />
+    <ClCompile Include="..\..\..\source\texture\SphereChecker.cpp" />
     <ClCompile Include="..\..\..\source\texture\Texture.cpp" />
     <ClCompile Include="..\..\..\source\tracer\AreaLighting.cpp" />
     <ClCompile Include="..\..\..\source\tracer\FirstHit.cpp" />
@@ -197,7 +201,6 @@
     <ClCompile Include="..\..\..\source\utilities\RGBColor.cpp" />
     <ClCompile Include="..\..\..\source\world\ViewPlane.cpp" />
     <ClCompile Include="..\..\..\source\world\World.cpp" />
-    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>1.raytracing</ProjectName>

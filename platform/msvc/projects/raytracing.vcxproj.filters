@@ -333,6 +333,12 @@
     <ClInclude Include="..\..\..\include\raytracing\texture\PlaneChecker.h">
       <Filter>texture</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\texture\SphereChecker.h">
+      <Filter>texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\materials\SV_Emissive.h">
+      <Filter>materials</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\brdfs\BRDF.cpp">
@@ -527,9 +533,6 @@
     <ClCompile Include="..\..\..\source\lights\EnvironmentLight.cpp">
       <Filter>lights</Filter>
     </ClCompile>
-    <ClCompile Include="Source.cpp">
-      <Filter>lights</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\lights\FakeSphericalLight.cpp">
       <Filter>lights</Filter>
     </ClCompile>
@@ -601,6 +604,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\texture\PlaneChecker.cpp">
       <Filter>texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\texture\SphereChecker.cpp">
+      <Filter>texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\materials\SV_Emissive.cpp">
+      <Filter>materials</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
