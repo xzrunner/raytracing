@@ -17,9 +17,7 @@ public:
         Panoramic
     };
 
-    void set_map_type(MapType t) {
-        m_map_type = t;
-    }
+    void SetMapType(MapType t) { m_map_type = t; }
 
 private:
     MapType m_map_type = MapType::Regular;
