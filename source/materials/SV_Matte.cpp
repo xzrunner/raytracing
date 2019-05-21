@@ -4,6 +4,7 @@
 #include "raytracing/utilities/ShadeRec.h"
 #include "raytracing/world/World.h"
 #include "raytracing/lights/Light.h"
+#include "raytracing/tracer/Tracer.h"
 
 namespace rt
 {
@@ -68,6 +69,36 @@ RGBColor SV_Matte::AreaLightShade(const ShadeRec& sr) const
 	}
 
 	return L;
+}
+
+RGBColor SV_Matte::PathShade(ShadeRec& sr) const
+{
+	Vector3D 	wo = -sr.ray.dir;
+	Vector3D 	wi;
+	RGBColor 	f = m_diffuse_brdf->sample_f(sr, wo, wi);
+	float 		ndotwi = static_cast<float>(sr.normal * wi);
+	Ray 		reflected_ray(sr.hit_point, wi);
+
+	return (f * sr.w.GetTracer()->TraceRay(reflected_ray, sr.depth + 1) * ndotwi);
+}
+
+RGBColor SV_Matte::GlobalShade(ShadeRec& sr) const
+{
+	RGBColor L;
+
+    if (sr.depth == 0) {
+        L = AreaLightShade(sr);
+    }
+
+	Vector3D 	wi;
+	Vector3D 	wo 		= -sr.ray.dir;
+	RGBColor 	f 		= m_diffuse_brdf->sample_f(sr, wo, wi);
+	float 		ndotwi 	= static_cast<float>(sr.normal * wi);
+	Ray 		reflected_ray(sr.hit_point, wi);
+
+	L += f * sr.w.GetTracer()->TraceRay(reflected_ray, sr.depth + 1) * ndotwi;
+
+	return (L);
 }
 
 RGBColor SV_Matte::GetLe(const ShadeRec& sr) const

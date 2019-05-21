@@ -23,18 +23,18 @@ Phong::~Phong()
 // this sets Phong::kd
 // there is no Phong::ka data member because ambient reflection
 // is diffuse reflection
-void Phong::SetKa(const float k)
+void Phong::SetKa(float k)
 {
 	m_ambient_brdf->SetKd(k);
 }
 
 // this also sets Phong::kd, but for a different Phong object
-void Phong::SetKd(const float k)
+void Phong::SetKd(float k)
 {
 	m_diffuse_brdf->SetKd(k);
 }
 
-void Phong::SetKs(const float ks)
+void Phong::SetKs(float ks)
 {
 	m_specular_brdf->SetKs(ks);
 }
@@ -51,7 +51,7 @@ void Phong::SetCs(const RGBColor& c)
 	m_specular_brdf->SetCs(c);
 }
 
-void Phong::SetExp(const float e)
+void Phong::SetExp(float e)
 {
 	m_specular_brdf->SetExp(e);
 }

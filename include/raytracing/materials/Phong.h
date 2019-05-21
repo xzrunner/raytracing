@@ -20,17 +20,17 @@ public:
     virtual RGBColor AreaLightShade(const ShadeRec& sr) const override;
     virtual RGBColor GetLe(const ShadeRec& sr) const override;
 
-	void SetKa(const float k);
-	void SetKd(const float k);
-	void SetKs(const float ks);
+	void SetKa(float k);
+	void SetKd(float k);
+	void SetKs(float ks);
 	void SetCd(const RGBColor& c);
 	void SetCs(const RGBColor& c);
-	void SetExp(const float e);
+	void SetExp(float e);
 
 protected:
     auto& GetDiffuseBRDF() const { return m_diffuse_brdf; }
 
-private:
+protected:
 	std::unique_ptr<Lambertian>		m_ambient_brdf = nullptr;
     std::unique_ptr<Lambertian>		m_diffuse_brdf = nullptr;
 	std::unique_ptr<GlossySpecular>	m_specular_brdf = nullptr;

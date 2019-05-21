@@ -18,6 +18,9 @@ public:
 	virtual RGBColor AreaLightShade(const ShadeRec& sr) const = 0;
 	virtual RGBColor GetLe(const ShadeRec& sr) const = 0;
 
+    virtual RGBColor PathShade(ShadeRec& sr) const { return RGBColor(1.0, 1.0, 1.0); }
+    virtual RGBColor GlobalShade(ShadeRec& sr) const { return RGBColor(1.0, 1.0, 1.0); }
+
 }; // Material
 
 }

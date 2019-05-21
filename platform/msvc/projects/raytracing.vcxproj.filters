@@ -339,6 +339,15 @@
     <ClInclude Include="..\..\..\include\raytracing\materials\SV_Emissive.h">
       <Filter>materials</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\SolidCone.h">
+      <Filter>objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\materials\GlossyReflector.h">
+      <Filter>materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\tracer\PathTrace.h">
+      <Filter>tracer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\brdfs\BRDF.cpp">
@@ -610,6 +619,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\materials\SV_Emissive.cpp">
       <Filter>materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\SolidCone.cpp">
+      <Filter>objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\materials\GlossyReflector.cpp">
+      <Filter>materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\tracer\PathTrace.cpp">
+      <Filter>tracer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

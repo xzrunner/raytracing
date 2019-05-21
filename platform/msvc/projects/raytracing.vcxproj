@@ -35,6 +35,7 @@
     <ClInclude Include="..\..\..\include\raytracing\mapping\Mapping.h" />
     <ClInclude Include="..\..\..\include\raytracing\mapping\SphericalMap.h" />
     <ClInclude Include="..\..\..\include\raytracing\materials\Emissive.h" />
+    <ClInclude Include="..\..\..\include\raytracing\materials\GlossyReflector.h" />
     <ClInclude Include="..\..\..\include\raytracing\materials\Material.h" />
     <ClInclude Include="..\..\..\include\raytracing\materials\Matte.h" />
     <ClInclude Include="..\..\..\include\raytracing\materials\Phong.h" />
@@ -78,6 +79,7 @@
     <ClInclude Include="..\..\..\include\raytracing\objects\RoundRimmedBowl.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\SmoothMeshTriangle.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\SmoothTriangle.h" />
+    <ClInclude Include="..\..\..\include\raytracing\objects\SolidCone.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\SolidCylinder.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\Sphere.h" />
     <ClInclude Include="..\..\..\include\raytracing\objects\ThickRing.h" />
@@ -99,6 +101,7 @@
     <ClInclude Include="..\..\..\include\raytracing\tracer\AreaLighting.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\FirstHit.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\MultipleObjects.h" />
+    <ClInclude Include="..\..\..\include\raytracing\tracer\PathTrace.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\RayCast.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\Tracer.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\Whitted.h" />
@@ -134,6 +137,7 @@
     <ClCompile Include="..\..\..\source\mapping\LightProbe.cpp" />
     <ClCompile Include="..\..\..\source\mapping\SphericalMap.cpp" />
     <ClCompile Include="..\..\..\source\materials\Emissive.cpp" />
+    <ClCompile Include="..\..\..\source\materials\GlossyReflector.cpp" />
     <ClCompile Include="..\..\..\source\materials\Material.cpp" />
     <ClCompile Include="..\..\..\source\materials\Matte.cpp" />
     <ClCompile Include="..\..\..\source\materials\Phong.cpp" />
@@ -174,6 +178,7 @@
     <ClCompile Include="..\..\..\source\objects\RoundRimmedBowl.cpp" />
     <ClCompile Include="..\..\..\source\objects\SmoothMeshTriangle.cpp" />
     <ClCompile Include="..\..\..\source\objects\SmoothTriangle.cpp" />
+    <ClCompile Include="..\..\..\source\objects\SolidCone.cpp" />
     <ClCompile Include="..\..\..\source\objects\SolidCylinder.cpp" />
     <ClCompile Include="..\..\..\source\objects\Sphere.cpp" />
     <ClCompile Include="..\..\..\source\objects\ThickRing.cpp" />
@@ -195,6 +200,7 @@
     <ClCompile Include="..\..\..\source\tracer\AreaLighting.cpp" />
     <ClCompile Include="..\..\..\source\tracer\FirstHit.cpp" />
     <ClCompile Include="..\..\..\source\tracer\MultipleObjects.cpp" />
+    <ClCompile Include="..\..\..\source\tracer\PathTrace.cpp" />
     <ClCompile Include="..\..\..\source\tracer\RayCast.cpp" />
     <ClCompile Include="..\..\..\source\tracer\Tracer.cpp" />
     <ClCompile Include="..\..\..\source\tracer\Whitted.cpp" />

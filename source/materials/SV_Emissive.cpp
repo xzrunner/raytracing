@@ -1,5 +1,7 @@
 #include "raytracing/materials/SV_Emissive.h"
 #include "raytracing/texture/Texture.h"
+#include "raytracing/utilities/ShadeRec.h"
+#include "raytracing/utilities/Constants.h"
 
 namespace rt
 {
@@ -58,6 +60,33 @@ RGBColor SV_Emissive::GetLe(const ShadeRec& sr) const
 	return ls * ce;		//here is added, this is very important to multiply ce with ls!!!!!!
 	*/
 	return m_ls * m_tex->GetColor(sr);
+}
+
+RGBColor SV_Emissive::PathShade(ShadeRec& sr) const
+{
+	/*
+	if (sr.depth == 1)
+		return (black);
+		*/
+	return m_ls * m_tex->GetColor(sr);
+	/*
+	if (-sr.normal * sr.ray.d > 0.0)
+		return (ls * ce);
+	else
+		return (black);*/
+}
+
+RGBColor SV_Emissive::GlobalShade(ShadeRec& sr) const
+{
+	if (sr.depth == 1)
+		return BLACK;
+
+	return m_ls * m_tex->GetColor(sr);
+	/*
+	if (-sr.normal * sr.ray.d > 0.0)
+		return (ls * ce);
+	else
+		return (black);*/
 }
 
 }

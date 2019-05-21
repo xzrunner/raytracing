@@ -20,16 +20,18 @@ public:
 
 	virtual RGBColor sample_f(const ShadeRec& sr, const Vector3D& wo, Vector3D& wi, float& pdf) const;
 
-	void SetKs(const float ks);
-	void SetExp(const float e);
+	void SetKs(float ks);
+	void SetExp(float e);
 	void SetCs(const RGBColor& c);
+
+    void SetSamples(int num_samples, float exp);
 
 private:
 	// specular reflection coefficient
-	float m_ks;
+	float m_ks = 0;
 
 	// specular exponent
-	float m_exp;
+	float m_exp = 0;
 
 	// specular color
 	RGBColor m_cs;

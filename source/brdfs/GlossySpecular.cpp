@@ -1,14 +1,12 @@
 #include "raytracing/brdfs/GlossySpecular.h"
 #include "raytracing/utilities/ShadeRec.h"
-#include "raytracing/samplers/Sampler.h"
+#include "raytracing/samplers/MultiJittered.h"
 
 namespace rt
 {
 
 GlossySpecular::GlossySpecular()
-	: m_ks(0)
-	, m_cs(1, 1, 1)
-	, m_sampler(nullptr)
+	: m_cs(1, 1, 1)
 {
 }
 
@@ -56,12 +54,12 @@ RGBColor GlossySpecular::sample_f(const ShadeRec& sr, const Vector3D& wo, Vector
 	return (m_ks * m_cs * phong_lobe);
 }
 
-void GlossySpecular::SetKs(const float ks)
+void GlossySpecular::SetKs(float ks)
 {
 	m_ks = ks;
 }
 
-void GlossySpecular::SetExp(const float e)
+void GlossySpecular::SetExp(float e)
 {
 	m_exp = e;
 }
@@ -69,6 +67,12 @@ void GlossySpecular::SetExp(const float e)
 void GlossySpecular::SetCs(const RGBColor& c)
 {
 	m_cs = c;
+}
+
+void GlossySpecular::SetSamples(int num_samples, float exp)
+{
+    m_sampler = std::make_shared<MultiJittered>(num_samples);
+    m_sampler->MapSamplesToHemisphere(exp);
 }
 
 }

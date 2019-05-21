@@ -48,6 +48,31 @@ RGBColor Reflective::AreaLightShade(const ShadeRec& sr) const
     return L;
 }
 
+RGBColor Reflective::PathShade(ShadeRec& sr) const
+{
+	Vector3D 	wo = -sr.ray.dir;
+	Vector3D 	wi;
+	float 		pdf;
+	RGBColor 	fr = m_reflective_brdf->sample_f(sr, wo, wi, pdf);
+	Ray 		reflected_ray(sr.hit_point, wi);
+
+	if (sr.depth == 0)
+		return (fr * sr.w.GetTracer()->TraceRay(reflected_ray, sr.depth + 2) * (sr.normal * wi) / pdf);
+	else
+		return (fr * sr.w.GetTracer()->TraceRay(reflected_ray, sr.depth + 1) * (sr.normal * wi) / pdf);
+}
+
+RGBColor Reflective::GlobalShade(ShadeRec& sr) const
+{
+	Vector3D 	wo = -sr.ray.dir;
+	Vector3D 	wi;
+	float 		pdf;
+	RGBColor 	fr = m_reflective_brdf->sample_f(sr, wo, wi, pdf);
+	Ray 		reflected_ray(sr.hit_point, wi);
+
+	return (fr * sr.w.GetTracer()->TraceRay(reflected_ray, sr.depth + 1) * (sr.normal * wi) / pdf);
+}
+
 void Reflective::SetKr(const float k)
 {
 	m_reflective_brdf->SetKr(k);
