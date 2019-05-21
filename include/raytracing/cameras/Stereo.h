@@ -33,11 +33,11 @@ public:
 	void SetupCameras();
 
 private:
-	ViewingType	m_viewing_type;		// parallel or transverse viewing
-	int			m_pixel_gap = 0;		// gap in pixels between the left and right images
-	float		m_beta = 0;			// stereo separation angle
-	std::shared_ptr<Camera> m_left_cam = nullptr;	// left eye camera, note: here we use Pinhole directly to avoid too many stereo function
-    std::shared_ptr<Camera> m_right_cam = nullptr;	// right eye camera
+	ViewingType	m_viewing_type = ViewingType::Parallel; // parallel or transverse viewing
+	int			m_pixel_gap    = 0;		                // gap in pixels between the left and right images
+	float		m_beta         = 0;			            // stereo separation angle
+	std::shared_ptr<Camera> m_left_cam  = nullptr;	    // left eye camera, note: here we use Pinhole directly to avoid too many stereo function
+    std::shared_ptr<Camera> m_right_cam = nullptr;	    // right eye camera
 
 }; // Stereo
 
