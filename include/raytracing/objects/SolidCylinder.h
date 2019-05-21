@@ -17,8 +17,6 @@ public:
 
     virtual AABB GetBoundingBox() const override { return bbox; }
 
-    virtual void SetMaterial(const std::shared_ptr<Material>& material) const override;
-
     void SetBottomMaterial(const std::shared_ptr<Material>& material) {
         m_parts[0]->SetMaterial(material);
     }

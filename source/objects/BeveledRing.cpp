@@ -87,12 +87,4 @@ bool BeveledRing::ShadowHit(const Ray& ray, float& tmin) const
     }
 }
 
-void BeveledRing::SetMaterial(const std::shared_ptr<Material>& material) const
-{
-    m_material = material;
-    for (auto& child : m_parts) {
-        child->SetMaterial(material);
-    }
-}
-
 }

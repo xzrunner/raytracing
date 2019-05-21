@@ -58,12 +58,4 @@ bool SolidCylinder::ShadowHit(const Ray& ray, float& tmin) const
     }
 }
 
-void SolidCylinder::SetMaterial(const std::shared_ptr<Material>& material) const
-{
-    m_material = material;
-    for (auto& child : m_parts) {
-        child->SetMaterial(material);
-    }
-}
-
 }
