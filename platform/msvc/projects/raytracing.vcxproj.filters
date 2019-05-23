@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="brdfs">
-      <UniqueIdentifier>{a48e4aa7-97e3-4d4f-99f9-df5f8abf66eb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="cameras">
       <UniqueIdentifier>{ce8da46d-cdd0-4c24-9efd-8f16cede1ee0}</UniqueIdentifier>
     </Filter>
@@ -43,19 +40,49 @@
     <Filter Include="objects\triangle">
       <UniqueIdentifier>{94b5b71a-6be8-4139-88cf-e8b27687a573}</UniqueIdentifier>
     </Filter>
+    <Filter Include="objects\box">
+      <UniqueIdentifier>{ac4877df-6727-4061-9a20-ec5724bc4b4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="objects\cylinder">
+      <UniqueIdentifier>{33f09b09-dd49-43bd-ae84-809103a1735c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="objects\ring">
+      <UniqueIdentifier>{d35ff63d-af1f-4941-bd09-2601ad3bcc15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="objects\sphere">
+      <UniqueIdentifier>{d8cd3052-00d8-4279-8d28-6f95b7399316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="objects\torus">
+      <UniqueIdentifier>{8aee66c2-4a53-4b68-ac7d-ece833f66ca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="objects\bowl">
+      <UniqueIdentifier>{f0d8b887-ab12-491e-9d7a-8fbd4333774b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="objects\annulus">
+      <UniqueIdentifier>{28de661b-8a18-40a8-8e7a-dd006b87430e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="objects\cone">
+      <UniqueIdentifier>{e9803495-2b0d-45f2-8e21-7165b6e9b429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="objects\others">
+      <UniqueIdentifier>{9b772714-c35b-4103-8355-de598390ba93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bxdfs">
+      <UniqueIdentifier>{a48e4aa7-97e3-4d4f-99f9-df5f8abf66eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\raytracing\brdfs\BRDF.h">
-      <Filter>brdfs</Filter>
+      <Filter>bxdfs</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\brdfs\GlossySpecular.h">
-      <Filter>brdfs</Filter>
+      <Filter>bxdfs</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\brdfs\Lambertian.h">
-      <Filter>brdfs</Filter>
+      <Filter>bxdfs</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\brdfs\PerfectSpecular.h">
-      <Filter>brdfs</Filter>
+      <Filter>bxdfs</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\cameras\Camera.h">
       <Filter>cameras</Filter>
@@ -189,33 +216,6 @@
     <ClInclude Include="..\..\..\include\raytracing\samplers\Sampler.h">
       <Filter>samplers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\Box.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\Compound.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\Grid.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\Instance.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\OpenCylinder.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\Plane.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\Rectangle.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\Sphere.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\WireframeBox.h">
-      <Filter>objects</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\objects\Object.h">
       <Filter>objects</Filter>
     </ClInclude>
@@ -228,20 +228,11 @@
     <ClInclude Include="..\..\..\include\raytracing\cameras\Stereo.h">
       <Filter>cameras</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\SolidCylinder.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\Disk.h">
-      <Filter>objects</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\lights\AmbientOccluder.h">
       <Filter>lights</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\samplers\PureRandom.h">
       <Filter>samplers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\ConvexPartCylinder.h">
-      <Filter>objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\objects\FlatMeshTriangle.h">
       <Filter>objects\mesh</Filter>
@@ -255,68 +246,17 @@
     <ClInclude Include="..\..\..\external\tinyply.h">
       <Filter>utilities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\OpenPartCylinder.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\ConcaveSphere.h">
-      <Filter>objects</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\lights\EnvironmentLight.h">
       <Filter>lights</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\lights\FakeSphericalLight.h">
       <Filter>lights</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\Torus.h">
-      <Filter>objects</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\tracer\FirstHit.h">
       <Filter>tracer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\texture\ConeChecker.h">
       <Filter>texture</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\OpenCone.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\FlatRimmedBowl.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\ConvexPartSphere.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\Annulus.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\RoundRimmedBowl.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\ConcavePartSphere.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\ThickRing.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\BeveledCylinder.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\BeveledRing.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\BeveledBox.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\BeveledWedge.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\ConcavePartCylinder.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\ConvexPartTorus.h">
-      <Filter>objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\PartAnnulus.h">
-      <Filter>objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\cameras\Orthographic.h">
       <Filter>cameras</Filter>
@@ -339,28 +279,136 @@
     <ClInclude Include="..\..\..\include\raytracing\materials\SV_Emissive.h">
       <Filter>materials</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\objects\SolidCone.h">
-      <Filter>objects</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\materials\GlossyReflector.h">
       <Filter>materials</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\tracer\PathTrace.h">
       <Filter>tracer</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\Box.h">
+      <Filter>objects\box</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\BeveledBox.h">
+      <Filter>objects\box</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\BeveledCylinder.h">
+      <Filter>objects\cylinder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\ConvexPartCylinder.h">
+      <Filter>objects\cylinder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\ConcavePartCylinder.h">
+      <Filter>objects\cylinder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\ConcavePartSphere.h">
+      <Filter>objects\sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\ConcaveSphere.h">
+      <Filter>objects\sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\ConvexPartSphere.h">
+      <Filter>objects\sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\BeveledRing.h">
+      <Filter>objects\ring</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\ConvexPartTorus.h">
+      <Filter>objects\torus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\OpenCylinder.h">
+      <Filter>objects\cylinder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\OpenPartCylinder.h">
+      <Filter>objects\cylinder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\ThickRing.h">
+      <Filter>objects\ring</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\Disk.h">
+      <Filter>objects\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\FlatRimmedBowl.h">
+      <Filter>objects\bowl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\RoundRimmedBowl.h">
+      <Filter>objects\bowl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\Annulus.h">
+      <Filter>objects\annulus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\PartAnnulus.h">
+      <Filter>objects\annulus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\OpenCone.h">
+      <Filter>objects\cone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\SolidCone.h">
+      <Filter>objects\cone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\SolidCylinder.h">
+      <Filter>objects\cylinder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\Torus.h">
+      <Filter>objects\torus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\Sphere.h">
+      <Filter>objects\sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\Grid.h">
+      <Filter>objects\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\Plane.h">
+      <Filter>objects\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\Rectangle.h">
+      <Filter>objects\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\WireframeBox.h">
+      <Filter>objects\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\Instance.h">
+      <Filter>objects\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\BeveledWedge.h">
+      <Filter>objects\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\objects\Compound.h">
+      <Filter>objects\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\tracer\GlobalTrace.h">
+      <Filter>tracer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\materials\Transparent.h">
+      <Filter>materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\brdfs\BTDF.h">
+      <Filter>bxdfs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\brdfs\PerfectTransmitter.h">
+      <Filter>bxdfs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\brdfs\FresnelTransmitter.h">
+      <Filter>bxdfs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\brdfs\FresnelReflector.h">
+      <Filter>bxdfs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\materials\Dielectric.h">
+      <Filter>materials</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\brdfs\BRDF.cpp">
-      <Filter>brdfs</Filter>
+      <Filter>bxdfs</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\brdfs\GlossySpecular.cpp">
-      <Filter>brdfs</Filter>
+      <Filter>bxdfs</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\brdfs\Lambertian.cpp">
-      <Filter>brdfs</Filter>
+      <Filter>bxdfs</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\brdfs\PerfectSpecular.cpp">
-      <Filter>brdfs</Filter>
+      <Filter>bxdfs</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\cameras\Camera.cpp">
       <Filter>cameras</Filter>
@@ -467,33 +515,6 @@
     <ClCompile Include="..\..\..\source\samplers\Sampler.cpp">
       <Filter>samplers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\Box.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\Compound.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\Grid.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\Instance.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\OpenCylinder.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\Plane.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\Rectangle.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\Sphere.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\WireframeBox.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\objects\Object.cpp">
       <Filter>objects</Filter>
     </ClCompile>
@@ -506,20 +527,11 @@
     <ClCompile Include="..\..\..\source\cameras\Stereo.cpp">
       <Filter>cameras</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\SolidCylinder.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\Disk.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\lights\AmbientOccluder.cpp">
       <Filter>lights</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\samplers\PureRandom.cpp">
       <Filter>samplers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\ConvexPartCylinder.cpp">
-      <Filter>objects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\objects\FlatMeshTriangle.cpp">
       <Filter>objects\mesh</Filter>
@@ -533,20 +545,11 @@
     <ClCompile Include="..\..\..\external\tinyply.cpp">
       <Filter>utilities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\OpenPartCylinder.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\ConcaveSphere.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\lights\EnvironmentLight.cpp">
       <Filter>lights</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\lights\FakeSphericalLight.cpp">
       <Filter>lights</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\Torus.cpp">
-      <Filter>objects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\maths\maths.cpp">
       <Filter>maths</Filter>
@@ -556,48 +559,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\texture\ConeChecker.cpp">
       <Filter>texture</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\OpenCone.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\FlatRimmedBowl.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\ConvexPartSphere.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\Annulus.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\RoundRimmedBowl.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\ConcavePartSphere.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\ThickRing.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\BeveledCylinder.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\BeveledRing.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\BeveledBox.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\BeveledWedge.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\ConcavePartCylinder.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\ConvexPartTorus.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\PartAnnulus.cpp">
-      <Filter>objects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\cameras\Orthographic.cpp">
       <Filter>cameras</Filter>
@@ -620,14 +581,122 @@
     <ClCompile Include="..\..\..\source\materials\SV_Emissive.cpp">
       <Filter>materials</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\objects\SolidCone.cpp">
-      <Filter>objects</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\materials\GlossyReflector.cpp">
       <Filter>materials</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\tracer\PathTrace.cpp">
       <Filter>tracer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\Box.cpp">
+      <Filter>objects\box</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\BeveledBox.cpp">
+      <Filter>objects\box</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\BeveledCylinder.cpp">
+      <Filter>objects\cylinder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\ConvexPartCylinder.cpp">
+      <Filter>objects\cylinder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\ConcavePartCylinder.cpp">
+      <Filter>objects\cylinder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\ConcavePartSphere.cpp">
+      <Filter>objects\sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\ConcaveSphere.cpp">
+      <Filter>objects\sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\ConvexPartSphere.cpp">
+      <Filter>objects\sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\BeveledRing.cpp">
+      <Filter>objects\ring</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\ConvexPartTorus.cpp">
+      <Filter>objects\torus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\OpenCylinder.cpp">
+      <Filter>objects\cylinder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\OpenPartCylinder.cpp">
+      <Filter>objects\cylinder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\ThickRing.cpp">
+      <Filter>objects\ring</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\Disk.cpp">
+      <Filter>objects\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\FlatRimmedBowl.cpp">
+      <Filter>objects\bowl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\RoundRimmedBowl.cpp">
+      <Filter>objects\bowl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\Annulus.cpp">
+      <Filter>objects\annulus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\PartAnnulus.cpp">
+      <Filter>objects\annulus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\OpenCone.cpp">
+      <Filter>objects\cone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\SolidCone.cpp">
+      <Filter>objects\cone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\SolidCylinder.cpp">
+      <Filter>objects\cylinder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\Torus.cpp">
+      <Filter>objects\torus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\Sphere.cpp">
+      <Filter>objects\sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\Grid.cpp">
+      <Filter>objects\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\Plane.cpp">
+      <Filter>objects\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\Rectangle.cpp">
+      <Filter>objects\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\WireframeBox.cpp">
+      <Filter>objects\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\Compound.cpp">
+      <Filter>objects\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\Instance.cpp">
+      <Filter>objects\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\objects\BeveledWedge.cpp">
+      <Filter>objects\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\tracer\GlobalTrace.cpp">
+      <Filter>tracer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\materials\Transparent.cpp">
+      <Filter>materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\brdfs\BTDF.cpp">
+      <Filter>bxdfs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\brdfs\PerfectTransmitter.cpp">
+      <Filter>bxdfs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\brdfs\FresnelTransmitter.cpp">
+      <Filter>bxdfs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\brdfs\FresnelReflector.cpp">
+      <Filter>bxdfs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\materials\Dielectric.cpp">
+      <Filter>materials</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

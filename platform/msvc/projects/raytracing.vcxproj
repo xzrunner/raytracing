@@ -13,9 +13,13 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\external\tinyply.h" />
     <ClInclude Include="..\..\..\include\raytracing\brdfs\BRDF.h" />
+    <ClInclude Include="..\..\..\include\raytracing\brdfs\BTDF.h" />
+    <ClInclude Include="..\..\..\include\raytracing\brdfs\FresnelReflector.h" />
+    <ClInclude Include="..\..\..\include\raytracing\brdfs\FresnelTransmitter.h" />
     <ClInclude Include="..\..\..\include\raytracing\brdfs\GlossySpecular.h" />
     <ClInclude Include="..\..\..\include\raytracing\brdfs\Lambertian.h" />
     <ClInclude Include="..\..\..\include\raytracing\brdfs\PerfectSpecular.h" />
+    <ClInclude Include="..\..\..\include\raytracing\brdfs\PerfectTransmitter.h" />
     <ClInclude Include="..\..\..\include\raytracing\cameras\Camera.h" />
     <ClInclude Include="..\..\..\include\raytracing\cameras\FishEye.h" />
     <ClInclude Include="..\..\..\include\raytracing\cameras\Orthographic.h" />
@@ -34,6 +38,7 @@
     <ClInclude Include="..\..\..\include\raytracing\mapping\LightProbe.h" />
     <ClInclude Include="..\..\..\include\raytracing\mapping\Mapping.h" />
     <ClInclude Include="..\..\..\include\raytracing\mapping\SphericalMap.h" />
+    <ClInclude Include="..\..\..\include\raytracing\materials\Dielectric.h" />
     <ClInclude Include="..\..\..\include\raytracing\materials\Emissive.h" />
     <ClInclude Include="..\..\..\include\raytracing\materials\GlossyReflector.h" />
     <ClInclude Include="..\..\..\include\raytracing\materials\Material.h" />
@@ -42,6 +47,7 @@
     <ClInclude Include="..\..\..\include\raytracing\materials\Reflective.h" />
     <ClInclude Include="..\..\..\include\raytracing\materials\SV_Emissive.h" />
     <ClInclude Include="..\..\..\include\raytracing\materials\SV_Matte.h" />
+    <ClInclude Include="..\..\..\include\raytracing\materials\Transparent.h" />
     <ClInclude Include="..\..\..\include\raytracing\maths\AABB.h" />
     <ClInclude Include="..\..\..\include\raytracing\maths\maths.h" />
     <ClInclude Include="..\..\..\include\raytracing\maths\Matrix.h" />
@@ -100,6 +106,7 @@
     <ClInclude Include="..\..\..\include\raytracing\texture\Texture.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\AreaLighting.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\FirstHit.h" />
+    <ClInclude Include="..\..\..\include\raytracing\tracer\GlobalTrace.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\MultipleObjects.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\PathTrace.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\RayCast.h" />
@@ -116,9 +123,13 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\external\tinyply.cpp" />
     <ClCompile Include="..\..\..\source\brdfs\BRDF.cpp" />
+    <ClCompile Include="..\..\..\source\brdfs\BTDF.cpp" />
+    <ClCompile Include="..\..\..\source\brdfs\FresnelReflector.cpp" />
+    <ClCompile Include="..\..\..\source\brdfs\FresnelTransmitter.cpp" />
     <ClCompile Include="..\..\..\source\brdfs\GlossySpecular.cpp" />
     <ClCompile Include="..\..\..\source\brdfs\Lambertian.cpp" />
     <ClCompile Include="..\..\..\source\brdfs\PerfectSpecular.cpp" />
+    <ClCompile Include="..\..\..\source\brdfs\PerfectTransmitter.cpp" />
     <ClCompile Include="..\..\..\source\cameras\Camera.cpp" />
     <ClCompile Include="..\..\..\source\cameras\FishEye.cpp" />
     <ClCompile Include="..\..\..\source\cameras\Orthographic.cpp" />
@@ -136,6 +147,7 @@
     <ClCompile Include="..\..\..\source\lights\PointLight.cpp" />
     <ClCompile Include="..\..\..\source\mapping\LightProbe.cpp" />
     <ClCompile Include="..\..\..\source\mapping\SphericalMap.cpp" />
+    <ClCompile Include="..\..\..\source\materials\Dielectric.cpp" />
     <ClCompile Include="..\..\..\source\materials\Emissive.cpp" />
     <ClCompile Include="..\..\..\source\materials\GlossyReflector.cpp" />
     <ClCompile Include="..\..\..\source\materials\Material.cpp" />
@@ -144,6 +156,7 @@
     <ClCompile Include="..\..\..\source\materials\Reflective.cpp" />
     <ClCompile Include="..\..\..\source\materials\SV_Emissive.cpp" />
     <ClCompile Include="..\..\..\source\materials\SV_Matte.cpp" />
+    <ClCompile Include="..\..\..\source\materials\Transparent.cpp" />
     <ClCompile Include="..\..\..\source\maths\AABB.cpp" />
     <ClCompile Include="..\..\..\source\maths\maths.cpp" />
     <ClCompile Include="..\..\..\source\maths\Matrix.cpp" />
@@ -199,6 +212,7 @@
     <ClCompile Include="..\..\..\source\texture\Texture.cpp" />
     <ClCompile Include="..\..\..\source\tracer\AreaLighting.cpp" />
     <ClCompile Include="..\..\..\source\tracer\FirstHit.cpp" />
+    <ClCompile Include="..\..\..\source\tracer\GlobalTrace.cpp" />
     <ClCompile Include="..\..\..\source\tracer\MultipleObjects.cpp" />
     <ClCompile Include="..\..\..\source\tracer\PathTrace.cpp" />
     <ClCompile Include="..\..\..\source\tracer\RayCast.cpp" />

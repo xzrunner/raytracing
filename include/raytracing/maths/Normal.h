@@ -1,5 +1,7 @@
 #pragma once
 
+#include "raytracing/maths/Vector3D.h"
+
 namespace rt
 {
 
