@@ -5,12 +5,6 @@
 namespace rt
 {
 
-Emissive::Emissive()
-	: m_radiance_scale_factor(40)
-	, m_color(WHITE)
-{
-}
-
 RGBColor Emissive::Shade(const ShadeRec& sr) const
 {
 	if (-sr.normal * sr.ray.dir > 0.0) {

@@ -31,7 +31,7 @@ private:
 	float m_ks = 0;
 
 	// specular exponent
-	float m_exp = 0;
+	float m_exp = 1.0f;
 
 	// specular color
 	RGBColor m_cs;

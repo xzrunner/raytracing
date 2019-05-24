@@ -8,7 +8,8 @@ namespace rt
 class Emissive : public Material
 {
 public:
-	Emissive();
+	Emissive() {}
+
 
 	virtual RGBColor Shade(const ShadeRec& sr) const override;
 	virtual RGBColor AreaLightShade(const ShadeRec& sr) const override;
@@ -18,7 +19,7 @@ public:
 	void SetColor(const RGBColor& col) { m_color = col; }
 
 private:
-	float m_radiance_scale_factor;
+	float m_radiance_scale_factor = 1.0f;
 
 	RGBColor m_color;
 
