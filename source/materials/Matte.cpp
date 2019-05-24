@@ -15,6 +15,11 @@ Matte::Matte()
 {
 }
 
+RGBColor Matte::GetLe(const ShadeRec& sr) const
+{
+    return RGBColor(1.0f, 1.0f, 1.0f);
+}
+
 RGBColor Matte::Shade(const ShadeRec& sr) const
 {
 	Vector3D wo = -sr.ray.dir;
@@ -63,11 +68,6 @@ RGBColor Matte::AreaLightShade(const ShadeRec& sr) const
 	}
 
 	return L;
-}
-
-RGBColor Matte::GetLe(const ShadeRec& sr) const
-{
-    return RGBColor(1.0f, 1.0f, 1.0f);
 }
 
 RGBColor Matte::PathShade(ShadeRec& sr) const

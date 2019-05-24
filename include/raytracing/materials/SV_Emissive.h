@@ -14,15 +14,15 @@ class SV_Emissive : public Material
 public:
     SV_Emissive() {}
 
+    virtual RGBColor GetLe(const ShadeRec& sr) const override;
+    virtual void SetCe(const RGBColor& col) override { m_ce = col; }
+
     virtual RGBColor Shade(const ShadeRec& sr) const override;
     virtual RGBColor AreaLightShade(const ShadeRec& sr) const override;
-    virtual RGBColor GetLe(const ShadeRec& sr) const override;
-
     virtual RGBColor PathShade(ShadeRec& sr) const override;
     virtual RGBColor GlobalShade(ShadeRec& sr) const override;
 
     void SetRadianceScaleFactor(float v) { m_ls = v; }
-    void SetColor(const RGBColor& col) { m_ce = col; }
 
     void SetTexture(const std::shared_ptr<Texture>& tex) { m_tex = tex; }
 

@@ -6,6 +6,14 @@
 namespace rt
 {
 
+RGBColor SV_Emissive::GetLe(const ShadeRec& sr) const
+{
+	/*
+	return ls * ce;		//here is added, this is very important to multiply ce with ls!!!!!!
+	*/
+	return m_ls * m_tex->GetColor(sr);
+}
+
 RGBColor SV_Emissive::Shade(const ShadeRec& sr) const
 {
 	/*
@@ -52,14 +60,6 @@ RGBColor SV_Emissive::AreaLightShade(const ShadeRec& sr) const
 		return (ls * ce);
 	else
 		return (black);*/
-}
-
-RGBColor SV_Emissive::GetLe(const ShadeRec& sr) const
-{
-	/*
-	return ls * ce;		//here is added, this is very important to multiply ce with ls!!!!!!
-	*/
-	return m_ls * m_tex->GetColor(sr);
 }
 
 RGBColor SV_Emissive::PathShade(ShadeRec& sr) const

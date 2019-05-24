@@ -20,40 +20,9 @@ Phong::~Phong()
 {
 }
 
-// this sets Phong::kd
-// there is no Phong::ka data member because ambient reflection
-// is diffuse reflection
-void Phong::SetKa(float k)
+RGBColor Phong::GetLe(const ShadeRec& sr) const
 {
-	m_ambient_brdf->SetKd(k);
-}
-
-// this also sets Phong::kd, but for a different Phong object
-void Phong::SetKd(float k)
-{
-	m_diffuse_brdf->SetKd(k);
-}
-
-void Phong::SetKs(float ks)
-{
-	m_specular_brdf->SetKs(ks);
-}
-
-void Phong::SetCd(const RGBColor& c)
-{
-	m_ambient_brdf->SetCd(c);
-	m_diffuse_brdf->SetCd(c);
-	m_specular_brdf->SetCs(c);
-}
-
-void Phong::SetCs(const RGBColor& c)
-{
-	m_specular_brdf->SetCs(c);
-}
-
-void Phong::SetExp(float e)
-{
-	m_specular_brdf->SetExp(e);
+    return RGBColor(1.0f, 1.0f, 1.0f);
 }
 
 RGBColor Phong::Shade(const ShadeRec& sr) const
@@ -124,9 +93,40 @@ RGBColor Phong::AreaLightShade(const ShadeRec& sr) const
 	return (L);
 }
 
-RGBColor Phong::GetLe(const ShadeRec& sr) const
+// this sets Phong::kd
+// there is no Phong::ka data member because ambient reflection
+// is diffuse reflection
+void Phong::SetKa(float k)
 {
-    return RGBColor(1.0f, 1.0f, 1.0f);
+	m_ambient_brdf->SetKd(k);
+}
+
+// this also sets Phong::kd, but for a different Phong object
+void Phong::SetKd(float k)
+{
+	m_diffuse_brdf->SetKd(k);
+}
+
+void Phong::SetKs(float ks)
+{
+	m_specular_brdf->SetKs(ks);
+}
+
+void Phong::SetCd(const RGBColor& c)
+{
+	m_ambient_brdf->SetCd(c);
+	m_diffuse_brdf->SetCd(c);
+	m_specular_brdf->SetCs(c);
+}
+
+void Phong::SetCs(const RGBColor& c)
+{
+	m_specular_brdf->SetCs(c);
+}
+
+void Phong::SetExp(float e)
+{
+	m_specular_brdf->SetExp(e);
 }
 
 }

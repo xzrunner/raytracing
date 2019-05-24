@@ -19,6 +19,11 @@ SV_Matte::~SV_Matte()
 {
 }
 
+RGBColor SV_Matte::GetLe(const ShadeRec& sr) const
+{
+    return RGBColor(1.0f, 1.0f, 1.0f);
+}
+
 // same with Matte::Shade
 RGBColor SV_Matte::Shade(const ShadeRec& sr) const
 {
@@ -99,11 +104,6 @@ RGBColor SV_Matte::GlobalShade(ShadeRec& sr) const
 	L += f * sr.w.GetTracer()->TraceRay(reflected_ray, sr.depth + 1) * ndotwi;
 
 	return (L);
-}
-
-RGBColor SV_Matte::GetLe(const ShadeRec& sr) const
-{
-    return RGBColor(1.0f, 1.0f, 1.0f);
 }
 
 void SV_Matte::SetKa(const float k)

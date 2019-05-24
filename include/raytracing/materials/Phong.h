@@ -16,9 +16,10 @@ public:
 	Phong();
     virtual ~Phong();
 
+    virtual RGBColor GetLe(const ShadeRec& sr) const override;
+
     virtual RGBColor Shade(const ShadeRec& sr) const override;
     virtual RGBColor AreaLightShade(const ShadeRec& sr) const override;
-    virtual RGBColor GetLe(const ShadeRec& sr) const override;
 
 	void SetKa(float k);
 	void SetKd(float k);
