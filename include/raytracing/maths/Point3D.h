@@ -28,6 +28,8 @@ public:
 
 	Vector3D operator - (const Point3D& p) const;
 
+    Point3D operator * (const float a) const;
+
 	float Distance(const Point3D& p) const;
 	float DistanceSquared(const Point3D& p) const;
 
@@ -41,6 +43,11 @@ inline Point3D Point3D::operator + (const Vector3D& v) const
 inline Vector3D Point3D::operator - (const Point3D& p) const
 {
 	return Vector3D(x - p.x, y - p.y, z - p.z);
+}
+
+inline Point3D Point3D::operator * (const float a) const
+{
+    return (Point3D(x * a, y * a, z * a));
 }
 
 inline float Point3D::Distance(const Point3D& p) const

@@ -27,6 +27,16 @@ Sampler::Sampler(int num)
 	SetupShuffledIndices();
 }
 
+Sampler::Sampler(int num, int num_sets)
+    : m_num_samples(num)
+    , m_num_sets(num_sets)
+    , m_count(0)
+    , m_jump(0)
+{
+    m_samples.reserve(m_num_samples * m_num_sets);
+    SetupShuffledIndices();
+}
+
 // ------------------------------------------------------------------- map_samples_to_unit_disk
 // Maps the 2D sample points in the square [-1,1] X [-1,1] to a unit disk, using Peter Shirley's
 // concentric map function
@@ -101,6 +111,27 @@ void Sampler::MapSamplesToHemisphere(const float exp)
 	}
 }
 
+void Sampler::MapSamplesToSphere()
+{
+    float r1, r2;
+	float x, y, z;
+	float r, phi;
+
+    m_sphere_samples.reserve(m_num_samples * m_num_sets);
+
+	for (int j = 0; j < m_num_samples * m_num_sets; j++)
+    {
+		r1 	= m_samples[j].x;
+    	r2 	= m_samples[j].y;
+    	z 	= 1.0f - 2.0f * r1;
+    	r 	= sqrt(1.0f - z * z);
+    	phi = static_cast<float>(TWO_PI * r2);
+    	x 	= r * cos(phi);
+    	y 	= r * sin(phi);
+        m_sphere_samples.push_back(Point3D(x, y, z));
+	}
+}
+
 const Point2D& Sampler::SampleUnitSquare() const
 {
 	// start of a new pixel
@@ -130,6 +161,21 @@ const Point3D& Sampler::SampleHemisphere()
 	}
 
 	return (m_hemisphere_samples[m_jump + m_shuffled_indices[m_jump + m_count++ % m_num_samples]]);
+}
+
+const Point3D& Sampler::SampleSphere() const
+{
+    // start of a new pixel
+    if (m_count % m_num_samples == 0) {
+        m_jump = (rand_int() % m_num_sets) * m_num_samples;
+    }
+
+    return (m_sphere_samples[m_jump + m_shuffled_indices[m_jump + m_count++ % m_num_samples]]);
+}
+
+const Point2D& Sampler::SampleOneSet() const
+{
+    return(m_samples[m_count++ % m_num_samples]);
 }
 
 void Sampler::SetupShuffledIndices()

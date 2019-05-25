@@ -12,6 +12,12 @@ MultiJittered::MultiJittered(int num)
 	GenerateSamples();
 }
 
+MultiJittered::MultiJittered(int num_samples, int m)
+    : Sampler(num_samples, m)
+{
+    GenerateSamples();
+}
+
 void MultiJittered::GenerateSamples()
 {
 	// m_num_samples needs to be a perfect square
