@@ -1,6 +1,6 @@
 #include "raytracing/tracer/PathTrace.h"
 #include "raytracing/world/World.h"
-#include "raytracing/materials/Material.h"
+#include "raytracing/material/Material.h"
 #include "raytracing/utilities/ShadeRec.h"
 #include "raytracing/utilities/Constants.h"
 

@@ -1,7 +1,7 @@
 #include "raytracing/tracer/AreaLighting.h"
 #include "raytracing/utilities/ShadeRec.h"
 #include "raytracing/world/World.h"
-#include "raytracing/materials/Material.h"
+#include "raytracing/material/Material.h"
 
 namespace rt
 {

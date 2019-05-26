@@ -1,7 +1,7 @@
 #include "raytracing/world/ViewPlane.h"
-#include "raytracing/samplers/Regular.h"
-#include "raytracing/samplers/MultiJittered.h"
-#include "raytracing/samplers/Jittered.h"
+#include "raytracing/sampler/Regular.h"
+#include "raytracing/sampler/MultiJittered.h"
+#include "raytracing/sampler/Jittered.h"
 
 #include <stdio.h>
 

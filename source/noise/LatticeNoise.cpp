@@ -1,6 +1,6 @@
 #include "raytracing/noise/LatticeNoise.h"
 #include "raytracing/maths/maths.h"
-#include "raytracing/samplers/MultiJittered.h"
+#include "raytracing/sampler/MultiJittered.h"
 #include "raytracing/utilities/Constants.h"
 
 #include <memory>

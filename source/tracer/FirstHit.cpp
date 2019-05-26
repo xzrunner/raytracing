@@ -1,6 +1,6 @@
 #include "raytracing/tracer/FirstHit.h"
 #include "raytracing/world/World.h"
-#include "raytracing/materials/Material.h"
+#include "raytracing/material/Material.h"
 #include "raytracing/utilities/ShadeRec.h"
 
 namespace rt

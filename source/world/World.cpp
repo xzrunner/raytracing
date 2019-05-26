@@ -1,11 +1,11 @@
 #include "raytracing/world/World.h"
 #include "raytracing/world/RenderOutput.h"
-#include "raytracing/objects/Object.h"
-#include "raytracing/lights/Light.h"
-#include "raytracing/lights/Ambient.h"
-#include "raytracing/samplers/Sampler.h"
+#include "raytracing/primitive/GeoPrimitive.h"
+#include "raytracing/light/Light.h"
+#include "raytracing/light/Ambient.h"
+#include "raytracing/sampler/Sampler.h"
 #include "raytracing/tracer/Tracer.h"
-#include "raytracing/cameras/Camera.h"
+#include "raytracing/camera/Camera.h"
 #include "raytracing/maths/Point2D.h"
 #include "raytracing/maths/Point3D.h"
 #include "raytracing/maths/Ray.h"
@@ -83,7 +83,7 @@ ShadeRec World::HitObjects(const Ray& ray) const
 	return(sr);
 }
 
-void World::AddObject(std::unique_ptr<Object> obj)
+void World::AddObject(std::unique_ptr<GeoPrimitive> obj)
 {
 	m_objects.push_back(std::move(obj));
 }
