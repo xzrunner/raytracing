@@ -115,6 +115,7 @@
     <ClInclude Include="..\..\..\include\raytracing\texture\ConstantColor.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\Image.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\ImageTexture.h" />
+    <ClInclude Include="..\..\..\include\raytracing\texture\NestedNoisesTexture.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\PlaneChecker.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\RampFBmTexture.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\SphereChecker.h" />
@@ -123,6 +124,9 @@
     <ClInclude Include="..\..\..\include\raytracing\texture\TurbulenceTexture.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\Wood.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\WrappedFBmTexture.h" />
+    <ClInclude Include="..\..\..\include\raytracing\texture\WrappedRamp.h" />
+    <ClInclude Include="..\..\..\include\raytracing\texture\WrappedThreeColors.h" />
+    <ClInclude Include="..\..\..\include\raytracing\texture\WrappedTwoColors.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\AreaLighting.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\FirstHit.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\GlobalTrace.h" />
@@ -240,6 +244,7 @@
     <ClCompile Include="..\..\..\source\texture\ConstantColor.cpp" />
     <ClCompile Include="..\..\..\source\texture\Image.cpp" />
     <ClCompile Include="..\..\..\source\texture\ImageTexture.cpp" />
+    <ClCompile Include="..\..\..\source\texture\NestedNoisesTexture.cpp" />
     <ClCompile Include="..\..\..\source\texture\PlaneChecker.cpp" />
     <ClCompile Include="..\..\..\source\texture\RampFBmTexture.cpp" />
     <ClCompile Include="..\..\..\source\texture\SphereChecker.cpp" />
@@ -247,6 +252,9 @@
     <ClCompile Include="..\..\..\source\texture\TurbulenceTexture.cpp" />
     <ClCompile Include="..\..\..\source\texture\Wood.cpp" />
     <ClCompile Include="..\..\..\source\texture\WrappedFBmTexture.cpp" />
+    <ClCompile Include="..\..\..\source\texture\WrappedRamp.cpp" />
+    <ClCompile Include="..\..\..\source\texture\WrappedThreeColors.cpp" />
+    <ClCompile Include="..\..\..\source\texture\WrappedTwoColors.cpp" />
     <ClCompile Include="..\..\..\source\tracer\AreaLighting.cpp" />
     <ClCompile Include="..\..\..\source\tracer\FirstHit.cpp" />
     <ClCompile Include="..\..\..\source\tracer\GlobalTrace.cpp" />

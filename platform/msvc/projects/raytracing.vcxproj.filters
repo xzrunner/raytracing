@@ -462,6 +462,18 @@
     <ClInclude Include="..\..\..\include\raytracing\texture\TurbulenceTexture.h">
       <Filter>texture</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\texture\WrappedTwoColors.h">
+      <Filter>texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\texture\NestedNoisesTexture.h">
+      <Filter>texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\texture\WrappedThreeColors.h">
+      <Filter>texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\texture\WrappedRamp.h">
+      <Filter>texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\cameras\Camera.cpp">
@@ -816,6 +828,18 @@
       <Filter>texture</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\texture\TurbulenceTexture.cpp">
+      <Filter>texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\texture\WrappedTwoColors.cpp">
+      <Filter>texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\texture\NestedNoisesTexture.cpp">
+      <Filter>texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\texture\WrappedThreeColors.cpp">
+      <Filter>texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\texture\WrappedRamp.cpp">
       <Filter>texture</Filter>
     </ClCompile>
   </ItemGroup>
