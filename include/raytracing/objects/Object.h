@@ -41,8 +41,12 @@ public:
         m_material = material;
     }
 
+    void SetShadows(bool shadows) { m_shadows = shadows; }
+
 protected:
 	mutable std::shared_ptr<Material> m_material = nullptr;
+
+    bool m_shadows = true;
 
 }; // Object
 

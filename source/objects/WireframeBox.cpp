@@ -74,7 +74,7 @@ bool WireframeBox::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 bool WireframeBox::ShadowHit(const Ray& ray, float& tmin) const
 {
-	if (m_aabb.Hit(ray)) {
+	if (m_shadows && m_aabb.Hit(ray)) {
 		return Compound::ShadowHit(ray, tmin);
 	} else {
 		return false;

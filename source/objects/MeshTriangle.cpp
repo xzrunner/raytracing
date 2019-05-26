@@ -18,6 +18,10 @@ MeshTriangle::MeshTriangle(std::shared_ptr<Mesh> mesh, int i1, int i2, int i3)
 
 bool MeshTriangle::ShadowHit(const Ray& ray, float& tmin) const
 {
+    if (!m_shadows) {
+        return false;
+    }
+
 	Point3D v0(mesh->vertices[index0]);
 	Point3D v1(mesh->vertices[index1]);
 	Point3D v2(mesh->vertices[index2]);

@@ -68,7 +68,7 @@ bool BeveledCylinder::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 bool BeveledCylinder::ShadowHit(const Ray& ray, float& tmin) const
 {
-    if (bbox.Hit(ray)) {
+    if (m_shadows && bbox.Hit(ray)) {
         return Compound::ShadowHit(ray, tmin);
     } else {
         return false;

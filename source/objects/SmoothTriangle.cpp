@@ -70,6 +70,10 @@ bool SmoothTriangle::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 bool SmoothTriangle::ShadowHit(const Ray& ray, float& tmin) const
 {
+    if (!m_shadows) {
+        return false;
+    }
+
 	double a = m_v0.x - m_v1.x, b = m_v0.x - m_v2.x, c = ray.dir.x, d = m_v0.x - ray.ori.x;
 	double e = m_v0.y - m_v1.y, f = m_v0.y - m_v2.y, g = ray.dir.y, h = m_v0.y - ray.ori.y;
 	double i = m_v0.z - m_v1.z, j = m_v0.z - m_v2.z, k = ray.dir.z, l = m_v0.z - ray.ori.z;

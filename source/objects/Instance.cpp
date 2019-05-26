@@ -52,6 +52,10 @@ bool Instance::Hit(const Ray& ray, double& t, ShadeRec& sr) const
 
 bool Instance::ShadowHit(const Ray& ray, float& tmin) const
 {
+    if (!m_shadows) {
+        return false;
+    }
+
 	Ray inv_ray(ray);
 	inv_ray.ori = m_inv_matrix * inv_ray.ori;
 	inv_ray.dir = m_inv_matrix * inv_ray.dir;

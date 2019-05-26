@@ -154,23 +154,22 @@ bool BeveledBox::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 bool BeveledBox::ShadowHit(const Ray& ray, float& tmin) const
 {
-	if (bbox.Hit(ray))
-	{
-		float		t = 100000;		// may be important too
-		Normal		normal;
-		Point3D		local_hit_point;
-		bool		hit 		= false;
-		int 		num_objects	= m_parts.size();
+    if (!m_shadows || !bbox.Hit(ray)) {
+        return (false);
+    }
 
-		for (int j = 0; j < num_objects; j++)
-			if (m_parts[j]->ShadowHit(ray, t) && (t < tmin)) {
-				hit				= true;
-				tmin 			= t;
-			}
-		return (hit);
-	}
-	else
-		return (false);
+	float		t = 100000;		// may be important too
+	Normal		normal;
+	Point3D		local_hit_point;
+	bool		hit 		= false;
+	int 		num_objects	= m_parts.size();
+
+	for (int j = 0; j < num_objects; j++)
+		if (m_parts[j]->ShadowHit(ray, t) && (t < tmin)) {
+			hit				= true;
+			tmin 			= t;
+		}
+	return (hit);
 }
 
 }

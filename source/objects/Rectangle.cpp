@@ -76,6 +76,10 @@ bool Rectangle::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 bool Rectangle::ShadowHit(const Ray& ray, float& tmin) const
 {
+    if (!m_shadows) {
+        return false;
+    }
+
 	double t = (m_p0 - ray.ori) * m_normal / (ray.dir * m_normal);
 
 	if (t <= EPSILON)

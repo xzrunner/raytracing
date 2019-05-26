@@ -35,6 +35,10 @@ bool Plane::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 bool Plane::ShadowHit(const Ray& ray, float& tmin) const
 {
+    if (!m_shadows) {
+        return false;
+    }
+
 	float t = static_cast<float>((m_pos - ray.ori) * m_normal / (ray.dir * m_normal));
 
 	if (t > EPSILON * 10) {

@@ -209,7 +209,7 @@ bool ConvexPartTorus::ShadowHit(const Ray& ray, float& tmin) const
 	return (true);
 	*/
 
-	if (!bbox.Hit(ray))
+	if (!m_shadows || !bbox.Hit(ray))
 		return (false);
 
 	double x1 = ray.ori.x; double y1 = ray.ori.y; double z1 = ray.ori.z;

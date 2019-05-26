@@ -106,6 +106,10 @@ bool Box::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 bool Box::ShadowHit(const Ray& ray, float& tmin) const
 {
+    if (!m_shadows) {
+        return false;
+    }
+
 	double ox = ray.ori.x; double oy = ray.ori.y; double oz = ray.ori.z;
 	double dx = ray.dir.x; double dy = ray.dir.y; double dz = ray.dir.z;
 

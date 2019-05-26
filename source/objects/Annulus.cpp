@@ -48,8 +48,9 @@ bool Annulus::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 bool Annulus::ShadowHit(const Ray& ray, float& tmin) const
 {
-	if (!bbox.Hit(ray))
-		return (false);
+    if (!m_shadows || !bbox.Hit(ray)) {
+        return (false);
+    }
 
 	double t = (center - ray.ori) * normal / (ray.dir * normal);
 

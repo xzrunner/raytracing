@@ -106,6 +106,10 @@ bool ConcavePartCylinder::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 bool ConcavePartCylinder::ShadowHit(const Ray& ray, float& tmin) const
 {
+    if (!m_shadows) {
+        return false;
+    }
+
 	double t;
 	double ox = ray.ori.x;
 	double oy = ray.ori.y;

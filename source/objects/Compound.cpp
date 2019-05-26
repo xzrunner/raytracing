@@ -41,6 +41,10 @@ bool Compound::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 bool Compound::ShadowHit(const Ray& ray, float& tmin) const
 {
+    if (!m_shadows) {
+        return false;
+    }
+
 	float t;
 	Normal normal;
 	Point3D	local_hit_point;

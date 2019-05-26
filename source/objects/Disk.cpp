@@ -14,7 +14,6 @@ Disk::Disk(const Point3D& point, const Normal& normal, double ra)
     , m_r(ra)
     , m_r_squared(ra*ra)
     , m_sampler(nullptr)
-    , m_shadows(false)
     , m_area(static_cast<float>(0.5 * PI * m_r_squared))
     , m_inv_area(1.0f / m_area)
 {
@@ -46,6 +45,10 @@ bool Disk::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 bool Disk::ShadowHit(const Ray& ray, float& tmin) const
 {
+    if (!m_shadows) {
+        return false;
+    }
+
 	float t = static_cast<float>((m_center - ray.ori) * m_normal / (ray.dir * m_normal));
     if (t <= EPSILON) {
         return false;

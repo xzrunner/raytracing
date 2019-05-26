@@ -77,7 +77,7 @@ bool Torus::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 bool Torus::ShadowHit(const Ray& ray, float& tmin) const
 {
-	if (!m_bbox.Hit(ray))
+	if (!m_shadows || !m_bbox.Hit(ray))
 		return (false);
 
 	double x1 = ray.ori.x; double y1 = ray.ori.y; double z1 = ray.ori.z;

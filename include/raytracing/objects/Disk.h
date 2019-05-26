@@ -33,7 +33,6 @@ private:
     double  m_r = 1;
 
     std::shared_ptr<Sampler> m_sampler = nullptr;
-    bool m_shadows = false;
 
     float m_area = 1.0f;			// for disk lights
     float m_inv_area = 1.0f;		// for disk lights

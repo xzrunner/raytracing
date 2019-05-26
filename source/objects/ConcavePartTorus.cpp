@@ -158,7 +158,7 @@ bool ConcavePartTorus::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 bool ConcavePartTorus::ShadowHit(const Ray& ray, float& tmin) const
 {
-	if (!bbox.Hit(ray))
+	if (!m_shadows || !bbox.Hit(ray))
 		return (false);
 
 	double x1 = ray.ori.x; double y1 = ray.ori.y; double z1 = ray.ori.z;

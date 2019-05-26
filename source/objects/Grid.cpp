@@ -243,6 +243,10 @@ bool Grid::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 
 bool Grid::ShadowHit(const Ray& ray, float& tmin) const
 {
+    if (!m_shadows) {
+        return false;
+    }
+
 	float t = 10000;
 
 	double ox = ray.ori.x;
