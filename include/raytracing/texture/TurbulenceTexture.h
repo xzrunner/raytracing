@@ -24,7 +24,7 @@ public:
 private:
     std::shared_ptr<LatticeNoise> noise = nullptr;
     RGBColor color;
-    float    min_value = 0, max_value = 0;	// scaling factors
+    float    min_value = 0, max_value = 1;	// scaling factors
 
 }; // TurbulenceTexture
 
