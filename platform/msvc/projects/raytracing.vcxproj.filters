@@ -79,6 +79,9 @@
     <Filter Include="bxdf\btdf">
       <UniqueIdentifier>{f413ec73-9844-4d7b-b42f-f1025c2d902b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="primitive\plane">
+      <UniqueIdentifier>{b5a1300c-84aa-47fc-b6d3-f21c4e80f479}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\raytracing\camera\Camera.h">
@@ -318,9 +321,6 @@
     <ClInclude Include="..\..\..\include\raytracing\primitive\ThickRing.h">
       <Filter>primitive\ring</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\primitive\Disk.h">
-      <Filter>primitive\others</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\primitive\FlatRimmedBowl.h">
       <Filter>primitive\bowl</Filter>
     </ClInclude>
@@ -349,9 +349,6 @@
       <Filter>primitive\sphere</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\primitive\Grid.h">
-      <Filter>primitive\others</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\primitive\Rectangle.h">
       <Filter>primitive\others</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\primitive\Instance.h">
@@ -383,9 +380,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\primitive\ConcavePartTorus.h">
       <Filter>primitive\torus</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\primitive\Plane.h">
-      <Filter>primitive\others</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\mapping\SquareMap.h">
       <Filter>mapping</Filter>
@@ -441,9 +435,6 @@
     <ClInclude Include="..\..\..\include\raytracing\texture\WrappedFBmTexture.h">
       <Filter>texture</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\primitive\CutCube.h">
-      <Filter>primitive\others</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\texture\TextureInstance.h">
       <Filter>texture</Filter>
     </ClInclude>
@@ -472,6 +463,18 @@
       <Filter>primitive</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\primitive\WireframeBox.h">
+      <Filter>primitive\box</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\primitive\Disk.h">
+      <Filter>primitive\plane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\primitive\Plane.h">
+      <Filter>primitive\plane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\primitive\CutCube.h">
+      <Filter>primitive\box</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\primitive\Rectangle.h">
       <Filter>primitive\box</Filter>
     </ClInclude>
   </ItemGroup>
@@ -686,9 +689,6 @@
     <ClCompile Include="..\..\..\source\primitive\ThickRing.cpp">
       <Filter>primitive\ring</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\primitive\Disk.cpp">
-      <Filter>primitive\others</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\primitive\FlatRimmedBowl.cpp">
       <Filter>primitive\bowl</Filter>
     </ClCompile>
@@ -717,9 +717,6 @@
       <Filter>primitive\sphere</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\primitive\Grid.cpp">
-      <Filter>primitive\others</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\primitive\Rectangle.cpp">
       <Filter>primitive\others</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\primitive\Compound.cpp">
@@ -751,9 +748,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\primitive\ConcavePartTorus.cpp">
       <Filter>primitive\torus</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\primitive\Plane.cpp">
-      <Filter>primitive\others</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\mapping\SquareMap.cpp">
       <Filter>mapping</Filter>
@@ -809,9 +803,6 @@
     <ClCompile Include="..\..\..\source\texture\WrappedFBmTexture.cpp">
       <Filter>texture</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\primitive\CutCube.cpp">
-      <Filter>primitive\others</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\texture\TextureInstance.cpp">
       <Filter>texture</Filter>
     </ClCompile>
@@ -840,6 +831,18 @@
       <Filter>primitive</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\primitive\WireframeBox.cpp">
+      <Filter>primitive\box</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\primitive\Disk.cpp">
+      <Filter>primitive\plane</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\primitive\Plane.cpp">
+      <Filter>primitive\plane</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\primitive\CutCube.cpp">
+      <Filter>primitive\box</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\primitive\Rectangle.cpp">
       <Filter>primitive\box</Filter>
     </ClCompile>
   </ItemGroup>
