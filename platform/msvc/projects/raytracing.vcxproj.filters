@@ -477,6 +477,9 @@
     <ClInclude Include="..\..\..\include\raytracing\primitive\GeoInstance.h">
       <Filter>primitive\others</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\texture\SphereTextures.h">
+      <Filter>texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\camera\Camera.cpp">
@@ -844,6 +847,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\primitive\GeoInstance.cpp">
       <Filter>primitive\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\texture\SphereTextures.cpp">
+      <Filter>texture</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

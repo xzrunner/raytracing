@@ -119,6 +119,7 @@
     <ClInclude Include="..\..\..\include\raytracing\texture\PlaneChecker.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\RampFBmTexture.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\SphereChecker.h" />
+    <ClInclude Include="..\..\..\include\raytracing\texture\SphereTextures.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\Texture.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\TextureInstance.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\TurbulenceTexture.h" />
@@ -248,6 +249,7 @@
     <ClCompile Include="..\..\..\source\texture\PlaneChecker.cpp" />
     <ClCompile Include="..\..\..\source\texture\RampFBmTexture.cpp" />
     <ClCompile Include="..\..\..\source\texture\SphereChecker.cpp" />
+    <ClCompile Include="..\..\..\source\texture\SphereTextures.cpp" />
     <ClCompile Include="..\..\..\source\texture\TextureInstance.cpp" />
     <ClCompile Include="..\..\..\source\texture\TurbulenceTexture.cpp" />
     <ClCompile Include="..\..\..\source\texture\Wood.cpp" />
