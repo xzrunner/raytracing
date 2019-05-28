@@ -1,7 +1,7 @@
 #include "raytracing/primitive/BeveledCylinder.h"
 #include "raytracing/primitive/Disk.h"
 #include "raytracing/primitive/OpenCylinder.h"
-#include "raytracing/primitive/Instance.h"
+#include "raytracing/primitive/GeoInstance.h"
 #include "raytracing/primitive/Torus.h"
 
 namespace rt
@@ -39,12 +39,12 @@ BeveledCylinder::BeveledCylinder(float bottom, float top, float r, float br)
 
 	// have to use instances for the tori because they have to be translated
 
-	auto bottom_torus_ptr = std::make_shared<Instance>(std::make_shared<Torus>(r - br, br));
+	auto bottom_torus_ptr = std::make_shared<GeoInstance>(std::make_shared<Torus>(r - br, br));
 	bottom_torus_ptr->Translate(Vector3D(0, bottom + br, 0));
 	bottom_torus_ptr->SetTransformTexture(false);
 	m_parts.push_back(bottom_torus_ptr);
 
-	auto top_torus_ptr = std::make_shared<Instance>(std::make_shared<Torus>(r - br, br));
+	auto top_torus_ptr = std::make_shared<GeoInstance>(std::make_shared<Torus>(r - br, br));
 	top_torus_ptr->Translate(Vector3D(0, top  - br, 0));
 	top_torus_ptr->SetTransformTexture(false);
 	m_parts.push_back(top_torus_ptr);

@@ -1,5 +1,5 @@
 #include "raytracing/primitive/FishBowl.h"
-#include "raytracing/primitive/Instance.h"
+#include "raytracing/primitive/GeoInstance.h"
 #include "raytracing/primitive/Disk.h"
 #include "raytracing/primitive/ConvexPartSphere.h"
 #include "raytracing/primitive/ConcavePartSphere.h"
@@ -84,7 +84,7 @@ void FishBowl::BuildComponents()
 	double theta_min = opening_angle / 2.0;  	// measured counter-clockwise from (x, z) plane
 	double theta_max = theta_min + 180;			// measured counter-clockwise from (x, z) plane
 
-	auto rim_ptr = std::make_shared<Instance>(std::make_shared<ConvexPartTorus>(
+	auto rim_ptr = std::make_shared<GeoInstance>(std::make_shared<ConvexPartTorus>(
         (inner_radius + glass_thickness / 2.0) * sin(angle_radians), // a
         glass_thickness / 2.0, 										 // b
         0, 360,
@@ -97,7 +97,7 @@ void FishBowl::BuildComponents()
 
 	// meniscus - if water_depth > 1, we need two part tori
 
-	auto torus_ptr1 = std::make_shared<Instance>(std::make_shared<ConcavePartTorus>(
+	auto torus_ptr1 = std::make_shared<GeoInstance>(std::make_shared<ConcavePartTorus>(
         xc,
         meniscus_radius,
         0, 360,
@@ -106,7 +106,7 @@ void FishBowl::BuildComponents()
 	m_parts.push_back(torus_ptr1);
 
 
-	auto torus_ptr2 = std::make_shared<Instance>(std::make_shared<ConcavePartTorus>(
+	auto torus_ptr2 = std::make_shared<GeoInstance>(std::make_shared<ConcavePartTorus>(
         xc,
         meniscus_radius,
         0, 360,

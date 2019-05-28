@@ -1,5 +1,5 @@
 #include "raytracing/primitive/BeveledBox.h"
-#include "raytracing/primitive/Instance.h"
+#include "raytracing/primitive/GeoInstance.h"
 #include "raytracing/primitive/OpenCylinder.h"
 #include "raytracing/primitive/Rectangle.h"
 #include "raytracing/primitive/Sphere.h"
@@ -29,73 +29,73 @@ BeveledBox::BeveledBox(const Point3D& bottom, const Point3D& top, float bevel_ra
 	m_parts.reserve(26);
 	m_parts.assign(26, 0);
 
-	m_parts[0] = std::make_shared<Instance>(ocd);
-	m_parts[1] = std::make_shared<Instance>(ocd);
-	m_parts[2] = std::make_shared<Instance>(ocd);
-	m_parts[3] = std::make_shared<Instance>(ocd);
+	m_parts[0] = std::make_shared<GeoInstance>(ocd);
+	m_parts[1] = std::make_shared<GeoInstance>(ocd);
+	m_parts[2] = std::make_shared<GeoInstance>(ocd);
+	m_parts[3] = std::make_shared<GeoInstance>(ocd);
 
 	auto ocd1 = std::make_shared<OpenCylinder>(p0.x + br, p1.x - br, br);
 	//BeveledCylinder *ocd1 = new BeveledCylinder(p0.x,p1.x,br,br);
 
-	m_parts[4] = std::make_shared<Instance>(ocd1);
-	m_parts[5] = std::make_shared<Instance>(ocd1);
-	m_parts[6] = std::make_shared<Instance>(ocd1);
-	m_parts[7] = std::make_shared<Instance>(ocd1);
+	m_parts[4] = std::make_shared<GeoInstance>(ocd1);
+	m_parts[5] = std::make_shared<GeoInstance>(ocd1);
+	m_parts[6] = std::make_shared<GeoInstance>(ocd1);
+	m_parts[7] = std::make_shared<GeoInstance>(ocd1);
 
 	//BeveledCylinder *ocd2 = new BeveledCylinder(p0.z,p1.z,br,br);
 	auto ocd2 = std::make_shared<OpenCylinder>(p0.z + br, p1.z - br, br);
-	m_parts[8] = std::make_shared<Instance>(ocd2);
-	m_parts[9] = std::make_shared<Instance>(ocd2);
-	m_parts[10] = std::make_shared<Instance>(ocd2);
-	m_parts[11] = std::make_shared<Instance>(ocd2);
+	m_parts[8] = std::make_shared<GeoInstance>(ocd2);
+	m_parts[9] = std::make_shared<GeoInstance>(ocd2);
+	m_parts[10] = std::make_shared<GeoInstance>(ocd2);
+	m_parts[11] = std::make_shared<GeoInstance>(ocd2);
 
 	//Here add a box
-	m_parts[12] = std::make_shared<Instance>(std::make_shared<Rectangle>( Point3D( -length/2+br,-height/2+br, width/2 ), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, height - 2 * br, 0 ), Normal(0, 0, 1) ));
-	m_parts[13] = std::make_shared<Instance>(std::make_shared<Rectangle>( Point3D( length/2,-height/2+br, width/2-br), Vector3D( 0, 0, - width + 2 * br ), Vector3D(  0, height - 2 * br, 0 ), Normal(1, 0, 0) ));
-	m_parts[14] = std::make_shared<Instance>(std::make_shared<Rectangle>( Point3D( length/2-br,-height/2+br, -width/2), Vector3D( - length + 2 * br, 0, 0 ), Vector3D( 0, height - 2 * br, 0 ), Normal(0, 0, -1) ));
-	m_parts[15] = std::make_shared<Instance>(std::make_shared<Rectangle>( Point3D( -length/2, -height/2+br, -width/2+br), Vector3D( 0, 0, width - 2 * br ), Vector3D(  0, height - 2 * br, 0 ), Normal(-1, 0, 0) ));
-	m_parts[16] = std::make_shared<Instance>(std::make_shared<Rectangle>( Point3D( -length/2+br,height/2, width/2-br), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, 0, -width + 2 * br ), Normal(0, 1, 0) ));
-	m_parts[17] = std::make_shared<Instance>(std::make_shared<Rectangle>( Point3D( -length/2+br,-height/2, -width/2+br), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, 0, width - 2 * br ), Normal(0, -1, 0) ));
+	m_parts[12] = std::make_shared<GeoInstance>(std::make_shared<Rectangle>( Point3D( -length/2+br,-height/2+br, width/2 ), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, height - 2 * br, 0 ), Normal(0, 0, 1) ));
+	m_parts[13] = std::make_shared<GeoInstance>(std::make_shared<Rectangle>( Point3D( length/2,-height/2+br, width/2-br), Vector3D( 0, 0, - width + 2 * br ), Vector3D(  0, height - 2 * br, 0 ), Normal(1, 0, 0) ));
+	m_parts[14] = std::make_shared<GeoInstance>(std::make_shared<Rectangle>( Point3D( length/2-br,-height/2+br, -width/2), Vector3D( - length + 2 * br, 0, 0 ), Vector3D( 0, height - 2 * br, 0 ), Normal(0, 0, -1) ));
+	m_parts[15] = std::make_shared<GeoInstance>(std::make_shared<Rectangle>( Point3D( -length/2, -height/2+br, -width/2+br), Vector3D( 0, 0, width - 2 * br ), Vector3D(  0, height - 2 * br, 0 ), Normal(-1, 0, 0) ));
+	m_parts[16] = std::make_shared<GeoInstance>(std::make_shared<Rectangle>( Point3D( -length/2+br,height/2, width/2-br), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, 0, -width + 2 * br ), Normal(0, 1, 0) ));
+	m_parts[17] = std::make_shared<GeoInstance>(std::make_shared<Rectangle>( Point3D( -length/2+br,-height/2, -width/2+br), Vector3D( length - 2 * br, 0, 0 ), Vector3D(  0, 0, width - 2 * br ), Normal(0, -1, 0) ));
 
-	m_parts[18] = std::make_shared<Instance>(std::make_shared<Sphere>( Point3D( -length/2+br,height/2-br, width/2-br ), br ));
-	m_parts[19] = std::make_shared<Instance>(std::make_shared<Sphere>( Point3D( length/2-br,height/2-br, width/2-br ), br ));
-	m_parts[20] = std::make_shared<Instance>(std::make_shared<Sphere>( Point3D( length/2-br,height/2-br, -width/2+br ), br ));
-	m_parts[21] = std::make_shared<Instance>(std::make_shared<Sphere>( Point3D( -length/2+br,height/2-br, -width/2+br ), br ));
-	m_parts[22] = std::make_shared<Instance>(std::make_shared<Sphere>( Point3D( -length/2+br,-height/2+br, width/2-br ), br ));
-	m_parts[23] = std::make_shared<Instance>(std::make_shared<Sphere>( Point3D( length/2-br,-height/2+br, width/2-br ), br ));
-	m_parts[24] = std::make_shared<Instance>(std::make_shared<Sphere>( Point3D( length/2-br,-height/2+br, -width/2+br ), br ));
-	m_parts[25] = std::make_shared<Instance>(std::make_shared<Sphere>( Point3D( -length/2+br,-height/2+br, -width/2+br ), br ));
+	m_parts[18] = std::make_shared<GeoInstance>(std::make_shared<Sphere>( Point3D( -length/2+br,height/2-br, width/2-br ), br ));
+	m_parts[19] = std::make_shared<GeoInstance>(std::make_shared<Sphere>( Point3D( length/2-br,height/2-br, width/2-br ), br ));
+	m_parts[20] = std::make_shared<GeoInstance>(std::make_shared<Sphere>( Point3D( length/2-br,height/2-br, -width/2+br ), br ));
+	m_parts[21] = std::make_shared<GeoInstance>(std::make_shared<Sphere>( Point3D( -length/2+br,height/2-br, -width/2+br ), br ));
+	m_parts[22] = std::make_shared<GeoInstance>(std::make_shared<Sphere>( Point3D( -length/2+br,-height/2+br, width/2-br ), br ));
+	m_parts[23] = std::make_shared<GeoInstance>(std::make_shared<Sphere>( Point3D( length/2-br,-height/2+br, width/2-br ), br ));
+	m_parts[24] = std::make_shared<GeoInstance>(std::make_shared<Sphere>( Point3D( length/2-br,-height/2+br, -width/2+br ), br ));
+	m_parts[25] = std::make_shared<GeoInstance>(std::make_shared<Sphere>( Point3D( -length/2+br,-height/2+br, -width/2+br ), br ));
 
-	std::static_pointer_cast<Instance>(m_parts[0])->Translate(Vector3D(-length / 2 + br, 0, -width / 2 + br));
-	std::static_pointer_cast<Instance>(m_parts[1])->Translate(Vector3D(-length / 2 + br, 0, width / 2 - br));
-	std::static_pointer_cast<Instance>(m_parts[2])->Translate(Vector3D(length / 2 - br, 0, width / 2 - br));
-	std::static_pointer_cast<Instance>(m_parts[3])->Translate(Vector3D(length / 2 - br, 0, -width / 2 + br));
+	std::static_pointer_cast<GeoInstance>(m_parts[0])->Translate(Vector3D(-length / 2 + br, 0, -width / 2 + br));
+	std::static_pointer_cast<GeoInstance>(m_parts[1])->Translate(Vector3D(-length / 2 + br, 0, width / 2 - br));
+	std::static_pointer_cast<GeoInstance>(m_parts[2])->Translate(Vector3D(length / 2 - br, 0, width / 2 - br));
+	std::static_pointer_cast<GeoInstance>(m_parts[3])->Translate(Vector3D(length / 2 - br, 0, -width / 2 + br));
 
-	std::static_pointer_cast<Instance>(m_parts[4])->Translate(Vector3D(0, -(p0.x + p1.x) / 2, 0));
-	std::static_pointer_cast<Instance>(m_parts[4])->RotateZ(90);
-	std::static_pointer_cast<Instance>(m_parts[4])->Translate(Vector3D(0, height / 2 - br, width / 2 - br));
-	std::static_pointer_cast<Instance>(m_parts[5])->Translate(Vector3D(0, -(p0.x + p1.x) / 2, 0));
-	std::static_pointer_cast<Instance>(m_parts[5])->RotateZ(90);
-	std::static_pointer_cast<Instance>(m_parts[5])->Translate(Vector3D(0, -height / 2 + br, width / 2 - br));
-	std::static_pointer_cast<Instance>(m_parts[6])->Translate(Vector3D(0, -(p0.x + p1.x) / 2, 0));
-	std::static_pointer_cast<Instance>(m_parts[6])->RotateZ(90);
-	std::static_pointer_cast<Instance>(m_parts[6])->Translate(Vector3D(0, -height / 2 + br, -width / 2 + br));
-	std::static_pointer_cast<Instance>(m_parts[7])->Translate(Vector3D(0, -(p0.x + p1.x) / 2, 0));
-	std::static_pointer_cast<Instance>(m_parts[7])->RotateZ(90);
-	std::static_pointer_cast<Instance>(m_parts[7])->Translate(Vector3D(0, height / 2 - br, -width / 2 + br));
+	std::static_pointer_cast<GeoInstance>(m_parts[4])->Translate(Vector3D(0, -(p0.x + p1.x) / 2, 0));
+	std::static_pointer_cast<GeoInstance>(m_parts[4])->RotateZ(90);
+	std::static_pointer_cast<GeoInstance>(m_parts[4])->Translate(Vector3D(0, height / 2 - br, width / 2 - br));
+	std::static_pointer_cast<GeoInstance>(m_parts[5])->Translate(Vector3D(0, -(p0.x + p1.x) / 2, 0));
+	std::static_pointer_cast<GeoInstance>(m_parts[5])->RotateZ(90);
+	std::static_pointer_cast<GeoInstance>(m_parts[5])->Translate(Vector3D(0, -height / 2 + br, width / 2 - br));
+	std::static_pointer_cast<GeoInstance>(m_parts[6])->Translate(Vector3D(0, -(p0.x + p1.x) / 2, 0));
+	std::static_pointer_cast<GeoInstance>(m_parts[6])->RotateZ(90);
+	std::static_pointer_cast<GeoInstance>(m_parts[6])->Translate(Vector3D(0, -height / 2 + br, -width / 2 + br));
+	std::static_pointer_cast<GeoInstance>(m_parts[7])->Translate(Vector3D(0, -(p0.x + p1.x) / 2, 0));
+	std::static_pointer_cast<GeoInstance>(m_parts[7])->RotateZ(90);
+	std::static_pointer_cast<GeoInstance>(m_parts[7])->Translate(Vector3D(0, height / 2 - br, -width / 2 + br));
 
-	std::static_pointer_cast<Instance>(m_parts[8])->Translate(Vector3D(0, -(p0.z + p1.z) / 2, 0));
-	std::static_pointer_cast<Instance>(m_parts[8])->RotateX(90);
-	std::static_pointer_cast<Instance>(m_parts[8])->Translate(Vector3D(-length / 2 + br, height / 2 - br, 0));
-	std::static_pointer_cast<Instance>(m_parts[9])->Translate(Vector3D(0, -(p0.z + p1.z) / 2, 0));
-	std::static_pointer_cast<Instance>(m_parts[9])->RotateX(90);
-	std::static_pointer_cast<Instance>(m_parts[9])->Translate(Vector3D(-length / 2 + br, -height / 2 + br, 0));
-	std::static_pointer_cast<Instance>(m_parts[10])->Translate(Vector3D(0, -(p0.z + p1.z) / 2, 0));
-	std::static_pointer_cast<Instance>(m_parts[10])->RotateX(90);
-	std::static_pointer_cast<Instance>(m_parts[10])->Translate(Vector3D(length / 2 - br, -height / 2 + br, 0));
-	std::static_pointer_cast<Instance>(m_parts[11])->Translate(Vector3D(0, -(p0.z + p1.z) / 2, 0));
-	std::static_pointer_cast<Instance>(m_parts[11])->RotateX(90);
-	std::static_pointer_cast<Instance>(m_parts[11])->Translate(Vector3D(length / 2 - br, height / 2 - br, 0));
+	std::static_pointer_cast<GeoInstance>(m_parts[8])->Translate(Vector3D(0, -(p0.z + p1.z) / 2, 0));
+	std::static_pointer_cast<GeoInstance>(m_parts[8])->RotateX(90);
+	std::static_pointer_cast<GeoInstance>(m_parts[8])->Translate(Vector3D(-length / 2 + br, height / 2 - br, 0));
+	std::static_pointer_cast<GeoInstance>(m_parts[9])->Translate(Vector3D(0, -(p0.z + p1.z) / 2, 0));
+	std::static_pointer_cast<GeoInstance>(m_parts[9])->RotateX(90);
+	std::static_pointer_cast<GeoInstance>(m_parts[9])->Translate(Vector3D(-length / 2 + br, -height / 2 + br, 0));
+	std::static_pointer_cast<GeoInstance>(m_parts[10])->Translate(Vector3D(0, -(p0.z + p1.z) / 2, 0));
+	std::static_pointer_cast<GeoInstance>(m_parts[10])->RotateX(90);
+	std::static_pointer_cast<GeoInstance>(m_parts[10])->Translate(Vector3D(length / 2 - br, -height / 2 + br, 0));
+	std::static_pointer_cast<GeoInstance>(m_parts[11])->Translate(Vector3D(0, -(p0.z + p1.z) / 2, 0));
+	std::static_pointer_cast<GeoInstance>(m_parts[11])->RotateX(90);
+	std::static_pointer_cast<GeoInstance>(m_parts[11])->Translate(Vector3D(length / 2 - br, height / 2 - br, 0));
 
 	bbox.x0 = p0.x - bevel_radius;
 	bbox.y0 = p0.y - bevel_radius;

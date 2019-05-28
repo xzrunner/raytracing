@@ -2,7 +2,7 @@
 #include "raytracing/primitive/ConvexPartSphere.h"
 #include "raytracing/primitive/ConcavePartSphere.h"
 #include "raytracing/primitive/Torus.h"
-#include "raytracing/primitive/Instance.h"
+#include "raytracing/primitive/GeoInstance.h"
 #include "raytracing/maths/Point3D.h"
 
 namespace rt
@@ -42,7 +42,7 @@ void RoundRimmedBowl::BuildComponents()
 
     double swept_radius = sin(outer_angle) * outer_radius - delta;
     double tube_radius = delta;
-	auto rim_ptr = std::make_shared<Instance>(std::make_shared<Torus>(swept_radius, tube_radius));
+	auto rim_ptr = std::make_shared<GeoInstance>(std::make_shared<Torus>(swept_radius, tube_radius));
 
     double dy = cos(openning*PI_ON_180) * (inner_radius + outer_radius) / 2.0 - (outer_radius - inner_radius) / 2.0;
 	rim_ptr->Translate(rt::Vector3D(0, dy, 0));

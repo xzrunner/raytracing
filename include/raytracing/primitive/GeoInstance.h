@@ -6,11 +6,11 @@
 namespace rt
 {
 
-class Instance : public GeoPrimitive
+class GeoInstance : public GeoPrimitive
 {
 public:
-	Instance();
-	Instance(const std::shared_ptr<GeoPrimitive>& obj);
+	GeoInstance();
+	GeoInstance(const std::shared_ptr<GeoPrimitive>& obj);
 
 	virtual bool Hit(const Ray& ray, double& t, ShadeRec& s) const;
 	virtual bool ShadowHit(const Ray& ray, float& t) const;
@@ -35,6 +35,6 @@ private:
 	AABB				m_aabb;						// transformed object's bounding box
 	bool				m_transform_the_texture;	// do we transform the texture?
 
-}; // Instance
+}; // GeoInstance
 
 }

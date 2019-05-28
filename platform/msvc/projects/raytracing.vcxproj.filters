@@ -351,9 +351,6 @@
     <ClInclude Include="..\..\..\include\raytracing\primitive\Grid.h">
       <Filter>primitive\others</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\primitive\Instance.h">
-      <Filter>primitive\others</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\primitive\BeveledWedge.h">
       <Filter>primitive\others</Filter>
     </ClInclude>
@@ -476,6 +473,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\primitive\Rectangle.h">
       <Filter>primitive\box</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\primitive\GeoInstance.h">
+      <Filter>primitive\others</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -722,9 +722,6 @@
     <ClCompile Include="..\..\..\source\primitive\Compound.cpp">
       <Filter>primitive\others</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\primitive\Instance.cpp">
-      <Filter>primitive\others</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\primitive\BeveledWedge.cpp">
       <Filter>primitive\others</Filter>
     </ClCompile>
@@ -844,6 +841,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\primitive\Rectangle.cpp">
       <Filter>primitive\box</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\primitive\GeoInstance.cpp">
+      <Filter>primitive\others</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

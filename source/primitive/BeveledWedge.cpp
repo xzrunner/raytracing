@@ -1,7 +1,7 @@
 #include "raytracing/primitive/BeveledWedge.h"
 #include "raytracing/primitive/Sphere.h"
 #include "raytracing/primitive/Rectangle.h"
-#include "raytracing/primitive/Instance.h"
+#include "raytracing/primitive/GeoInstance.h"
 #include "raytracing/primitive/OpenCylinder.h"
 #include "raytracing/primitive/ConvexPartCylinder.h"
 #include "raytracing/primitive/ConvexPartTorus.h"
@@ -79,22 +79,22 @@ BeveledWedge::BeveledWedge(double y0, double y1, double r0, double r1, double rb
 
 	// vertical cylinders ------------------------------------------------------------------------------
 
-	auto bottom_c1_cylinder = std::make_shared<Instance>(std::make_shared<OpenCylinder>(y0 + rb, y1 - rb, rb));
+	auto bottom_c1_cylinder = std::make_shared<GeoInstance>(std::make_shared<OpenCylinder>(y0 + rb, y1 - rb, rb));
 	bottom_c1_cylinder->Translate(Vector3D(xc1, 0.0, zc1));
 	bottom_c1_cylinder->SetTransformTexture(false);
 	m_parts.push_back(bottom_c1_cylinder);
 
-	auto bottom_c2_cylinder = std::make_shared<Instance>(std::make_shared<OpenCylinder>(y0 + rb, y1 - rb, rb));
+	auto bottom_c2_cylinder = std::make_shared<GeoInstance>(std::make_shared<OpenCylinder>(y0 + rb, y1 - rb, rb));
 	bottom_c2_cylinder->Translate(Vector3D(xc2, 0.0, zc2));
 	bottom_c2_cylinder->SetTransformTexture(false);
 	m_parts.push_back(bottom_c2_cylinder);
 
-	auto bottom_c3_cylinder = std::make_shared<Instance>(std::make_shared<OpenCylinder>(y0 + rb, y1 - rb, rb));
+	auto bottom_c3_cylinder = std::make_shared<GeoInstance>(std::make_shared<OpenCylinder>(y0 + rb, y1 - rb, rb));
 	bottom_c3_cylinder->Translate(Vector3D(xc3, 0.0, zc3));
 	bottom_c3_cylinder->SetTransformTexture(false);
 	m_parts.push_back(bottom_c3_cylinder);
 
-	auto bottom_c4_cylinder = std::make_shared<Instance>(std::make_shared<OpenCylinder>(y0 + rb, y1 - rb, rb));
+	auto bottom_c4_cylinder = std::make_shared<GeoInstance>(std::make_shared<OpenCylinder>(y0 + rb, y1 - rb, rb));
 	bottom_c4_cylinder->Translate(Vector3D(xc4, 0.0, zc4));
 	bottom_c4_cylinder->SetTransformTexture(false);
 	m_parts.push_back(bottom_c4_cylinder);
@@ -155,7 +155,7 @@ BeveledWedge::BeveledWedge(double y0, double y1, double r0, double r1, double rb
 	phi_min = phi0 + alpha * 180.0 / PI;
 	phi_max = phi1 - alpha * 180.0 / PI;
 
-	auto inner_bottom_torus = std::make_shared<Instance>(std::make_shared<ConvexPartTorus>(r0 + rb, rb, phi_min, phi_max, 0, 360));
+	auto inner_bottom_torus = std::make_shared<GeoInstance>(std::make_shared<ConvexPartTorus>(r0 + rb, rb, phi_min, phi_max, 0, 360));
 	inner_bottom_torus->Translate(Vector3D(0.0, y0 + rb, 0.0));
 	inner_bottom_torus->SetTransformTexture(false);
 	m_parts.push_back(inner_bottom_torus);
@@ -163,7 +163,7 @@ BeveledWedge::BeveledWedge(double y0, double y1, double r0, double r1, double rb
 
 	// inner top
 
-	auto inner_top_torus = std::make_shared<Instance>(std::make_shared<ConvexPartTorus>(r0 + rb, rb, phi_min, phi_max, 0, 360));
+	auto inner_top_torus = std::make_shared<GeoInstance>(std::make_shared<ConvexPartTorus>(r0 + rb, rb, phi_min, phi_max, 0, 360));
 	inner_top_torus->Translate(Vector3D(0.0, y1 - rb, 0.0));
 	inner_top_torus->SetTransformTexture(false);
 	m_parts.push_back(inner_top_torus);
@@ -174,7 +174,7 @@ BeveledWedge::BeveledWedge(double y0, double y1, double r0, double r1, double rb
 	phi_min = phi0 + beta * 180.0 / PI;
 	phi_max = phi1 - beta * 180.0 / PI;
 
-	auto outer_bottom_torus = std::make_shared<Instance>(std::make_shared<ConvexPartTorus>(r1 - rb, rb, phi_min, phi_max, 0, 360));
+	auto outer_bottom_torus = std::make_shared<GeoInstance>(std::make_shared<ConvexPartTorus>(r1 - rb, rb, phi_min, phi_max, 0, 360));
 	outer_bottom_torus->Translate(Vector3D(0.0, y0 + rb, 0.0));
 	outer_bottom_torus->SetTransformTexture(false);
 	m_parts.push_back(outer_bottom_torus);
@@ -182,7 +182,7 @@ BeveledWedge::BeveledWedge(double y0, double y1, double r0, double r1, double rb
 
 	// outer top
 
-	auto outer_top_torus = std::make_shared<Instance>(std::make_shared<ConvexPartTorus>(r1 - rb, rb, phi_min, phi_max, 0, 360));
+	auto outer_top_torus = std::make_shared<GeoInstance>(std::make_shared<ConvexPartTorus>(r1 - rb, rb, phi_min, phi_max, 0, 360));
 	outer_top_torus->Translate(Vector3D(0.0, y1 - rb, 0.0));
 	outer_top_torus->SetTransformTexture(false);
 	m_parts.push_back(outer_top_torus);
@@ -192,7 +192,7 @@ BeveledWedge::BeveledWedge(double y0, double y1, double r0, double r1, double rb
 
 	// phi0 bottom cylinder
 
-	auto phi0_bottom_cylinder_ptr = std::make_shared<Instance>(std::make_shared<OpenCylinder>(0, s2 - s1, rb));
+	auto phi0_bottom_cylinder_ptr = std::make_shared<GeoInstance>(std::make_shared<OpenCylinder>(0, s2 - s1, rb));
 	phi0_bottom_cylinder_ptr->RotateX(90);
 	phi0_bottom_cylinder_ptr->RotateY(phi0);
 	phi0_bottom_cylinder_ptr->Translate(Vector3D(xc1, y0 + rb, zc1));
@@ -202,7 +202,7 @@ BeveledWedge::BeveledWedge(double y0, double y1, double r0, double r1, double rb
 
 	// phi0 top cylinder
 
-	auto phi0_top_cylinder_ptr = std::make_shared<Instance>(std::make_shared<OpenCylinder>(0, s2 - s1, rb));
+	auto phi0_top_cylinder_ptr = std::make_shared<GeoInstance>(std::make_shared<OpenCylinder>(0, s2 - s1, rb));
 	phi0_top_cylinder_ptr->RotateX(90);
 	phi0_top_cylinder_ptr->RotateY(phi0);
 	phi0_top_cylinder_ptr->Translate(Vector3D(xc1, y1 - rb, zc1));
@@ -212,7 +212,7 @@ BeveledWedge::BeveledWedge(double y0, double y1, double r0, double r1, double rb
 
 	// phi1 bottom cylinder
 
-	auto phi1_bottom_cylinder_ptr = std::make_shared<Instance>(std::make_shared<OpenCylinder>(0, s2 - s1, rb));
+	auto phi1_bottom_cylinder_ptr = std::make_shared<GeoInstance>(std::make_shared<OpenCylinder>(0, s2 - s1, rb));
 	phi1_bottom_cylinder_ptr->RotateX(90);
 	phi1_bottom_cylinder_ptr->RotateY(phi1);
 	phi1_bottom_cylinder_ptr->Translate(Vector3D(xc3, y0 + rb, zc3));
@@ -222,7 +222,7 @@ BeveledWedge::BeveledWedge(double y0, double y1, double r0, double r1, double rb
 
 	// phi1 top cylinder
 
-	auto phi1_top_cylinder_ptr = std::make_shared<Instance>(std::make_shared<OpenCylinder>(0, s2 - s1, rb));
+	auto phi1_top_cylinder_ptr = std::make_shared<GeoInstance>(std::make_shared<OpenCylinder>(0, s2 - s1, rb));
 	phi1_top_cylinder_ptr->RotateX(90);
 	phi1_top_cylinder_ptr->RotateY(phi1);
 	phi1_top_cylinder_ptr->Translate(Vector3D(xc3, y1 - rb, zc3));
@@ -252,7 +252,7 @@ BeveledWedge::BeveledWedge(double y0, double y1, double r0, double r1, double rb
 	phi_min = 0.0;
 	phi_max = alpha * 180.0 / PI;
 
-	auto top_phi0_patch_ptr = std::make_shared<Instance>(std::make_shared<PartAnnulus>(center, normal, r_min, r_max, phi_min, phi_max));
+	auto top_phi0_patch_ptr = std::make_shared<GeoInstance>(std::make_shared<PartAnnulus>(center, normal, r_min, r_max, phi_min, phi_max));
 	top_phi0_patch_ptr->RotateY(phi0);
 	top_phi0_patch_ptr->Translate(Vector3D(xc1, 0.0, zc1));
 	top_phi0_patch_ptr->SetTransformTexture(false);
@@ -264,7 +264,7 @@ BeveledWedge::BeveledWedge(double y0, double y1, double r0, double r1, double rb
 	phi_min = 360.0 - alpha * 180.0 / PI;
 	phi_max = 360.0;
 
-	auto top_phi1_patch_ptr = std::make_shared<Instance>(std::make_shared<PartAnnulus>(center, normal, r_min, r_max, phi_min, phi_max));
+	auto top_phi1_patch_ptr = std::make_shared<GeoInstance>(std::make_shared<PartAnnulus>(center, normal, r_min, r_max, phi_min, phi_max));
 	top_phi1_patch_ptr->RotateY(phi1);
 	top_phi1_patch_ptr->Translate(Vector3D(xc3, 0.0, zc3));
 	top_phi1_patch_ptr->SetTransformTexture(false);
@@ -294,7 +294,7 @@ BeveledWedge::BeveledWedge(double y0, double y1, double r0, double r1, double rb
 	phi_min = 0.0;
 	phi_max = alpha * 180.0 / PI;
 
-	auto bottom_phi0_patch_ptr = std::make_shared<Instance>(std::make_shared<PartAnnulus>(center, normal, r_min, r_max, phi_min, phi_max));
+	auto bottom_phi0_patch_ptr = std::make_shared<GeoInstance>(std::make_shared<PartAnnulus>(center, normal, r_min, r_max, phi_min, phi_max));
 	bottom_phi0_patch_ptr->RotateY(phi0);
 	bottom_phi0_patch_ptr->Translate(Vector3D(xc1, 0.0, zc1));
 	bottom_phi0_patch_ptr->SetTransformTexture(false);
@@ -306,7 +306,7 @@ BeveledWedge::BeveledWedge(double y0, double y1, double r0, double r1, double rb
 	phi_min = 360.0 - alpha * 180.0 / PI;
 	phi_max = 360.0;
 
-	auto bottom_phi1_patch_ptr = std::make_shared<Instance>(std::make_shared<PartAnnulus>(center, normal, r_min, r_max, phi_min, phi_max));
+	auto bottom_phi1_patch_ptr = std::make_shared<GeoInstance>(std::make_shared<PartAnnulus>(center, normal, r_min, r_max, phi_min, phi_max));
 	bottom_phi1_patch_ptr->RotateY(phi1);
 	bottom_phi1_patch_ptr->Translate(Vector3D(xc3, 0.0, zc3));
 	bottom_phi1_patch_ptr->SetTransformTexture(false);

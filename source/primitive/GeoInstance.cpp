@@ -1,4 +1,4 @@
-#include "raytracing/primitive/Instance.h"
+#include "raytracing/primitive/GeoInstance.h"
 #include "raytracing/maths/Ray.h"
 #include "raytracing/utilities/Constants.h"
 #include "raytracing/utilities/ShadeRec.h"
@@ -8,9 +8,9 @@
 namespace rt
 {
 
-Matrix Instance::m_forward_matrix;
+Matrix GeoInstance::m_forward_matrix;
 
-Instance::Instance()
+GeoInstance::GeoInstance()
 	: m_object(nullptr)
 	, m_inv_matrix()
 	, m_aabb()
@@ -19,7 +19,7 @@ Instance::Instance()
 	m_forward_matrix.SetIdentity();
 }
 
-Instance::Instance(const std::shared_ptr<GeoPrimitive>& obj)
+GeoInstance::GeoInstance(const std::shared_ptr<GeoPrimitive>& obj)
 	: m_object(obj)
     , m_inv_matrix()
 	, m_aabb()
@@ -28,7 +28,7 @@ Instance::Instance(const std::shared_ptr<GeoPrimitive>& obj)
 	m_forward_matrix.SetIdentity();
 }
 
-bool Instance::Hit(const Ray& ray, double& t, ShadeRec& sr) const
+bool GeoInstance::Hit(const Ray& ray, double& t, ShadeRec& sr) const
 {
 	Ray inv_ray(ray);
 	inv_ray.ori = m_inv_matrix * inv_ray.ori;
@@ -50,7 +50,7 @@ bool Instance::Hit(const Ray& ray, double& t, ShadeRec& sr) const
 	return false;
 }
 
-bool Instance::ShadowHit(const Ray& ray, float& tmin) const
+bool GeoInstance::ShadowHit(const Ray& ray, float& tmin) const
 {
     if (!m_shadows) {
         return false;
@@ -71,12 +71,12 @@ bool Instance::ShadowHit(const Ray& ray, float& tmin) const
 	return false;
 }
 
-AABB Instance::GetBoundingBox() const
+AABB GeoInstance::GetBoundingBox() const
 {
 	return m_aabb;
 }
 
-void Instance::ComputeBoundingBox()
+void GeoInstance::ComputeBoundingBox()
 {
 	// First get the object's untransformed AABB
 
@@ -172,7 +172,7 @@ void Instance::ComputeBoundingBox()
 	m_aabb.z1 = z1;
 }
 
-void Instance::Translate(const Vector3D& trans)
+void GeoInstance::Translate(const Vector3D& trans)
 {
 	Matrix inv_translation_matrix;				// temporary inverse translation matrix
 
@@ -191,7 +191,7 @@ void Instance::Translate(const Vector3D& trans)
 	m_forward_matrix = translation_matrix * m_forward_matrix;
 }
 
-void Instance::Scale(const Vector3D& s)
+void GeoInstance::Scale(const Vector3D& s)
 {
 	Matrix	inv_scaling_matrix;			// temporary inverse scaling matrix
 
@@ -210,7 +210,7 @@ void Instance::Scale(const Vector3D& s)
 	m_forward_matrix = scaling_matrix * m_forward_matrix;
 }
 
-void Instance::RotateX(double theta)
+void GeoInstance::RotateX(double theta)
 {
 	double sin_theta = sin(theta * PI_ON_180);
 	double cos_theta = cos(theta * PI_ON_180);
@@ -234,7 +234,7 @@ void Instance::RotateX(double theta)
 	m_forward_matrix = x_rotation_matrix * m_forward_matrix;
 }
 
-void Instance::RotateY(double theta)
+void GeoInstance::RotateY(double theta)
 {
 	double sin_theta = sin(theta * PI / 180.0);
 	double cos_theta = cos(theta * PI / 180.0);
@@ -258,7 +258,7 @@ void Instance::RotateY(double theta)
 	m_forward_matrix = y_rotation_matrix * m_forward_matrix;
 }
 
-void Instance::RotateZ(double theta)
+void GeoInstance::RotateZ(double theta)
 {
 	double sin_theta = sin(theta * PI / 180.0);
 	double cos_theta = cos(theta * PI / 180.0);
@@ -282,7 +282,7 @@ void Instance::RotateZ(double theta)
 	m_forward_matrix = z_rotation_matrix * m_forward_matrix;
 }
 
-void Instance::Shear(const Matrix& s)
+void GeoInstance::Shear(const Matrix& s)
 {
 	Matrix inverse_shearing_matrix;    // inverse shear matrix
 

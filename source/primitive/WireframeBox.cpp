@@ -1,6 +1,6 @@
 #include "raytracing/primitive/WireframeBox.h"
 #include "raytracing/primitive/OpenCylinder.h"
-#include "raytracing/primitive/Instance.h"
+#include "raytracing/primitive/GeoInstance.h"
 
 namespace rt
 {
@@ -16,10 +16,10 @@ WireframeBox::WireframeBox(const Point3D& p0, const Point3D& p1, float br)
 
 	auto ocd = std::make_shared<OpenCylinder>(p0.y, p1.y, br);
 
-	std::vector<std::shared_ptr<Instance>> parts;
+	std::vector<std::shared_ptr<GeoInstance>> parts;
 	parts.resize(12, 0);
     for (int i = 0; i < 12; ++i) {
-        parts[i] = std::make_shared<Instance>(std::make_shared<OpenCylinder>(*ocd));
+        parts[i] = std::make_shared<GeoInstance>(std::make_shared<OpenCylinder>(*ocd));
     }
 
 	parts[0]->Translate(Vector3D(-width/2+br/2,0,-length/2));

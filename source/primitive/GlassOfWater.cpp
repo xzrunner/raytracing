@@ -4,7 +4,7 @@
 #include "raytracing/primitive/ConvexPartCylinder.h"
 #include "raytracing/primitive/ConcavePartCylinder.h"
 #include "raytracing/primitive/ConcavePartTorus.h"
-#include "raytracing/primitive/Instance.h"
+#include "raytracing/primitive/GeoInstance.h"
 
 namespace rt
 {
@@ -92,7 +92,7 @@ void GlassOfWater::BuildComponents()
 
 	// build the meniscus: we need an instance for this
 
-	auto meniscus_ptr = std::make_shared<Instance>(std::make_shared<ConcavePartTorus>(
+	auto meniscus_ptr = std::make_shared<GeoInstance>(std::make_shared<ConcavePartTorus>(
         inner_radius - meniscus_radius,
         meniscus_radius,
         0, 360,			// azimuth angle - phi - range

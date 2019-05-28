@@ -88,7 +88,7 @@
     <ClInclude Include="..\..\..\include\raytracing\primitive\MeshTriangle.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\GeoPrimitive.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\Grid.h" />
-    <ClInclude Include="..\..\..\include\raytracing\primitive\Instance.h" />
+    <ClInclude Include="..\..\..\include\raytracing\primitive\GeoInstance.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\OpenCone.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\OpenCylinder.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\OpenPartCylinder.h" />
@@ -217,7 +217,7 @@
     <ClCompile Include="..\..\..\source\primitive\MeshTriangle.cpp" />
     <ClCompile Include="..\..\..\source\primitive\GeoPrimitive.cpp" />
     <ClCompile Include="..\..\..\source\primitive\Grid.cpp" />
-    <ClCompile Include="..\..\..\source\primitive\Instance.cpp" />
+    <ClCompile Include="..\..\..\source\primitive\GeoInstance.cpp" />
     <ClCompile Include="..\..\..\source\primitive\OpenCone.cpp" />
     <ClCompile Include="..\..\..\source\primitive\OpenCylinder.cpp" />
     <ClCompile Include="..\..\..\source\primitive\OpenPartCylinder.cpp" />

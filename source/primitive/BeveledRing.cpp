@@ -1,7 +1,7 @@
 #include "raytracing/primitive/BeveledRing.h"
 #include "raytracing/primitive/Annulus.h"
 #include "raytracing/primitive/OpenCylinder.h"
-#include "raytracing/primitive/Instance.h"
+#include "raytracing/primitive/GeoInstance.h"
 #include "raytracing/primitive/Torus.h"
 
 namespace rt
@@ -9,12 +9,12 @@ namespace rt
 
 BeveledRing::BeveledRing()
 {
-	auto bottom_torus_ptr = std::make_shared<Instance>(std::make_shared<Torus>(0.95, 0.05));
+	auto bottom_torus_ptr = std::make_shared<GeoInstance>(std::make_shared<Torus>(0.95, 0.05));
 	bottom_torus_ptr->Translate(Vector3D(0, 0, 0));
 	bottom_torus_ptr->SetTransformTexture(false);
 	m_parts.push_back(bottom_torus_ptr);
 
-	auto top_torus_ptr = std::make_shared<Instance>(std::make_shared<Torus>(0.95, 0.05));
+	auto top_torus_ptr = std::make_shared<GeoInstance>(std::make_shared<Torus>(0.95, 0.05));
 	top_torus_ptr->Translate(Vector3D(0, 1, 0));
 	top_torus_ptr->SetTransformTexture(false);
 	m_parts.push_back(top_torus_ptr);
@@ -36,22 +36,22 @@ BeveledRing::BeveledRing(double bottom, double top, double i_radius, double o_ra
 
 	m_parts.push_back(std::make_shared<Annulus>(Point3D(0, top, 0), Normal(0, 1, 0), i_radius + b_radius, o_radius - i_radius - 2 * b_radius));
 
-	auto outer_bottom_torus_ptr = std::make_shared<Instance>(std::make_shared<Torus>((o_radius - b_radius ), b_radius));
+	auto outer_bottom_torus_ptr = std::make_shared<GeoInstance>(std::make_shared<Torus>((o_radius - b_radius ), b_radius));
 	outer_bottom_torus_ptr->Translate(Vector3D(0, 0 + b_radius, 0));
 	outer_bottom_torus_ptr->SetTransformTexture(false);
 	m_parts.push_back(outer_bottom_torus_ptr);
 
-	auto outer_top_torus_ptr = std::make_shared<Instance>(std::make_shared<Torus>((o_radius - b_radius ), b_radius));
+	auto outer_top_torus_ptr = std::make_shared<GeoInstance>(std::make_shared<Torus>((o_radius - b_radius ), b_radius));
 	outer_top_torus_ptr->Translate(Vector3D(0, top - b_radius, 0));
 	outer_top_torus_ptr->SetTransformTexture(false);
 	m_parts.push_back(outer_top_torus_ptr);
 
-	auto inner_bottom_torus_ptr = std::make_shared<Instance>(std::make_shared<Torus>((i_radius + b_radius ), b_radius));
+	auto inner_bottom_torus_ptr = std::make_shared<GeoInstance>(std::make_shared<Torus>((i_radius + b_radius ), b_radius));
 	inner_bottom_torus_ptr->Translate(Vector3D(0, 0 + b_radius, 0));
 	inner_bottom_torus_ptr->SetTransformTexture(false);
 	m_parts.push_back(inner_bottom_torus_ptr);
 
-	auto inner_top_torus_ptr = std::make_shared<Instance>(std::make_shared<Torus>((i_radius + b_radius), b_radius));
+	auto inner_top_torus_ptr = std::make_shared<GeoInstance>(std::make_shared<Torus>((i_radius + b_radius), b_radius));
 	inner_top_torus_ptr->Translate(Vector3D(0, top - b_radius, 0));
 	inner_top_torus_ptr->SetTransformTexture(false);
 	m_parts.push_back(inner_top_torus_ptr);
