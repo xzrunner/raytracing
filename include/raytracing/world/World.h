@@ -28,7 +28,8 @@ public:
 
 	ShadeRec HitObjects(const Ray& ray) const;
 
-	const RGBColor& GetBackgroundColor() const { return m_background_color; }
+	auto& GetBackgroundColor() const { return m_background_color; }
+    void  SetBackgroundColor(const RGBColor& col) { m_background_color = col; }
 
 	auto& GetLights() const { return m_lights; }
 
