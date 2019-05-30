@@ -112,8 +112,8 @@ bool ConcavePartTorus::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 					{
 						sr.normal 		 	= -ComputeNormal(sr.local_hit_point);
 					}
+                    return (true);
 				}
-				return (true);
 			}
 		}
 	}
