@@ -29,6 +29,9 @@ RGBColor Dielectric::Shade(const ShadeRec& sr) const
 	RGBColor 	Lr, Lt;
 	float 		ndotwi = static_cast<float>(sr.normal * wi);
 
+    //const double S = 0.0001;
+    const double S = 1;
+
     // total internal reflection
 	if (fresnel_btdf->Tir(sr))
     {
@@ -36,13 +39,13 @@ RGBColor Dielectric::Shade(const ShadeRec& sr) const
 			// reflected ray is inside
 
 			Lr = sr.w.GetTracer()->TraceRay(reflected_ray, t, sr.depth + 1);
-			L += cf_in.Powc(static_cast<float>(t)) * Lr;   						// inside filter color
+			L += cf_in.Powc(static_cast<float>(t * S)) * Lr;   						// inside filter color
 		}
 		else {
 			// reflected ray is outside
 
 			Lr = sr.w.GetTracer()->TraceRay(reflected_ray, t, sr.depth + 1);   // kr = 1
-			L += cf_out.Powc(static_cast<float>(t)) * Lr;   					// outside filter color
+			L += cf_out.Powc(static_cast<float>(t * S)) * Lr;   					// outside filter color
 		}
 	}
 	else { 													// no total internal reflection
@@ -55,23 +58,23 @@ RGBColor Dielectric::Shade(const ShadeRec& sr) const
 			// reflected ray is inside
 
 			Lr = fr * sr.w.GetTracer()->TraceRay(reflected_ray, t, sr.depth + 1) * fabs(ndotwi);
-			L += cf_in.Powc(static_cast<float>(t)) * Lr;     					// inside filter color
+			L += cf_in.Powc(static_cast<float>(t * S)) * Lr;     					// inside filter color
 
 			// transmitted ray is outside
 
 			Lt = ft * sr.w.GetTracer()->TraceRay(transmitted_ray, t, sr.depth + 1) * fabs(ndotwt);
-			L += cf_out.Powc(static_cast<float>(t)) * Lt;   					// outside filter color
+			L += cf_out.Powc(static_cast<float>(t * S)) * Lt;   					// outside filter color
 		}
 		else {
 			// reflected ray is outside
 
 			Lr = fr * sr.w.GetTracer()->TraceRay(reflected_ray, t, sr.depth + 1) * fabs(ndotwi);
-			L += cf_out.Powc(static_cast<float>(t)) * Lr;						// outside filter color
+			L += cf_out.Powc(static_cast<float>(t * S)) * Lr;						// outside filter color
 
 			// transmitted ray is inside
 
 			Lt = ft * sr.w.GetTracer()->TraceRay(transmitted_ray, t, sr.depth + 1) * fabs(ndotwt);
-			L += cf_in.Powc(static_cast<float>(t)) * Lt; 						// inside filter color
+			L += cf_in.Powc(static_cast<float>(t * S)) * Lt; 						// inside filter color
 		}
 	}
 
