@@ -36,6 +36,7 @@ RGBColor PathTrace::TraceRay(const Ray& ray, double& tmin, int depth) const
 {
     if (depth > m_world.GetViewPlane().GetMaxDepth())
     {
+        tmin = HUGE_VALUE;
         return BLACK;
     }
 	else
