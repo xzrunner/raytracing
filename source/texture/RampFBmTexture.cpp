@@ -34,4 +34,28 @@ RGBColor RampFBmTexture::GetColor(const ShadeRec& sr) const
 	return ramp->GetColor(column, row);
 }
 
+void RampFBmTexture::SetNumOctaves(float num_octaves)
+{
+    if (noise == nullptr) {
+        noise = std::make_shared<CubicNoise>();
+    }
+    noise->set_num_octaves(static_cast<int>(num_octaves));
+}
+
+void RampFBmTexture::SetLacunarity(float lacunarity)
+{
+    if (noise == nullptr) {
+        noise = std::make_shared<CubicNoise>();
+    }
+    noise->set_lacunarity(lacunarity);
+}
+
+void RampFBmTexture::SetGain(float gain)
+{
+    if (noise == nullptr) {
+        noise = std::make_shared<CubicNoise>();
+    }
+    noise->set_gain(gain);
+}
+
 }

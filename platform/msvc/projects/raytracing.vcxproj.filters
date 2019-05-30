@@ -480,6 +480,18 @@
     <ClInclude Include="..\..\..\include\raytracing\texture\SphereTextures.h">
       <Filter>texture</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\primitive\ConcaveLens.h">
+      <Filter>primitive\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\primitive\ConvexOpenCylinder.h">
+      <Filter>primitive\cylinder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\primitive\ProductJar.h">
+      <Filter>primitive\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\texture\FBmTexture.h">
+      <Filter>texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\camera\Camera.cpp">
@@ -849,6 +861,18 @@
       <Filter>primitive\others</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\texture\SphereTextures.cpp">
+      <Filter>texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\primitive\ConcaveLens.cpp">
+      <Filter>primitive\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\primitive\ConvexOpenCylinder.cpp">
+      <Filter>primitive\cylinder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\primitive\ProductJar.cpp">
+      <Filter>primitive\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\texture\FBmTexture.cpp">
       <Filter>texture</Filter>
     </ClCompile>
   </ItemGroup>

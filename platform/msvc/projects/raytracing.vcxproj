@@ -72,10 +72,12 @@
     <ClInclude Include="..\..\..\include\raytracing\primitive\BeveledWedge.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\Box.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\Compound.h" />
+    <ClInclude Include="..\..\..\include\raytracing\primitive\ConcaveLens.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\ConcavePartCylinder.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\ConcavePartSphere.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\ConcavePartTorus.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\ConcaveSphere.h" />
+    <ClInclude Include="..\..\..\include\raytracing\primitive\ConvexOpenCylinder.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\ConvexPartCylinder.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\ConvexPartSphere.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\ConvexPartTorus.h" />
@@ -94,6 +96,7 @@
     <ClInclude Include="..\..\..\include\raytracing\primitive\OpenPartCylinder.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\PartAnnulus.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\Plane.h" />
+    <ClInclude Include="..\..\..\include\raytracing\primitive\ProductJar.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\Rectangle.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\RoundRimmedBowl.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\SmoothMeshTriangle.h" />
@@ -113,6 +116,7 @@
     <ClInclude Include="..\..\..\include\raytracing\texture\Checker3D.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\ConeChecker.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\ConstantColor.h" />
+    <ClInclude Include="..\..\..\include\raytracing\texture\FBmTexture.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\Image.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\ImageTexture.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\NestedNoisesTexture.h" />
@@ -202,10 +206,12 @@
     <ClCompile Include="..\..\..\source\primitive\BeveledWedge.cpp" />
     <ClCompile Include="..\..\..\source\primitive\Box.cpp" />
     <ClCompile Include="..\..\..\source\primitive\Compound.cpp" />
+    <ClCompile Include="..\..\..\source\primitive\ConcaveLens.cpp" />
     <ClCompile Include="..\..\..\source\primitive\ConcavePartCylinder.cpp" />
     <ClCompile Include="..\..\..\source\primitive\ConcavePartSphere.cpp" />
     <ClCompile Include="..\..\..\source\primitive\ConcavePartTorus.cpp" />
     <ClCompile Include="..\..\..\source\primitive\ConcaveSphere.cpp" />
+    <ClCompile Include="..\..\..\source\primitive\ConvexOpenCylinder.cpp" />
     <ClCompile Include="..\..\..\source\primitive\ConvexPartCylinder.cpp" />
     <ClCompile Include="..\..\..\source\primitive\ConvexPartSphere.cpp" />
     <ClCompile Include="..\..\..\source\primitive\ConvexPartTorus.cpp" />
@@ -224,6 +230,7 @@
     <ClCompile Include="..\..\..\source\primitive\OpenPartCylinder.cpp" />
     <ClCompile Include="..\..\..\source\primitive\PartAnnulus.cpp" />
     <ClCompile Include="..\..\..\source\primitive\Plane.cpp" />
+    <ClCompile Include="..\..\..\source\primitive\ProductJar.cpp" />
     <ClCompile Include="..\..\..\source\primitive\Rectangle.cpp" />
     <ClCompile Include="..\..\..\source\primitive\RoundRimmedBowl.cpp" />
     <ClCompile Include="..\..\..\source\primitive\SmoothMeshTriangle.cpp" />
@@ -243,6 +250,7 @@
     <ClCompile Include="..\..\..\source\texture\Checker3D.cpp" />
     <ClCompile Include="..\..\..\source\texture\ConeChecker.cpp" />
     <ClCompile Include="..\..\..\source\texture\ConstantColor.cpp" />
+    <ClCompile Include="..\..\..\source\texture\FBmTexture.cpp" />
     <ClCompile Include="..\..\..\source\texture\Image.cpp" />
     <ClCompile Include="..\..\..\source\texture\ImageTexture.cpp" />
     <ClCompile Include="..\..\..\source\texture\NestedNoisesTexture.cpp" />
