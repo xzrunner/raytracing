@@ -26,7 +26,7 @@ RGBColor PathTrace::TraceRay(const Ray& ray, int depth) const
 		if (sr.hit_an_object) {
 			sr.depth = depth;
 			sr.ray   = ray;
-			return sr.material->Shade(sr);
+			return sr.material->PathShade(sr);
 		} else {
             return m_world.GetBackgroundColor();
         }
@@ -51,7 +51,7 @@ RGBColor PathTrace::TraceRay(const Ray& ray, double& tmin, int depth) const
 			sr.ray 		= ray;
 			tmin		= sr.t;     // required for colored transparency
 
-			return sr.material->Shade(sr);
+			return sr.material->PathShade(sr);
 		}
 		else
         {
