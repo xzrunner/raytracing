@@ -16,7 +16,8 @@ RGBColor GlobalTrace::TraceRay(const Ray& ray, int depth) const
 {
     if (depth > m_world.GetViewPlane().GetMaxDepth())
     {
-        return BLACK;
+//        return BLACK;
+        return WHITE;
     }
 	else
     {
@@ -37,7 +38,8 @@ RGBColor GlobalTrace::TraceRay(const Ray& ray, double& tmin, int depth) const
     if (depth > m_world.GetViewPlane().GetMaxDepth())
     {
         tmin = HUGE_VALUE;
-        return BLACK;
+//        return BLACK;
+        return WHITE;
     }
 	else
     {
