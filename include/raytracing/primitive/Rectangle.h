@@ -24,9 +24,7 @@ public:
 
 	virtual Normal GetNormal(const Point3D& p) const;
 
-    void SetSampler(const std::shared_ptr<Sampler>& sampler) {
-        m_sampler = sampler;
-    }
+    void SetSampler(const std::shared_ptr<Sampler>& sampler);
 
 private:
 	// corner vertex

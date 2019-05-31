@@ -119,4 +119,10 @@ Normal Rectangle::GetNormal(const Point3D& p) const
 	return m_normal;
 }
 
+void Rectangle::SetSampler(const std::shared_ptr<Sampler>& sampler)
+{
+    m_sampler = sampler;
+    m_sampler->MapSamplesToSphere();
+}
+
 }

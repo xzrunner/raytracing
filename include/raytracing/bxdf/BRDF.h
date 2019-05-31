@@ -24,9 +24,7 @@ public:
 	virtual RGBColor sample_f(const ShadeRec& sr, const Vector3D& wo, Vector3D& wi) const;
 	virtual RGBColor sample_f(const ShadeRec& sr, const Vector3D& wo, Vector3D& wi, float& pdf) const;
 
-    void SetSampler(const std::shared_ptr<Sampler>& sampler) {
-        m_sampler = sampler;
-    }
+    void SetSampler(const std::shared_ptr<Sampler>& sampler);
 
 protected:
     std::shared_ptr<Sampler> m_sampler = nullptr;
