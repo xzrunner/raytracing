@@ -25,7 +25,7 @@ rand_float(float l, float h) {
 
 inline int
 rand_int(int l, int h) {
-	return (int) (rand_float(0.0f, h - l + 1.0f) + l);
+    return (int)(rand_float() * (h - l) + l);
 }
 
 inline void
