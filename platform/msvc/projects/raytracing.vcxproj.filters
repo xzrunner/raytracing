@@ -82,6 +82,9 @@
     <Filter Include="primitive\plane">
       <UniqueIdentifier>{b5a1300c-84aa-47fc-b6d3-f21c4e80f479}</UniqueIdentifier>
     </Filter>
+    <Filter Include="texture\checker">
+      <UniqueIdentifier>{7d0e91e0-4cb8-458b-8255-88328fb309ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\raytracing\camera\Camera.h">
@@ -192,9 +195,6 @@
     <ClInclude Include="..\..\..\include\raytracing\tracer\Tracer.h">
       <Filter>tracer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\texture\Checker3D.h">
-      <Filter>texture</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\texture\Image.h">
       <Filter>texture</Filter>
     </ClInclude>
@@ -252,9 +252,6 @@
     <ClInclude Include="..\..\..\include\raytracing\tracer\FirstHit.h">
       <Filter>tracer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\texture\ConeChecker.h">
-      <Filter>texture</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\camera\Orthographic.h">
       <Filter>camera</Filter>
     </ClInclude>
@@ -266,12 +263,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\tracer\Whitted.h">
       <Filter>tracer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\texture\PlaneChecker.h">
-      <Filter>texture</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\texture\SphereChecker.h">
-      <Filter>texture</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\material\SV_Emissive.h">
       <Filter>material</Filter>
@@ -492,6 +483,33 @@
     <ClInclude Include="..\..\..\include\raytracing\texture\FBmTexture.h">
       <Filter>texture</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\texture\ConeChecker.h">
+      <Filter>texture\checker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\texture\PlaneChecker.h">
+      <Filter>texture\checker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\texture\SphereChecker.h">
+      <Filter>texture\checker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\texture\Checker3D.h">
+      <Filter>texture\checker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\texture\CylinderChecker.h">
+      <Filter>texture\checker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\texture\RectangleChecker.h">
+      <Filter>texture\checker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\texture\DiskChecker.h">
+      <Filter>texture\checker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\mapping\HemisphericalMap.h">
+      <Filter>mapping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\primitive\ConcaveHemisphere.h">
+      <Filter>primitive\sphere</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\camera\Camera.cpp">
@@ -575,9 +593,6 @@
     <ClCompile Include="..\..\..\source\tracer\Tracer.cpp">
       <Filter>tracer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\texture\Checker3D.cpp">
-      <Filter>texture</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\texture\Image.cpp">
       <Filter>texture</Filter>
     </ClCompile>
@@ -635,9 +650,6 @@
     <ClCompile Include="..\..\..\source\tracer\FirstHit.cpp">
       <Filter>tracer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\texture\ConeChecker.cpp">
-      <Filter>texture</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\camera\Orthographic.cpp">
       <Filter>camera</Filter>
     </ClCompile>
@@ -649,12 +661,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\tracer\Whitted.cpp">
       <Filter>tracer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\texture\PlaneChecker.cpp">
-      <Filter>texture</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\texture\SphereChecker.cpp">
-      <Filter>texture</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\material\SV_Emissive.cpp">
       <Filter>material</Filter>
@@ -874,6 +880,33 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\texture\FBmTexture.cpp">
       <Filter>texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\texture\ConeChecker.cpp">
+      <Filter>texture\checker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\texture\PlaneChecker.cpp">
+      <Filter>texture\checker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\texture\SphereChecker.cpp">
+      <Filter>texture\checker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\texture\Checker3D.cpp">
+      <Filter>texture\checker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\texture\CylinderChecker.cpp">
+      <Filter>texture\checker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\texture\RectangleChecker.cpp">
+      <Filter>texture\checker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\texture\DiskChecker.cpp">
+      <Filter>texture\checker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\mapping\HemisphericalMap.cpp">
+      <Filter>mapping</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\primitive\ConcaveHemisphere.cpp">
+      <Filter>primitive\sphere</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

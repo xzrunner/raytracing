@@ -38,6 +38,7 @@
     <ClInclude Include="..\..\..\include\raytracing\light\Light.h" />
     <ClInclude Include="..\..\..\include\raytracing\light\PointLight.h" />
     <ClInclude Include="..\..\..\include\raytracing\mapping\CylindricalMap.h" />
+    <ClInclude Include="..\..\..\include\raytracing\mapping\HemisphericalMap.h" />
     <ClInclude Include="..\..\..\include\raytracing\mapping\LightProbe.h" />
     <ClInclude Include="..\..\..\include\raytracing\mapping\Mapping.h" />
     <ClInclude Include="..\..\..\include\raytracing\mapping\SphericalMap.h" />
@@ -72,6 +73,7 @@
     <ClInclude Include="..\..\..\include\raytracing\primitive\BeveledWedge.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\Box.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\Compound.h" />
+    <ClInclude Include="..\..\..\include\raytracing\primitive\ConcaveHemisphere.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\ConcaveLens.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\ConcavePartCylinder.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\ConcavePartSphere.h" />
@@ -116,12 +118,15 @@
     <ClInclude Include="..\..\..\include\raytracing\texture\Checker3D.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\ConeChecker.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\ConstantColor.h" />
+    <ClInclude Include="..\..\..\include\raytracing\texture\CylinderChecker.h" />
+    <ClInclude Include="..\..\..\include\raytracing\texture\DiskChecker.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\FBmTexture.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\Image.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\ImageTexture.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\NestedNoisesTexture.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\PlaneChecker.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\RampFBmTexture.h" />
+    <ClInclude Include="..\..\..\include\raytracing\texture\RectangleChecker.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\SphereChecker.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\SphereTextures.h" />
     <ClInclude Include="..\..\..\include\raytracing\texture\Texture.h" />
@@ -176,6 +181,7 @@
     <ClCompile Include="..\..\..\source\light\Light.cpp" />
     <ClCompile Include="..\..\..\source\light\PointLight.cpp" />
     <ClCompile Include="..\..\..\source\mapping\CylindricalMap.cpp" />
+    <ClCompile Include="..\..\..\source\mapping\HemisphericalMap.cpp" />
     <ClCompile Include="..\..\..\source\mapping\LightProbe.cpp" />
     <ClCompile Include="..\..\..\source\mapping\SphericalMap.cpp" />
     <ClCompile Include="..\..\..\source\mapping\SquareMap.cpp" />
@@ -206,6 +212,7 @@
     <ClCompile Include="..\..\..\source\primitive\BeveledWedge.cpp" />
     <ClCompile Include="..\..\..\source\primitive\Box.cpp" />
     <ClCompile Include="..\..\..\source\primitive\Compound.cpp" />
+    <ClCompile Include="..\..\..\source\primitive\ConcaveHemisphere.cpp" />
     <ClCompile Include="..\..\..\source\primitive\ConcaveLens.cpp" />
     <ClCompile Include="..\..\..\source\primitive\ConcavePartCylinder.cpp" />
     <ClCompile Include="..\..\..\source\primitive\ConcavePartSphere.cpp" />
@@ -250,12 +257,15 @@
     <ClCompile Include="..\..\..\source\texture\Checker3D.cpp" />
     <ClCompile Include="..\..\..\source\texture\ConeChecker.cpp" />
     <ClCompile Include="..\..\..\source\texture\ConstantColor.cpp" />
+    <ClCompile Include="..\..\..\source\texture\CylinderChecker.cpp" />
+    <ClCompile Include="..\..\..\source\texture\DiskChecker.cpp" />
     <ClCompile Include="..\..\..\source\texture\FBmTexture.cpp" />
     <ClCompile Include="..\..\..\source\texture\Image.cpp" />
     <ClCompile Include="..\..\..\source\texture\ImageTexture.cpp" />
     <ClCompile Include="..\..\..\source\texture\NestedNoisesTexture.cpp" />
     <ClCompile Include="..\..\..\source\texture\PlaneChecker.cpp" />
     <ClCompile Include="..\..\..\source\texture\RampFBmTexture.cpp" />
+    <ClCompile Include="..\..\..\source\texture\RectangleChecker.cpp" />
     <ClCompile Include="..\..\..\source\texture\SphereChecker.cpp" />
     <ClCompile Include="..\..\..\source\texture\SphereTextures.cpp" />
     <ClCompile Include="..\..\..\source\texture\TextureInstance.cpp" />
