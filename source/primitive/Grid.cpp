@@ -3,6 +3,8 @@
 #include "raytracing/primitive/SmoothTriangle.h"
 #include "raytracing/primitive/FlatMeshTriangle.h"
 #include "raytracing/primitive/SmoothMeshTriangle.h"
+#include "raytracing/primitive/FlatUVMeshTriangle.h"
+#include "raytracing/primitive/SmoothUVMeshTriangle.h"
 #include "raytracing/maths/Ray.h"
 #include "raytracing/maths/maths.h"
 #include "raytracing/utilities/Constants.h"
@@ -895,6 +897,9 @@ void Grid::ReadPlyFile(const std::string& filename, int triangle_type)
         const size_t num_vertices_bytes = vertices->buffer.size_bytes();
         std::memcpy(mesh->vertices.data(), vertices->buffer.get(), num_vertices_bytes);
 
+        mesh->texcoords.resize(texcoords->count);
+        std::memcpy(mesh->texcoords.data(), texcoords->buffer.get(), texcoords->buffer.size_bytes());
+
         mesh->num_triangles = faces->count;
         mesh->vertex_faces.resize(faces->count);
         assert(faces->t == tinyply::Type::INT32);
@@ -912,14 +917,26 @@ void Grid::ReadPlyFile(const std::string& filename, int triangle_type)
             face[2] = face_data[idx_ptr++];
             mesh->vertex_faces[i] = face;
 
-			if (triangle_type == Flat) {
-			    auto triangle_ptr = std::make_shared<FlatMeshTriangle>(mesh, face[0], face[1], face[2]);
+			if (triangle_type == Flat)
+            {
+                std::shared_ptr<FlatMeshTriangle> triangle_ptr = nullptr;
+                if (texcoords) {
+                    triangle_ptr = std::make_shared<FlatUVMeshTriangle>(mesh, face[0], face[1], face[2]);
+                } else {
+                    triangle_ptr = std::make_shared<FlatMeshTriangle>(mesh, face[0], face[1], face[2]);
+                }
 				triangle_ptr->ComputeNormal(reverse_normal);
 				m_parts.push_back(triangle_ptr);
 			}
 
-			if (triangle_type == Smooth) {
-			    auto triangle_ptr = std::make_shared<SmoothMeshTriangle>(mesh, face[0], face[1], face[2]);
+			if (triangle_type == Smooth)
+            {
+                std::shared_ptr<SmoothMeshTriangle> triangle_ptr = nullptr;
+                if (texcoords) {
+                    triangle_ptr = std::make_shared<SmoothUVMeshTriangle>(mesh, face[0], face[1], face[2]);
+                } else {
+                    triangle_ptr = std::make_shared<SmoothMeshTriangle>(mesh, face[0], face[1], face[2]);
+                }
 				triangle_ptr->ComputeNormal(reverse_normal); 	// the "flat triangle" normal is used to compute the average normal at each mesh vertex
 				m_parts.push_back(triangle_ptr); 				// it's quicker to do it once here, than have to do it on average 6 times in compute_mesh_normals
 

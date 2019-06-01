@@ -22,6 +22,10 @@ public:
     void ComputeNormal(bool reverse_normal);
 
 protected:
+    float InterpolateU(float beta, float gamma) const;
+    float InterpolateV(float beta, float gamma) const;
+
+protected:
     std::shared_ptr<Mesh> mesh = nullptr;					// stores all the data
     int			index0 = 0, index1 = 0, index2 = 0;  	// indices into the vertices array in the mesh
     Normal		normal;

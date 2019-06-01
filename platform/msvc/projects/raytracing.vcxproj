@@ -88,6 +88,7 @@
     <ClInclude Include="..\..\..\include\raytracing\primitive\FishBowl.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\FlatMeshTriangle.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\FlatRimmedBowl.h" />
+    <ClInclude Include="..\..\..\include\raytracing\primitive\FlatUVMeshTriangle.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\GlassOfWater.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\MeshTriangle.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\GeoPrimitive.h" />
@@ -103,6 +104,7 @@
     <ClInclude Include="..\..\..\include\raytracing\primitive\RoundRimmedBowl.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\SmoothMeshTriangle.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\SmoothTriangle.h" />
+    <ClInclude Include="..\..\..\include\raytracing\primitive\SmoothUVMeshTriangle.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\SolidCone.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\SolidCylinder.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\Sphere.h" />
@@ -227,6 +229,7 @@
     <ClCompile Include="..\..\..\source\primitive\FishBowl.cpp" />
     <ClCompile Include="..\..\..\source\primitive\FlatMeshTriangle.cpp" />
     <ClCompile Include="..\..\..\source\primitive\FlatRimmedBowl.cpp" />
+    <ClCompile Include="..\..\..\source\primitive\FlatUVMeshTriangle.cpp" />
     <ClCompile Include="..\..\..\source\primitive\GlassOfWater.cpp" />
     <ClCompile Include="..\..\..\source\primitive\MeshTriangle.cpp" />
     <ClCompile Include="..\..\..\source\primitive\GeoPrimitive.cpp" />
@@ -242,6 +245,7 @@
     <ClCompile Include="..\..\..\source\primitive\RoundRimmedBowl.cpp" />
     <ClCompile Include="..\..\..\source\primitive\SmoothMeshTriangle.cpp" />
     <ClCompile Include="..\..\..\source\primitive\SmoothTriangle.cpp" />
+    <ClCompile Include="..\..\..\source\primitive\SmoothUVMeshTriangle.cpp" />
     <ClCompile Include="..\..\..\source\primitive\SolidCone.cpp" />
     <ClCompile Include="..\..\..\source\primitive\SolidCylinder.cpp" />
     <ClCompile Include="..\..\..\source\primitive\Sphere.cpp" />

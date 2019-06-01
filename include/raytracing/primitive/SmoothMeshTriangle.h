@@ -13,7 +13,7 @@ public:
 
     virtual bool Hit(const Ray& ray, double& t, ShadeRec& s) const override;
 
-private:
+protected:
     Normal InterpolateNormal(double beta, double gamma) const;
 
 }; // SmoothMeshTriangle

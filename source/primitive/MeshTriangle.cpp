@@ -85,4 +85,14 @@ void MeshTriangle::ComputeNormal(bool reverse_normal)
         normal = -normal;
 }
 
+float MeshTriangle::InterpolateU(float beta, float gamma) const
+{
+	return (1 - beta - gamma) * mesh->texcoords[index0].x + beta * mesh->texcoords[index1].x + gamma * mesh->texcoords[index2].x;
+}
+
+float MeshTriangle::InterpolateV(float beta, float gamma) const
+{
+	return (1 - beta - gamma) * mesh->texcoords[index0].y + beta * mesh->texcoords[index1].y + gamma * mesh->texcoords[index2].y;
+}
+
 }

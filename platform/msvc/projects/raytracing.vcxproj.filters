@@ -510,6 +510,12 @@
     <ClInclude Include="..\..\..\include\raytracing\primitive\ConcaveHemisphere.h">
       <Filter>primitive\sphere</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\primitive\FlatUVMeshTriangle.h">
+      <Filter>primitive\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\primitive\SmoothUVMeshTriangle.h">
+      <Filter>primitive\mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\camera\Camera.cpp">
@@ -907,6 +913,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\primitive\ConcaveHemisphere.cpp">
       <Filter>primitive\sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\primitive\FlatUVMeshTriangle.cpp">
+      <Filter>primitive\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\primitive\SmoothUVMeshTriangle.cpp">
+      <Filter>primitive\mesh</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
