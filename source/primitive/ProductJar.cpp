@@ -95,4 +95,9 @@ void ProductJar::SetMaterial(const std::shared_ptr<Material>& material) const
     }
 }
 
+void ProductJar::SetBodyMaterial(const std::shared_ptr<Material>& material) const
+{
+    m_parts[0]->SetMaterial(material);
+}
+
 }
