@@ -13,11 +13,6 @@
 namespace rt
 {
 
-FishEye::FishEye()
-	: m_psi_max(180.0)
-{
-}
-
 void FishEye::RenderScene(const World& wr) const
 {
 	const auto& vp    = wr.GetViewPlane();
@@ -51,7 +46,7 @@ void FishEye::RenderScene(const World& wr) const
                     float r_squared;
                     ray.dir = RayDirection(pp, w, h, s, r_squared);
 
-                    if (r_squared <= 1.0f) {
+                    if ((r_squared <= 1.0f && !m_rectangular) || m_rectangular) {
                         L += wr.GetTracer()->TraceRay(ray, depth);
                     }
                 }
@@ -101,7 +96,7 @@ void FishEye::RenderStereo(const World& wr, float x, int pixel_offset) const
                     float r_squared;
                     ray.dir = RayDirection(pp, w, h, s, r_squared);
 
-                    if (r_squared <= 1.0f) {
+                    if ((r_squared <= 1.0f && !m_rectangular) || m_rectangular) {
                         L += wr.GetTracer()->TraceRay(ray, depth);
                     }
                 }
@@ -115,11 +110,6 @@ void FishEye::RenderStereo(const World& wr, float x, int pixel_offset) const
     });
 }
 
-void FishEye::SetFov(float fov)
-{
-	m_psi_max = fov;
-}
-
 Vector3D FishEye::RayDirection(const Point2D& pp, const int hres, const int vres,
 							   const float s, float& r_squared) const
 {
@@ -127,7 +117,8 @@ Vector3D FishEye::RayDirection(const Point2D& pp, const int hres, const int vres
 	Point2D pn(2.0f / (s * hres) * pp.x, 2.0f / (s * vres) * pp.y);
 	r_squared = pn.x * pn.x + pn.y * pn.y;
 
-	if (r_squared <= 1.0f) {
+	if ((r_squared <= 1.0f && !m_rectangular) || m_rectangular)
+    {
 		float r 		= sqrt(r_squared);
 		float psi 		= static_cast<float>(r * m_psi_max * PI_ON_180);
 		float sin_psi 	= sin(psi);
@@ -137,7 +128,9 @@ Vector3D FishEye::RayDirection(const Point2D& pp, const int hres, const int vres
 		Vector3D dir 	= sin_psi * cos_alpha * m_u +  sin_psi * sin_alpha * m_v - cos_psi * m_w;
 
 		return dir;
-	} else {
+	}
+    else
+    {
 		return Vector3D(0, 0, 0);
 	}
 }
