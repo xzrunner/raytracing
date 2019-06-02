@@ -22,6 +22,7 @@
     <ClInclude Include="..\..\..\include\raytracing\bxdf\PerfectTransmitter.h" />
     <ClInclude Include="..\..\..\include\raytracing\bxdf\SV_GlossySpecular.h" />
     <ClInclude Include="..\..\..\include\raytracing\bxdf\SV_Lambertian.h" />
+    <ClInclude Include="..\..\..\include\raytracing\bxdf\SV_PerfectSpecular.h" />
     <ClInclude Include="..\..\..\include\raytracing\camera\Camera.h" />
     <ClInclude Include="..\..\..\include\raytracing\camera\FishEye.h" />
     <ClInclude Include="..\..\..\include\raytracing\camera\Orthographic.h" />
@@ -54,6 +55,7 @@
     <ClInclude Include="..\..\..\include\raytracing\material\SV_Emissive.h" />
     <ClInclude Include="..\..\..\include\raytracing\material\SV_Matte.h" />
     <ClInclude Include="..\..\..\include\raytracing\material\SV_Phong.h" />
+    <ClInclude Include="..\..\..\include\raytracing\material\SV_Reflector.h" />
     <ClInclude Include="..\..\..\include\raytracing\material\Transparent.h" />
     <ClInclude Include="..\..\..\include\raytracing\maths\AABB.h" />
     <ClInclude Include="..\..\..\include\raytracing\maths\maths.h" />
@@ -68,6 +70,7 @@
     <ClInclude Include="..\..\..\include\raytracing\noise\LinearNoise.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\Annulus.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\BeveledBox.h" />
+    <ClInclude Include="..\..\..\include\raytracing\primitive\BeveledBoxShell.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\BeveledCylinder.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\BeveledRing.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\BeveledWedge.h" />
@@ -84,6 +87,7 @@
     <ClInclude Include="..\..\..\include\raytracing\primitive\ConvexPartSphere.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\ConvexPartTorus.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\CutCube.h" />
+    <ClInclude Include="..\..\..\include\raytracing\primitive\CutFace.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\Disk.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\FishBowl.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\FlatMeshTriangle.h" />
@@ -112,8 +116,10 @@
     <ClInclude Include="..\..\..\include\raytracing\primitive\Torus.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\Triangle.h" />
     <ClInclude Include="..\..\..\include\raytracing\primitive\WireframeBox.h" />
+    <ClInclude Include="..\..\..\include\raytracing\sampler\Hammersley.h" />
     <ClInclude Include="..\..\..\include\raytracing\sampler\Jittered.h" />
     <ClInclude Include="..\..\..\include\raytracing\sampler\MultiJittered.h" />
+    <ClInclude Include="..\..\..\include\raytracing\sampler\NRooks.h" />
     <ClInclude Include="..\..\..\include\raytracing\sampler\PureRandom.h" />
     <ClInclude Include="..\..\..\include\raytracing\sampler\Regular.h" />
     <ClInclude Include="..\..\..\include\raytracing\sampler\Sampler.h" />
@@ -145,6 +151,7 @@
     <ClInclude Include="..\..\..\include\raytracing\tracer\MultipleObjects.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\PathTrace.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\RayCast.h" />
+    <ClInclude Include="..\..\..\include\raytracing\tracer\SingleSphere.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\Tracer.h" />
     <ClInclude Include="..\..\..\include\raytracing\tracer\Whitted.h" />
     <ClInclude Include="..\..\..\include\raytracing\utilities\Constants.h" />
@@ -167,6 +174,7 @@
     <ClCompile Include="..\..\..\source\bxdf\PerfectTransmitter.cpp" />
     <ClCompile Include="..\..\..\source\bxdf\SV_GlossySpecular.cpp" />
     <ClCompile Include="..\..\..\source\bxdf\SV_Lambertian.cpp" />
+    <ClCompile Include="..\..\..\source\bxdf\SV_PerfectSpecular.cpp" />
     <ClCompile Include="..\..\..\source\camera\Camera.cpp" />
     <ClCompile Include="..\..\..\source\camera\FishEye.cpp" />
     <ClCompile Include="..\..\..\source\camera\Orthographic.cpp" />
@@ -198,6 +206,7 @@
     <ClCompile Include="..\..\..\source\material\SV_Emissive.cpp" />
     <ClCompile Include="..\..\..\source\material\SV_Matte.cpp" />
     <ClCompile Include="..\..\..\source\material\SV_Phong.cpp" />
+    <ClCompile Include="..\..\..\source\material\SV_Reflector.cpp" />
     <ClCompile Include="..\..\..\source\material\Transparent.cpp" />
     <ClCompile Include="..\..\..\source\maths\AABB.cpp" />
     <ClCompile Include="..\..\..\source\maths\maths.cpp" />
@@ -209,6 +218,7 @@
     <ClCompile Include="..\..\..\source\noise\LinearNoise.cpp" />
     <ClCompile Include="..\..\..\source\primitive\Annulus.cpp" />
     <ClCompile Include="..\..\..\source\primitive\BeveledBox.cpp" />
+    <ClCompile Include="..\..\..\source\primitive\BeveledBoxShell.cpp" />
     <ClCompile Include="..\..\..\source\primitive\BeveledCylinder.cpp" />
     <ClCompile Include="..\..\..\source\primitive\BeveledRing.cpp" />
     <ClCompile Include="..\..\..\source\primitive\BeveledWedge.cpp" />
@@ -225,6 +235,7 @@
     <ClCompile Include="..\..\..\source\primitive\ConvexPartSphere.cpp" />
     <ClCompile Include="..\..\..\source\primitive\ConvexPartTorus.cpp" />
     <ClCompile Include="..\..\..\source\primitive\CutCube.cpp" />
+    <ClCompile Include="..\..\..\source\primitive\CutFace.cpp" />
     <ClCompile Include="..\..\..\source\primitive\Disk.cpp" />
     <ClCompile Include="..\..\..\source\primitive\FishBowl.cpp" />
     <ClCompile Include="..\..\..\source\primitive\FlatMeshTriangle.cpp" />
@@ -253,8 +264,10 @@
     <ClCompile Include="..\..\..\source\primitive\Torus.cpp" />
     <ClCompile Include="..\..\..\source\primitive\Triangle.cpp" />
     <ClCompile Include="..\..\..\source\primitive\WireframeBox.cpp" />
+    <ClCompile Include="..\..\..\source\sampler\Hammersley.cpp" />
     <ClCompile Include="..\..\..\source\sampler\Jittered.cpp" />
     <ClCompile Include="..\..\..\source\sampler\MultiJittered.cpp" />
+    <ClCompile Include="..\..\..\source\sampler\NRooks.cpp" />
     <ClCompile Include="..\..\..\source\sampler\PureRandom.cpp" />
     <ClCompile Include="..\..\..\source\sampler\Regular.cpp" />
     <ClCompile Include="..\..\..\source\sampler\Sampler.cpp" />
@@ -285,6 +298,7 @@
     <ClCompile Include="..\..\..\source\tracer\MultipleObjects.cpp" />
     <ClCompile Include="..\..\..\source\tracer\PathTrace.cpp" />
     <ClCompile Include="..\..\..\source\tracer\RayCast.cpp" />
+    <ClCompile Include="..\..\..\source\tracer\SingleSphere.cpp" />
     <ClCompile Include="..\..\..\source\tracer\Tracer.cpp" />
     <ClCompile Include="..\..\..\source\tracer\Whitted.cpp" />
     <ClCompile Include="..\..\..\source\utilities\RGBColor.cpp" />

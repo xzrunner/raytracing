@@ -178,6 +178,30 @@ const Point2D& Sampler::SampleOneSet() const
     return(m_samples[m_count++ % m_num_samples]);
 }
 
+void Sampler::ShuffleXCoordinates()
+{
+    for (int p = 0; p < m_num_sets; p++) {
+        for (int i = 0; i < m_num_samples - 1; i++) {
+            int target = rand_int() % m_num_samples + p * m_num_samples;
+            float temp = m_samples[i + p * m_num_samples + 1].x;
+            m_samples[i + p * m_num_samples + 1].x = m_samples[target].x;
+            m_samples[target].x = temp;
+        }
+    }
+}
+
+void Sampler::ShuffleYCoordinates()
+{
+    for (int p = 0; p < m_num_sets; p++) {
+        for (int i = 0; i < m_num_samples - 1; i++) {
+            int target = rand_int() % m_num_samples + p * m_num_samples;
+            float temp = m_samples[i + p * m_num_samples + 1].y;
+            m_samples[i + p * m_num_samples + 1].y = m_samples[target].y;
+            m_samples[target].y = temp;
+        }
+    }
+}
+
 void Sampler::SetupShuffledIndices()
 {
 	m_shuffled_indices.reserve(m_num_samples * m_num_sets);

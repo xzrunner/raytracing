@@ -41,6 +41,10 @@ public:
 
 	int GetNumSamples() const { return m_num_samples; }
 
+protected:
+    void ShuffleXCoordinates();
+    void ShuffleYCoordinates();
+
 private:
 	void SetupShuffledIndices();
 

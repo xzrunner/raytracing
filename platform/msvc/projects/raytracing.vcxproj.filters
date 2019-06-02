@@ -85,6 +85,9 @@
     <Filter Include="texture\checker">
       <UniqueIdentifier>{7d0e91e0-4cb8-458b-8255-88328fb309ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="material\phong">
+      <UniqueIdentifier>{f1a22b92-6010-4f77-9199-cb02d9fae777}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\raytracing\camera\Camera.h">
@@ -127,12 +130,6 @@
       <Filter>material</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\material\Matte.h">
-      <Filter>material</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\material\Phong.h">
-      <Filter>material</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\material\Reflective.h">
       <Filter>material</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\material\SV_Matte.h">
@@ -267,9 +264,6 @@
     <ClInclude Include="..\..\..\include\raytracing\material\SV_Emissive.h">
       <Filter>material</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\material\GlossyReflector.h">
-      <Filter>material</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\tracer\PathTrace.h">
       <Filter>tracer</Filter>
     </ClInclude>
@@ -351,12 +345,6 @@
     <ClInclude Include="..\..\..\include\raytracing\tracer\GlobalTrace.h">
       <Filter>tracer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\material\Transparent.h">
-      <Filter>material</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\material\Dielectric.h">
-      <Filter>material</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\material\SphereMaterials.h">
       <Filter>material</Filter>
     </ClInclude>
@@ -397,9 +385,6 @@
       <Filter>bxdf\brdf</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\bxdf\PerfectSpecular.h">
-      <Filter>bxdf\brdf</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\raytracing\bxdf\PerfectTransmitter.h">
       <Filter>bxdf\brdf</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\raytracing\bxdf\SV_Lambertian.h">
@@ -516,6 +501,45 @@
     <ClInclude Include="..\..\..\include\raytracing\primitive\SmoothUVMeshTriangle.h">
       <Filter>primitive\mesh</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\primitive\CutFace.h">
+      <Filter>primitive\others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\primitive\BeveledBoxShell.h">
+      <Filter>primitive\box</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\bxdf\PerfectTransmitter.h">
+      <Filter>bxdf\btdf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\sampler\Hammersley.h">
+      <Filter>sampler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\bxdf\SV_PerfectSpecular.h">
+      <Filter>bxdf\brdf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\material\Dielectric.h">
+      <Filter>material\phong</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\material\GlossyReflector.h">
+      <Filter>material\phong</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\material\Reflective.h">
+      <Filter>material\phong</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\material\Transparent.h">
+      <Filter>material\phong</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\material\Phong.h">
+      <Filter>material\phong</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\material\SV_Reflector.h">
+      <Filter>material\phong</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\sampler\NRooks.h">
+      <Filter>sampler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\raytracing\tracer\SingleSphere.h">
+      <Filter>tracer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\camera\Camera.cpp">
@@ -555,12 +579,6 @@
       <Filter>material</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\material\Matte.cpp">
-      <Filter>material</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\material\Phong.cpp">
-      <Filter>material</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\material\Reflective.cpp">
       <Filter>material</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\material\SV_Matte.cpp">
@@ -671,9 +689,6 @@
     <ClCompile Include="..\..\..\source\material\SV_Emissive.cpp">
       <Filter>material</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\material\GlossyReflector.cpp">
-      <Filter>material</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\tracer\PathTrace.cpp">
       <Filter>tracer</Filter>
     </ClCompile>
@@ -755,12 +770,6 @@
     <ClCompile Include="..\..\..\source\tracer\GlobalTrace.cpp">
       <Filter>tracer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\material\Transparent.cpp">
-      <Filter>material</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\material\Dielectric.cpp">
-      <Filter>material</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\material\SphereMaterials.cpp">
       <Filter>material</Filter>
     </ClCompile>
@@ -801,9 +810,6 @@
       <Filter>bxdf\brdf</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\bxdf\PerfectSpecular.cpp">
-      <Filter>bxdf\brdf</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\bxdf\PerfectTransmitter.cpp">
       <Filter>bxdf\brdf</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\bxdf\SV_Lambertian.cpp">
@@ -919,6 +925,45 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\primitive\SmoothUVMeshTriangle.cpp">
       <Filter>primitive\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\primitive\CutFace.cpp">
+      <Filter>primitive\others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\primitive\BeveledBoxShell.cpp">
+      <Filter>primitive\box</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\bxdf\PerfectTransmitter.cpp">
+      <Filter>bxdf\btdf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\sampler\Hammersley.cpp">
+      <Filter>sampler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\bxdf\SV_PerfectSpecular.cpp">
+      <Filter>bxdf\brdf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\material\Dielectric.cpp">
+      <Filter>material\phong</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\material\GlossyReflector.cpp">
+      <Filter>material\phong</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\material\Reflective.cpp">
+      <Filter>material\phong</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\material\Transparent.cpp">
+      <Filter>material\phong</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\material\Phong.cpp">
+      <Filter>material\phong</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\material\SV_Reflector.cpp">
+      <Filter>material\phong</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\sampler\NRooks.cpp">
+      <Filter>sampler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\tracer\SingleSphere.cpp">
+      <Filter>tracer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
