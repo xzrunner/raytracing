@@ -10,6 +10,7 @@ namespace rt
 class Lambertian;
 class ShadeRec;
 class Vector3D;
+class Sampler;
 
 class Matte : public Material
 {
@@ -26,6 +27,8 @@ public:
 	void SetKa(const float k);
 	void SetKd(const float k);
 	void SetCd(const RGBColor c);
+
+    void SetSampler(const std::shared_ptr<Sampler>& sampler);
 
 private:
 	std::unique_ptr<Lambertian>	m_ambient_brdf = nullptr;

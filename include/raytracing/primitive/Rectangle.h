@@ -19,8 +19,8 @@ public:
 	virtual bool Hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
 	virtual bool ShadowHit(const Ray& ray, float& tmin) const;
 
-	virtual Point3D Sample() const;
-	virtual float Pdf(const ShadeRec& sr) const;
+	virtual Point3D Sample() const override;
+	virtual float Pdf(const ShadeRec& sr) const override;
 
 	virtual Normal GetNormal(const Point3D& p) const;
 

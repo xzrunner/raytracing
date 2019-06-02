@@ -6,6 +6,8 @@
 #include "raytracing/tracer/Tracer.h"
 #include "raytracing/utilities/ShadeRec.h"
 
+#include "raytracing/sampler/MultiJittered.h"
+
 namespace rt
 {
 
@@ -116,6 +118,12 @@ void Matte::SetCd(const RGBColor c)
 {
 	m_ambient_brdf->SetCd(c);
 	m_diffuse_brdf->SetCd(c);
+}
+
+void Matte::SetSampler(const std::shared_ptr<Sampler>& sampler)
+{
+//    m_ambient_brdf->SetSampler(sampler);
+    m_diffuse_brdf->SetSampler(sampler);
 }
 
 }

@@ -65,6 +65,11 @@ void GlossyReflector::SetSamples(int num_samples, float exp)
     m_glossy_specular_brdf->SetSamples(num_samples, exp);
 }
 
+void GlossyReflector::SetSampler(const std::shared_ptr<Sampler>& sampler, float exp)
+{
+    m_glossy_specular_brdf->SetSampler(sampler, exp);
+}
+
 void GlossyReflector::SetKr(float k)
 {
     m_glossy_specular_brdf->SetKs(k);

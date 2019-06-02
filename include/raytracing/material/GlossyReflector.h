@@ -7,6 +7,7 @@ namespace rt
 
 class GlossySpecular;
 class Lambertian;
+class Sampler;
 
 class GlossyReflector : public Phong
 {
@@ -18,6 +19,7 @@ public:
     virtual RGBColor AreaLightShade(const ShadeRec& sr) const;
 
     void SetSamples(int num_samples, float exp);
+    void SetSampler(const std::shared_ptr<Sampler>& sampler, float exp);
 
     void SetKr(float k);
     void SetCr(const RGBColor& c);

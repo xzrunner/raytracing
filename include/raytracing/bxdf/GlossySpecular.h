@@ -25,6 +25,7 @@ public:
 	void SetCs(const RGBColor& c);
 
     void SetSamples(int num_samples, float exp);
+    void SetSampler(const std::shared_ptr<Sampler>& sampler, float exp);
 
 private:
 	// specular reflection coefficient

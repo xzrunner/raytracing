@@ -18,7 +18,7 @@ public:
     virtual bool ShadowHit(const Ray& ray, float& t) const override;
 
     virtual Point3D Sample() const override;
-    virtual float Pdf(const ShadeRec& sr) const override { return m_inv_area; }
+    virtual float Pdf(const ShadeRec& sr) const override;
 
     // The following two functions allow us to simplify the code for smooth shaded triangle meshes
     virtual Normal GetNormal(void) const override { return m_normal; }

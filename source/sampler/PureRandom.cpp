@@ -9,7 +9,7 @@ namespace rt
 PureRandom::PureRandom(int num)
 	: Sampler(num)
 {
-	m_num_sets = 1;
+    m_num_sets = 1;
 	GenerateSamples();
 }
 

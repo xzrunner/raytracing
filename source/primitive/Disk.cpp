@@ -70,6 +70,11 @@ Point3D Disk::Sample() const
     return m_center + sample_point.x * m_u + sample_point.y * m_v;
 }
 
+float Disk::Pdf(const ShadeRec& sr) const
+{
+    return m_inv_area;
+}
+
 void Disk::SetSampler(const std::shared_ptr<Sampler>& sampler)
 {
     m_sampler = sampler;

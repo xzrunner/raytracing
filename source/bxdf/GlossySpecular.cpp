@@ -75,4 +75,10 @@ void GlossySpecular::SetSamples(int num_samples, float exp)
     m_sampler->MapSamplesToHemisphere(exp);
 }
 
+void GlossySpecular::SetSampler(const std::shared_ptr<Sampler>& sampler, float exp)
+{
+    m_sampler = sampler;
+    m_sampler->MapSamplesToHemisphere(exp);
+}
+
 }

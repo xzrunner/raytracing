@@ -1,4 +1,5 @@
 #include "raytracing/primitive/Sphere.h"
+#include "raytracing/sampler/Sampler.h"
 #include "raytracing/maths/Ray.h"
 #include "raytracing/utilities/ShadeRec.h"
 #include "raytracing/utilities/Constants.h"
@@ -88,6 +89,17 @@ bool Sphere::ShadowHit(const Ray& ray, float& tmin) const
 	return false;
 }
 
+Point3D Sphere::Sample() const
+{
+    Point3D s = m_sampler->SampleSphere();
+    return s + m_center;
+}
+
+float Sphere::Pdf(const ShadeRec& sr) const
+{
+    return static_cast<float>(m_inv_area);
+}
+
 void Sphere::SetCenter(const Point3D& center)
 {
 	m_center = center;
@@ -96,6 +108,14 @@ void Sphere::SetCenter(const Point3D& center)
 void Sphere::SetRadius(float r)
 {
 	m_radius = r;
+
+    m_inv_area = 1.0 / (PI * r * r);
+}
+
+void Sphere::SetSampler(const std::shared_ptr<Sampler>& sampler)
+{
+    m_sampler = sampler;
+    m_sampler->MapSamplesToSphere();
 }
 
 }
