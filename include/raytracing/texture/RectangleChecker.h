@@ -16,8 +16,8 @@ public:
 
     void SetNumXCheckers(int num) { m_num_x_checkers = num; }
     void SetNumZCheckers(int num) { m_num_z_checkers = num; }
-    void SetXLineWidth(int width) { m_x_line_width = width; }
-    void SetZLineWidth(int width) { m_z_line_width = width; }
+    void SetXLineWidth(float width) { m_x_line_width = width; }
+    void SetZLineWidth(float width) { m_z_line_width = width; }
 
     void SetP0(const Point3D& p) { m_p0 = p; }
     void SetA(const Vector3D& v) { m_a = v; }
